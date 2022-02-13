@@ -217,18 +217,15 @@ public class JoalAudioFactory extends AbstractAudioFactory {
             ALut.alutInit();
             al = ALFactory.getAL();
             al.alGetError();
-            if (log.isInfoEnabled()) {
-                log.info("Initialised JOAL using OpenAL: vendor - {} version - {}", al.alGetString(AL.AL_VENDOR), al.alGetString(AL.AL_VERSION));
-            }
+            log.info("Initialised JOAL using OpenAL: vendor - {} version - {}", al.alGetString(AL.AL_VENDOR), al.alGetString(AL.AL_VERSION));
         } catch (ALException e) {
-            if (log.isDebugEnabled()) {
-                log.debug("Error initialising JOAL: {}", e);
-            }
+            log.warn("Error initialising JOAL", jmri.util.LoggingUtil.shortenStacktrace(e));
+            return false;
+        } catch (UnsatisfiedLinkError e) {
+            log.warn("Error loading OpenAL libraries", jmri.util.LoggingUtil.shortenStacktrace(e));
             return false;
         } catch (RuntimeException e) {
-            if (log.isDebugEnabled()) {
-                log.debug("Error initialising OpenAL: {}", e);
-            }
+            log.warn("Error initialising OpenAL", jmri.util.LoggingUtil.shortenStacktrace(e));
             return false;
         }
 
@@ -333,7 +330,7 @@ public class JoalAudioFactory extends AbstractAudioFactory {
                     + " vendor - " + al.alGetString(AL.AL_VENDOR)
                     + " version - " + al.alGetString(AL.AL_VERSION);
         } catch (NullPointerException e) {
-            log.error("NPE from JoalAudioFactory: {}",e);
+            log.error("NPE from JoalAudioFactory",e);
             return "JoalAudioFactory, using Null";
         }
     }

@@ -11,9 +11,12 @@ import jmri.util.*;
  * Implements {@link Section} for both the field and CTC machine parts.
  * <p>
  * Based on the Signal interface.
+ * <p>
+ * Note that this intentionally does not turn off indicators when the code button
+ * is pressed unless a change has been requested.  This is a model-railroad compromise
+ * to speed up the dispatcher's ability to see what's going on.
  *
  * @author Bob Jacobsen Copyright (C) 2007, 2017, 2021
- * TODO: Update state diagram
  */
 public class SignalHeadSection implements Section<CodeGroupThreeBits, CodeGroupThreeBits> {
 
@@ -21,7 +24,7 @@ public class SignalHeadSection implements Section<CodeGroupThreeBits, CodeGroupT
      *  Anonymous object only for testing
      */
     SignalHeadSection() {
-        this.station = new Station("1", null, new CodeButton("IS1","IT1"));
+        this.station = new Station<CodeGroupThreeBits, CodeGroupThreeBits>("1", null, new CodeButton("IS1","IT1"));
     }
 
     static final int DEFAULT_RUN_TIME_LENGTH = 30000;
@@ -43,7 +46,7 @@ public class SignalHeadSection implements Section<CodeGroupThreeBits, CodeGroupT
     public SignalHeadSection(List<String> rightHeads, List<String> leftHeads,
                              String leftIndicator, String stopIndicator, String rightIndicator,
                              String leftInput, String rightInput,
-                             Station station) {
+                             Station<CodeGroupThreeBits, CodeGroupThreeBits> station) {
 
         this.station = station;
 
@@ -162,9 +165,9 @@ public class SignalHeadSection implements Section<CodeGroupThreeBits, CodeGroupT
 
     public boolean isRunningTime() { return timeRunning; }
 
-    Station station;
+    Station<CodeGroupThreeBits, CodeGroupThreeBits> station;
     @Override
-    public Station getStation() { return station;}
+    public Station<CodeGroupThreeBits, CodeGroupThreeBits> getStation() { return station;}
     @Override
     public String getName() { return "SH for "+hStopIndicator.getBean().getDisplayName(); }
 
@@ -272,8 +275,6 @@ public class SignalHeadSection implements Section<CodeGroupThreeBits, CodeGroupT
      */
     @Override
     public void codeValueDelivered(CodeGroupThreeBits value) {
-        // @TODO add lock checking here; this is part of vital logic implementation
-
         // Set signals. While doing that, remember command as indication, so that the
         // following signal change won't drive an _immediate_ indication cycle.
         // Also, always go via stop...

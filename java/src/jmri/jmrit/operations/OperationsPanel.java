@@ -1,13 +1,11 @@
 package jmri.jmrit.operations;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.GridBagConstraints;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
 
 import javax.swing.*;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -17,9 +15,10 @@ import org.slf4j.LoggerFactory;
 
 import jmri.InstanceManager;
 import jmri.jmrit.operations.rollingstock.cars.CarTypes;
-import jmri.jmrit.operations.setup.Control;
+import jmri.jmrit.operations.trains.TrainCommon;
 import jmri.swing.JTablePersistenceManager;
 import jmri.util.JmriJFrame;
+import jmri.util.swing.SplitButtonColorChooserPanel;
 
 /**
  * Panel for operations
@@ -33,14 +32,6 @@ public class OperationsPanel extends JPanel {
 
     public OperationsPanel() {
         super();
-    }
-
-    public void initMinimumSize() {
-        initMinimumSize(new Dimension(Control.panelWidth500, Control.panelHeight250));
-    }
-
-    public void initMinimumSize(Dimension dimension) {
-        setMinimumSize(dimension);
     }
 
     public void dispose() {
@@ -286,6 +277,30 @@ public class OperationsPanel extends JPanel {
             return ((JmriJFrame) c).getWindowFrameRef();
         }
         return null;
+    }
+    public static JPanel getColorChooserPanel(String text, JColorChooser chooser) {
+        return getColorChooserPanel(Bundle.getMessage("TextColor"), TrainCommon.getTextColor(text), chooser);
+    }
+    
+    public static JPanel getColorChooserPanel(String title, Color color, JColorChooser chooser) {
+        JPanel pTextColorPanel = new JPanel();
+        pTextColorPanel.setBorder(BorderFactory.createTitledBorder(title));
+        chooser.setColor(color);
+        AbstractColorChooserPanel commentColorPanels[] = {new SplitButtonColorChooserPanel()};
+        chooser.setChooserPanels(commentColorPanels);
+        chooser.setPreviewPanel(new JPanel());
+        pTextColorPanel.add(chooser);
+        return pTextColorPanel;
+    }
+
+    public static void loadFontSizeComboBox(JComboBox<Integer> box) {
+        // load font sizes 7 through 18
+        for (int i = 7; i < 19; i++) {
+            box.addItem(i);
+        }
+        Dimension size = box.getPreferredSize();
+        size = new Dimension(size.width + 10, size.height);
+        box.setPreferredSize(size);
     }
 
     private final static Logger log = LoggerFactory.getLogger(OperationsPanel.class);

@@ -8,6 +8,7 @@ import javax.annotation.*;
 
 import jmri.JmriException;
 import jmri.NamedBean;
+import jmri.NamedBean.DisplayOptions;
 import jmri.beans.PropertyChangeProvider;
 
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -519,6 +520,15 @@ public interface Base extends PropertyChangeProvider {
     public ArrayList<String> getListenerRefs();
 
     /**
+     * Returns a list of all the listeners references for this object
+     * and all its children.
+     *
+     * @param list a list of textual references
+     */
+    @CheckReturnValue
+    public void getListenerRefsIncludingChildren(List<String> list);
+
+    /**
      * Number of current listeners. May return -1 if the information is not
      * available for some reason.
      *
@@ -562,6 +572,7 @@ public interface Base extends PropertyChangeProvider {
 
     public static class PrintTreeSettings {
         public boolean _printLineNumbers = false;
+        public boolean _printDisplayName = false;
         public boolean _printErrorHandling = true;
         public boolean _printNotConnectedSockets = true;
         public boolean _printLocalVariables = true;

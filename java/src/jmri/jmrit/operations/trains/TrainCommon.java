@@ -237,14 +237,8 @@ public class TrainCommon {
             }
             trackNames.add(splitString(track.getName())); // use a track name
                                                           // once
-            // block pick up cars
-            // except for passenger cars
-            boolean found = false; // begin blocking at rl
+            // block pick up cars, except for passenger cars
             for (RouteLocation rld : train.getTrainBlockingOrder()) {
-                if (rld != rl && !found) {
-                    continue;
-                }
-                found = true;
                 for (Car car : carList) {
                     if (Setup.isSortByTrackNameEnabled() &&
                             !splitString(track.getName()).equals(splitString(car.getTrackName()))) {
@@ -274,7 +268,6 @@ public class TrainCommon {
                                 printLocalMoveHeader = false;
                             }
                         }
-
                         // use truncated format if there's a switch list
                         boolean isTruncate = Setup.isPrintTruncateManifestEnabled() &&
                                 rl.getLocation().isSwitchListEnabled();
@@ -382,12 +375,7 @@ public class TrainCommon {
             }
             trackNames.add(splitString(track.getName())); // use a track name once
             // block car pick ups
-            boolean found = false; // begin blocking at rl
             for (RouteLocation rld : train.getTrainBlockingOrder()) {
-                if (rld != rl && !found) {
-                    continue;
-                }
-                found = true;
                 for (int k = 0; k < carList.size(); k++) {
                     Car car = carList.get(k);
                     if (car.getTrack() != null &&
@@ -478,12 +466,7 @@ public class TrainCommon {
                 continue;
             }
             // block car pick ups
-            boolean found = false; // begin blocking at rl
             for (RouteLocation rld : train.getTrainBlockingOrder()) {
-                if (rld != rl && !found) {
-                    continue;
-                }
-                found = true;
                 for (Car car : carList) {
                     if (car.getTrack() != null &&
                             car.getRouteLocation() == rl &&
@@ -560,12 +543,12 @@ public class TrainCommon {
                     }
                 }
                 // print the appropriate comment if there's one
-                if (pickup && setout && !track.getCommentBoth().equals(Track.NONE)) {
-                    newLine(file, track.getCommentBoth(), isManifest);
-                } else if (pickup && !setout && !track.getCommentPickup().equals(Track.NONE)) {
-                    newLine(file, track.getCommentPickup(), isManifest);
-                } else if (!pickup && setout && !track.getCommentSetout().equals(Track.NONE)) {
-                    newLine(file, track.getCommentSetout(), isManifest);
+                if (pickup && setout && !track.getCommentBothWithColor().equals(Track.NONE)) {
+                    newLine(file, track.getCommentBothWithColor(), isManifest);
+                } else if (pickup && !setout && !track.getCommentPickupWithColor().equals(Track.NONE)) {
+                    newLine(file, track.getCommentPickupWithColor(), isManifest);
+                } else if (!pickup && setout && !track.getCommentSetoutWithColor().equals(Track.NONE)) {
+                    newLine(file, track.getCommentSetoutWithColor(), isManifest);
                 }
             }
         }

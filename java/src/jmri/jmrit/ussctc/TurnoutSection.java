@@ -12,7 +12,10 @@ import jmri.*;
  * static inner classes to ensure they're functionally separate, connected only
  * by the code they exchange. They're combined in this single class
  * to make sure they work together.
- *
+ * <p>
+ * Note that this intentionally does not turn off indicators when the code button
+ * is pressed unless a change has been requested.  This is a model-railroad compromise
+ * to speed up the dispatcher's ability to see what's going on.
  * <p>
  * The state diagram for the central section is presented in three parts to make it more useful:
  *<ul>
@@ -108,7 +111,7 @@ public class TurnoutSection implements Section<CodeGroupTwoBits, CodeGroupTwoBit
      * @param reversedInput Sensor name for reversed (right) side of switch on panel
      * @param station Station to which this Section belongs
      */
-    public TurnoutSection(String layoutTO, String normalIndicator, String reversedIndicator, String normalInput, String reversedInput, Station station) {
+    public TurnoutSection(String layoutTO, String normalIndicator, String reversedIndicator, String normalInput, String reversedInput, Station<CodeGroupTwoBits, CodeGroupTwoBits> station) {
         TurnoutManager tm = InstanceManager.getDefault(TurnoutManager.class);
         this.station = station;
 
@@ -124,9 +127,9 @@ public class TurnoutSection implements Section<CodeGroupTwoBits, CodeGroupTwoBit
         field.addLocks(locks);
     }
 
-    Station station;
+    Station<CodeGroupTwoBits, CodeGroupTwoBits> station;
     @Override
-    public Station getStation() { return station; }
+    public Station<CodeGroupTwoBits, CodeGroupTwoBits> getStation() { return station; }
     @Override
     public String getName() { return "TO for "+field.hLayoutTO.getBean().getDisplayName(); }
 
