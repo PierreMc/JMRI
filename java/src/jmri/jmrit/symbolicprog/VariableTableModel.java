@@ -806,6 +806,8 @@ public class VariableTableModel extends AbstractTableModel implements ActionList
         return v;
     }
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings( value="SLF4J_FORMAT_SHOULD_BE_CONST",
+        justification="I18N of Error Message")
     protected VariableValue processSplitTextVal(Element child, String CV, boolean readOnly, boolean infoOnly, boolean writeOnly, String name, String comment, boolean opsOnly, String mask, String item) throws NumberFormatException {
         VariableValue v;
         Attribute a;
@@ -1186,16 +1188,58 @@ public class VariableTableModel extends AbstractTableModel implements ActionList
         return null;
     }
 
+    /**
+     * Returns the index of the first variable that matches a given name string.
+     * <p>
+     * Checks the search string against every variable's "item", the true name, 
+     * then against their "label" (default language only) and finally the
+     * CV name before moving on to the next variable if none of those match.
+     *
+     * @param name search string.
+     * @return index of the first matching variable found.
+     */
     public int findVarIndex(String name) {
-        for (int i = 0; i < getRowCount(); i++) {
-            if (name.equals(getItem(i))) {
-                return i;
+        return findVarIndex(name, false);
+    }
+    
+    /**
+     * Returns the index of a variable that matches a given name string.
+     * <p>
+     * Checks the search string against every variable's "item", the true name, 
+     * then against their "label" (default language only) and finally the
+     * CV name before moving on to the next variable if none of those match.
+     *
+     * Depending on the second parameter, it will return the index of the first
+     * or last variable in our internal rowVector that matches the given string.
+     *
+     * @param name search string.
+     * @param searchFromEnd If true, will start searching from the end.
+     * @return index of the first matching variable found.
+     */
+    public int findVarIndex(String name, boolean searchFromEnd) {
+        if(searchFromEnd) {
+            for (int i = getRowCount() - 1; i >= 0; i--) {
+                if (name.equals(getItem(i))) {
+                    return i;
+                }
+                if (name.equals(getLabel(i))) {
+                    return i;
+                }
+                if (name.equals("CV" + getCvName(i))) {
+                    return i;
+                }
             }
-            if (name.equals(getLabel(i))) {
-                return i;
-            }
-            if (name.equals("CV" + getCvName(i))) {
-                return i;
+        } else {
+            for (int i = 0; i < getRowCount(); i++) {
+                if (name.equals(getItem(i))) {
+                    return i;
+                }
+                if (name.equals(getLabel(i))) {
+                    return i;
+                }
+                if (name.equals("CV" + getCvName(i))) {
+                    return i;
+                }
             }
         }
         return -1;

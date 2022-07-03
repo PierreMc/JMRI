@@ -181,7 +181,9 @@ public class WarrantTest {
         warrant.addThrottleCommand(new ThrottleSetting(100, "Speed", "0.0", "South"));
 
         warrant.getSpeedUtil().setAddress("999(L)");
+        warrant.setBlockOrders(orders);
         String msg = warrant.allocateRoute(false, orders);
+        Assert.assertNull("allocateRoute - " + msg, msg);
 
         warrant.setTrainName("TestTrain");
         PropertyChangeListener listener = new WarrantListener(warrant);
@@ -194,25 +196,29 @@ public class WarrantTest {
             String m = warrant.getRunningMessage();
             return m.endsWith("Cmd #2.") || m.endsWith("Cmd #3.");
         }, "Train starts to move after 2nd command");
-        jmri.util.JUnitUtil.releaseThread(this, 100); // What should we specifically waitFor?
+//        JUnitUtil.waitFor(100); // What should we specifically waitFor?
 
-        jmri.util.ThreadingUtil.runOnLayout(() -> {
-            try {
-                sWest.setState(Sensor.ACTIVE);
-            } catch (jmri.JmriException e) {
-                Assert.fail("Unexpected Exception: " + e);
-            }
-        });
-        jmri.util.JUnitUtil.releaseThread(this, 100); // What should we specifically waitFor?
+        try {
+            sWest.setState(Sensor.ACTIVE);
+        } catch (jmri.JmriException e) {
+            Assert.fail("Unexpected Exception: " + e);
+        }
 
-        jmri.util.ThreadingUtil.runOnLayout(() -> {
-            try {
-                sSouth.setState(Sensor.ACTIVE);
-            } catch (jmri.JmriException e) {
-                Assert.fail("Unexpected Exception: " + e);
-            }
-        });
-        jmri.util.JUnitUtil.releaseThread(this, 100);
+        jmri.util.JUnitUtil.waitFor(() -> {
+            return bWest.isOccupied() == true;
+
+        }, "South not occupied");
+
+        try {
+            sSouth.setState(Sensor.ACTIVE);
+        } catch (jmri.JmriException e) {
+            Assert.fail("Unexpected Exception: " + e);
+        }
+
+        jmri.util.JUnitUtil.waitFor(() -> {
+            return bSouth.isOccupied() == true;
+
+        }, "South not occupied");
 
         // wait for done
         jmri.util.JUnitUtil.waitFor(() -> {

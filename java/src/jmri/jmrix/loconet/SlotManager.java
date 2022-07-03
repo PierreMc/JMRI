@@ -570,6 +570,7 @@ public class SlotManager extends AbstractProgrammer implements LocoNetListener, 
         switch (m.getOpCode()) {
             case LnConstants.OPC_WR_SL_DATA:
             case LnConstants.OPC_SL_RD_DATA:
+            case LnConstants.RE_OPC_IB2_SPECIAL:
                 i = m.getElement(2);
                 break;
 
@@ -1697,8 +1698,11 @@ public class SlotManager extends AbstractProgrammer implements LocoNetListener, 
     /**
      * Dispose of this by stopped it's ongoing actions
      */
+    @Override
     public void dispose() {
-        if (staleSlotCheckTimer != null) staleSlotCheckTimer.stop();
+        if (staleSlotCheckTimer != null) {
+            staleSlotCheckTimer.stop();
+        }
     }
 
     // initialize logging

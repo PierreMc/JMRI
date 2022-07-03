@@ -944,7 +944,7 @@ public class Train extends PropertyChangeSupport implements Identifiable, Proper
      * @return true if only passenger cars have been assigned to this train.
      */
     public boolean isOnlyPassengerCars() {
-        for (Car car : InstanceManager.getDefault(CarManager.class).getByTrainDestinationList(this)) {
+        for (Car car : InstanceManager.getDefault(CarManager.class).getList(this)) {
             if (!car.isPassenger()) {
                 return false;
             }
@@ -1810,7 +1810,8 @@ public class Train extends PropertyChangeSupport implements Identifiable, Proper
         }
         if (!track.isDropTrainAccepted(this)) {
             addLine(buildReport, MessageFormat.format(Bundle.getMessage("buildCanNotDropCarTrain"),
-                    new Object[] { car.toString(), getName(), track.getTrackTypeName(), track.getName() }));
+                    new Object[]{car.toString(), getName(), track.getTrackTypeName(), track.getLocation().getName(),
+                            track.getName()}));
             return false;
         }
         return true;
@@ -2124,9 +2125,13 @@ public class Train extends PropertyChangeSupport implements Identifiable, Proper
      * @return The train's description.
      */
     public String getDescription() {
-        String description = MessageFormat.format(_description, new Object[] { getLeadEngineNumber(),
-                getTrainDepartsDirection(), getLeadEngineRoadName(), getLeadEngineDccAddress() });
-        return description;
+        try {
+            String description = MessageFormat.format(getRawDescription(), new Object[]{getLeadEngineNumber(),
+                    getTrainDepartsDirection(), getLeadEngineRoadName(), getLeadEngineDccAddress()});
+            return description;
+        } catch (IllegalArgumentException e) {
+            return "ERROR IN FORMATTING: " + getRawDescription();
+        }
     }
 
     public void setNumberEngines(String number) {
@@ -2889,10 +2894,10 @@ public class Train extends PropertyChangeSupport implements Identifiable, Proper
         }
     }
 
-    public void printBuildReport() {
+    public boolean printBuildReport() {
         boolean isPreview = (InstanceManager.getDefault(TrainManager.class).isPrintPreviewEnabled() ||
                 Setup.isBuildReportAlwaysPreviewEnabled());
-        printBuildReport(isPreview);
+        return printBuildReport(isPreview);
     }
 
     public boolean printBuildReport(boolean isPreview) {

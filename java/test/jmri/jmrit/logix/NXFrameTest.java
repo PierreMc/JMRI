@@ -282,6 +282,7 @@ public class NXFrameTest {
         tableFrame.runTrain(warrant, Warrant.MODE_RUN);
         jmri.util.JUnitUtil.waitFor(() -> {
             String m =  warrant.getRunningMessage();
+            if (m == null) return false;
             return m.endsWith("Cmd #3.");
         }, "Train is moving at 3rd command");
 
@@ -332,6 +333,7 @@ public class NXFrameTest {
 
         jmri.util.JUnitUtil.waitFor(() -> {
             String m =  warrant.getRunningMessage();
+            if (m == null) return false;
             return m.endsWith("Cmd #8.");
         }, "Train starts to move at 8th command");
 
@@ -341,7 +343,7 @@ public class NXFrameTest {
         // runtimes() in next line runs the train, then checks location
         assertThat(runtimes(route1,_OBlockMgr).getDisplayName()).withFailMessage("Train in block OB3").isEqualTo(block3.getSensor().getDisplayName());
 
-        warrant.controlRunTrain(Warrant.RAMP_HALT); // user interrupts script
+        warrant.controlRunTrain(Warrant.HALT); // user interrupts script
         JUnitUtil.waitFor(100);     // waitEmpty(10) causes a lot of failures on Travis GUI
         jmri.util.JUnitUtil.waitFor(() -> {
             String m =  warrant.getRunningMessage();
@@ -352,6 +354,7 @@ public class NXFrameTest {
 
         jmri.util.JUnitUtil.waitFor(() -> {
             String m =  warrant.getRunningMessage();
+            if (m == null) return false;
             return m.startsWith("At speed Normal") ||
                     m.startsWith("Overdue for arrival at block");
         }, "Train Resumed");
@@ -455,7 +458,6 @@ public class NXFrameTest {
     public void tearDown() throws Exception {
         JUnitUtil.removeMatchingThreads("Engineer(");
         JUnitUtil.deregisterBlockManagerShutdownTask();
-        JUnitUtil.deregisterEditorManagerShutdownTask();
         InstanceManager.getDefault(WarrantManager.class).dispose();
         JUnitUtil.resetWindows(false,false);
         JUnitUtil.tearDown();

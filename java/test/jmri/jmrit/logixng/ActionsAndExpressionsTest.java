@@ -20,6 +20,7 @@ import jmri.util.JUnitUtil;
 // import org.apache.log4j.Level;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.Assert;
 
 /**
@@ -65,7 +66,8 @@ public class ActionsAndExpressionsTest {
 
     }
 
-    private void checkFolder(Path path, String packageName, Map<Category, List<Class<? extends Base>>> registeredClasses, String[] classesToIgnore) {
+    private void checkFolder(Path path, String packageName, Map<Category, List<Class<? extends Base>>> registeredClasses, String[] classesToIgnore)
+            throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, java.lang.reflect.InvocationTargetException {
 
         JDialog dialog = new JDialog();
 
@@ -132,41 +134,40 @@ public class ActionsAndExpressionsTest {
 //            Assert.assertNotNull(String.format("Class %s has xml class%n", file), configureXml);
 
             // Check that all actions and expressions has a swing class
-            SwingConfiguratorInterface configureSwing = null;
+            SwingConfiguratorInterface configureSwing;
             fullConfigName = packageName + ".swing." + file + "Swing";
             log.debug("getAdapter looks for {}", fullConfigName);
-            try {
-                Class<?> configClass = Class.forName(fullConfigName);
-                configureSwing = (SwingConfiguratorInterface)configClass.getDeclaredConstructor().newInstance();
-                configureSwing.setJDialog(dialog);
-                configureSwing.getConfigPanel(new JPanel());
 
-                MaleSocket socket = configureSwing.createNewObject(configureSwing.getAutoSystemName(), null);
-                MaleSocket lastMaleSocket = socket;
-                Base base = socket;
-                while ((base != null) && (base instanceof MaleSocket)) {
-                    lastMaleSocket = (MaleSocket) base;
-                    base = ((MaleSocket)base).getObject();
-                }
-                Assert.assertNotNull(base);
-                Assert.assertEquals("SwingConfiguratorInterface creates an object of correct type", base.getClass().getName(), packageName+"."+file);
+            Class<?> configClass = Class.forName(fullConfigName);
+            configureSwing = (SwingConfiguratorInterface)configClass.getDeclaredConstructor().newInstance();
+            configureSwing.setJDialog(dialog);
+            configureSwing.getConfigPanel(new JPanel());
+
+            MaleSocket socket = configureSwing.createNewObject(configureSwing.getAutoSystemName(), null);
+            MaleSocket lastMaleSocket = socket;
+            Base base = socket;
+            while ((base != null) && (base instanceof MaleSocket)) {
+                lastMaleSocket = (MaleSocket) base;
+                base = ((MaleSocket)base).getObject();
+            }
+            Assert.assertNotNull(base);
+            Assert.assertEquals("SwingConfiguratorInterface creates an object of correct type", base.getClass().getName(), packageName+"."+file);
 //                System.out.format("Swing: %s, Class: %s, class: %s%n", configureSwing.toString(), socket.getShortDescription(), socket.getObject().getClass().getName());
-                Assert.assertEquals("Swing class has correct name", socket.getShortDescription(), configureSwing.toString());
+            Assert.assertEquals("Swing class has correct name", socket.getShortDescription(), configureSwing.toString());
 //                System.out.format("MaleSocket class: %s, socket class: %s%n",
 //                        configureSwing.getManager().getMaleSocketClass().getName(),
 //                        socket.getClass().getName());
-                Assert.assertTrue(configureSwing.getManager().getMaleSocketClass().isAssignableFrom(lastMaleSocket.getClass()));
+            Assert.assertTrue(configureSwing.getManager().getMaleSocketClass().isAssignableFrom(lastMaleSocket.getClass()));
 
-                // Test all locales. This mainly tests that the female socket
-                // names are valid for each locale, for example that the name
-                // doesn't contain any spaces.
-                for (Locale locale : locales) {
-                    Locale.setDefault(locale);
-                    configureSwing.createNewObject(configureSwing.getAutoSystemName(), null);
-                }
-                Locale.setDefault(DEFAULT_LOCALE);
-            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | java.lang.reflect.InvocationTargetException e) {
+            // Test all locales. This mainly tests that the female socket
+            // names are valid for each locale, for example that the name
+            // doesn't contain any spaces.
+            for (Locale locale : locales) {
+                Locale.setDefault(locale);
+                configureSwing.createNewObject(configureSwing.getAutoSystemName(), null);
             }
+            Locale.setDefault(DEFAULT_LOCALE);
+
 //            if (configureSwing == null) {
 //                System.out.format("Class %s.%s has no swing class%n", packageName, file);
 //                errorsFound = true;
@@ -237,16 +238,19 @@ public class ActionsAndExpressionsTest {
     }
 
     public void addClasses(Map<Category, List<Class<? extends Base>>> classes, Map<Category, List<Class<? extends Base>>> newClasses) {
-            newClasses.entrySet().forEach((entry) -> {
-//                System.out.format("Add action: %s, %s%n", entry.getKey().name(), entry.getValue().getName());
-                entry.getValue().forEach((clazz) -> {
-                    classes.get(entry.getKey()).add(clazz);
-                });
+        newClasses.entrySet().forEach((entry) -> {
+//            System.out.format("Add action: %s, %s%n", entry.getKey().name(), entry.getValue().getName());
+            entry.getValue().forEach((clazz) -> {
+                classes.get(entry.getKey()).add(clazz);
             });
+        });
     }
 
     @Test
-    public void testGetBeanType() {
+    @DisabledIfSystemProperty(named = "java.awt.headless", matches = "true")
+    public void testGetBeanType()
+            throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, java.lang.reflect.InvocationTargetException {
+
         Map<Category, List<Class<? extends Base>>> classes = new HashMap<>();
         for (Category category : Category.values()) {
             classes.put(category, new ArrayList<>());
@@ -314,7 +318,6 @@ public class ActionsAndExpressionsTest {
     public void tearDown() {
         jmri.jmrit.logixng.util.LogixNG_Thread.stopAllLogixNGThreads();
         JUnitUtil.deregisterBlockManagerShutdownTask();
-        JUnitUtil.deregisterEditorManagerShutdownTask();
         JUnitUtil.tearDown();
     }
 
