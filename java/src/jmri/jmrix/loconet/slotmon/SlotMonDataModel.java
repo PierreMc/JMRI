@@ -52,7 +52,7 @@ public class SlotMonDataModel extends javax.swing.table.AbstractTableModel imple
         this.memo = memo;
 
         // connect to SlotManager for updates
-        memo.getSlotManager().addSlotListener(this);
+        memo.getSlotManager().addSlotListener(SlotMonDataModel.this);
 
         // start update process
         memo.getSlotManager().update();
@@ -107,23 +107,23 @@ public class SlotMonDataModel extends javax.swing.table.AbstractTableModel imple
             case DISPCOLUMN:
                 return "";     // no heading, as button is clear
             case F0COLUMN:
-                return Throttle.F0;
+                return Throttle.getFunctionString(0);
             case F1COLUMN:
-                return Throttle.F1;
+                return Throttle.getFunctionString(1);
             case F2COLUMN:
-                return Throttle.F2;
+                return Throttle.getFunctionString(2);
             case F3COLUMN:
-                return Throttle.F3;
+                return Throttle.getFunctionString(3);
             case F4COLUMN:
-                return Throttle.F4;
+                return Throttle.getFunctionString(4);
             case F5COLUMN:
-                return Throttle.F5;
+                return Throttle.getFunctionString(5);
             case F6COLUMN:
-                return Throttle.F6;
+                return Throttle.getFunctionString(6);
             case F7COLUMN:
-                return Throttle.F7;
+                return Throttle.getFunctionString(7);
             case F8COLUMN:
-                return Throttle.F8;
+                return Throttle.getFunctionString(8);
             case THROTCOLUMN:
                 return Bundle.getMessage("ThrottleIDCol");
             default:
@@ -591,6 +591,7 @@ public class SlotMonDataModel extends javax.swing.table.AbstractTableModel imple
         }
     }
 
+    // gets called on SlotMonPane.dispose
     public void dispose() {
         memo.getSlotManager().removeSlotListener(this);
     }

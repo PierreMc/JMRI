@@ -39,8 +39,11 @@ public class Xml {
     static final String LOCO_TYPE = "locoType"; // NOI18N
     static final String CAR_ROAD_OPERATION = "carRoadOperation"; // NOI18N should have been option not operation
     static final String CAR_ROAD_OPTION = "carRoadOption"; // NOI18N
+    static final String LOCO_ROAD_OPTION = "locoRoadOption"; // NOI18N
     static final String CAR_ROADS = "carRoads"; // NOI18N
+    static final String LOCO_ROADS = "locoRoads"; // NOI18N
     static final String CAR_ROAD = "carRoad"; // NOI18N
+    static final String LOCO_ROAD = "locoRoad"; // NOI18N
     static final String CAR_LOAD_OPTION = "carLoadOption"; // NOI18N
     static final String CAR_LOADS = "carLoads"; // NOI18N
     static final String CAR_LOAD = "carLoad"; // NOI18N
@@ -206,6 +209,7 @@ public class Xml {
     static final String CONSIST = "consist"; // NOI18N
     static final String KERNEL = "kernel"; // NOI18N
     static final String OWNER = "owner"; // NOI18N
+    static final String DIVISION = "division"; // NOI18N
     static final String RWE = "rwe"; // NOI18N
     //static final String COMMENT = "Comment"; // NOI18N
     static final String DROP_COMMENT = "setOut_msg"; // NOI18N

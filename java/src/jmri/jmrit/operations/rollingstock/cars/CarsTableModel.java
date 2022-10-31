@@ -129,18 +129,20 @@ public class CarsTableModel extends javax.swing.table.AbstractTableModel impleme
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWE_LOAD_COLUMN), sort == SORTBY_RWE);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWL_LOAD_COLUMN), sort == SORTBY_RWL);
         }
+        if (sort == SORTBY_DIVISION) {
+            tcm.setColumnVisible(tcm.getColumnByModelIndex(DIVISION_COLUMN), true);
+        }
         if (sort == SORTBY_DESTINATION ||
                 sort == SORTBY_FINALDESTINATION ||
                 sort == SORTBY_RWE ||
-                sort == SORTBY_RWL ||
-                sort == SORTBY_DIVISION) {
+                sort == SORTBY_RWL) {
             tcm.setColumnVisible(tcm.getColumnByModelIndex(DESTINATION_COLUMN), sort == SORTBY_DESTINATION);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(FINAL_DESTINATION_COLUMN), sort == SORTBY_FINALDESTINATION);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWE_DESTINATION_COLUMN), sort == SORTBY_RWE);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWL_DESTINATION_COLUMN), sort == SORTBY_RWL);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWE_LOAD_COLUMN), sort == SORTBY_RWE);
             tcm.setColumnVisible(tcm.getColumnByModelIndex(RWL_LOAD_COLUMN), sort == SORTBY_RWL);
-            tcm.setColumnVisible(tcm.getColumnByModelIndex(DIVISION_COLUMN), sort == SORTBY_DIVISION);
+            
             // show load column if color column isn't visible.
             tcm.setColumnVisible(tcm.getColumnByModelIndex(LOAD_COLUMN),
                     sort != SORTBY_RWE &&
@@ -660,7 +662,7 @@ public class CarsTableModel extends javax.swing.table.AbstractTableModel impleme
             case BUILT_COLUMN:
                 return car.getBuilt();
             case OWNER_COLUMN:
-                return car.getOwner();
+                return car.getOwnerName();
             case VALUE_COLUMN:
                 return car.getValue();
             case RFID_COLUMN:
@@ -712,7 +714,7 @@ public class CarsTableModel extends javax.swing.table.AbstractTableModel impleme
                 SwingUtilities.invokeLater(() -> {
                     csf = new CarSetFrame();
                     csf.initComponents();
-                    csf.loadCar(car);
+                    csf.load(car);
                 });
                 break;
             case EDIT_COLUMN:

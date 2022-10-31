@@ -19,6 +19,7 @@ import jmri.jmrit.logixng.util.parser.ParserException;
 import jmri.jmrix.loconet.*;
 import jmri.jmrix.mqtt.MqttSystemConnectionMemo;
 import jmri.script.ScriptEngineSelector;
+import jmri.util.CompareUtil;
 import jmri.util.JUnitUtil;
 
 import org.junit.*;
@@ -531,10 +532,113 @@ public class CreateLogixNGTreeScaffold {
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
+        ActionCreateBeansFromTable actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        actionCreateBeansFromTable.setComment("A comment");
+        actionCreateBeansFromTable.getSelectNamedBean().setNamedBean(csvTable);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        actionCreateBeansFromTable.setComment("A comment");
+        actionCreateBeansFromTable.getSelectNamedBean().setNamedBean(csvTable);
+        actionCreateBeansFromTable.setRowOrColumnSystemName("Signal before sysName");
+        actionCreateBeansFromTable.setRowOrColumnUserName("Signal before userName");
+        actionCreateBeansFromTable.setTableRowOrColumn(TableRowOrColumn.Row);
+        actionCreateBeansFromTable.setOnlyCreatableTypes(false);
+        actionCreateBeansFromTable.setIncludeCellsWithoutHeader(false);
+        actionCreateBeansFromTable.setMoveUserName(true);
+        actionCreateBeansFromTable.setUpdateToUserName(true);
+        actionCreateBeansFromTable.setRemoveOldBean(false);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        actionCreateBeansFromTable.setComment("A comment");
+        actionCreateBeansFromTable.getSelectNamedBean().setNamedBean(csvTable);
+        actionCreateBeansFromTable.setRowOrColumnSystemName("2");
+        actionCreateBeansFromTable.setRowOrColumnUserName("3");
+        actionCreateBeansFromTable.setTableRowOrColumn(TableRowOrColumn.Column);
+        actionCreateBeansFromTable.setOnlyCreatableTypes(true);
+        actionCreateBeansFromTable.setIncludeCellsWithoutHeader(false);
+        actionCreateBeansFromTable.setMoveUserName(true);
+        actionCreateBeansFromTable.setUpdateToUserName(false);
+        actionCreateBeansFromTable.setRemoveOldBean(true);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        actionCreateBeansFromTable.setComment("A comment");
+        actionCreateBeansFromTable.getSelectNamedBean().setNamedBean(csvTable);
+        actionCreateBeansFromTable.setRowOrColumnSystemName("Something");
+        actionCreateBeansFromTable.setIncludeCellsWithoutHeader(true);
+        actionCreateBeansFromTable.setMoveUserName(false);
+        actionCreateBeansFromTable.setRemoveOldBean(false);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionCreateBeansFromTable = new ActionCreateBeansFromTable(digitalActionManager.getAutoSystemName(), null);
+        actionCreateBeansFromTable.setComment("A comment");
+        actionCreateBeansFromTable.getSelectNamedBean().setNamedBean(csvTable);
+        actionCreateBeansFromTable.setIncludeCellsWithoutHeader(true);
+        maleSocket = digitalActionManager.registerAction(actionCreateBeansFromTable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
         ActionDispatcher actionDispatcher = new ActionDispatcher(digitalActionManager.getAutoSystemName(), null);
         actionDispatcher.getSelectEnum().setEnum(ActionDispatcher.DirectOperation.TrainPriority);
         maleSocket = digitalActionManager.registerAction(actionDispatcher);
         maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        ActionFindTableRowOrColumn actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        actionFindTableRowOrColumn.setComment("A comment");
+        actionFindTableRowOrColumn.getSelectNamedBean().setNamedBean(csvTable);
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        actionFindTableRowOrColumn.setComment("A comment");
+        actionFindTableRowOrColumn.getSelectNamedBean().setNamedBean(csvTable);
+        actionFindTableRowOrColumn.setRowOrColumnName("Signal before");
+        actionFindTableRowOrColumn.setTableRowOrColumn(TableRowOrColumn.Row);
+        actionFindTableRowOrColumn.setIncludeCellsWithoutHeader(false);
+        actionFindTableRowOrColumn.setLocalVariableNamedBean("variableNamedBean");
+        actionFindTableRowOrColumn.setLocalVariableRow("variableRow");
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        actionFindTableRowOrColumn.setComment("A comment");
+        actionFindTableRowOrColumn.getSelectNamedBean().setNamedBean(csvTable);
+        actionFindTableRowOrColumn.setRowOrColumnName("2");
+        actionFindTableRowOrColumn.setTableRowOrColumn(TableRowOrColumn.Column);
+        actionFindTableRowOrColumn.setIncludeCellsWithoutHeader(false);
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        actionFindTableRowOrColumn.setComment("A comment");
+        actionFindTableRowOrColumn.getSelectNamedBean().setNamedBean(csvTable);
+        actionFindTableRowOrColumn.setIncludeCellsWithoutHeader(true);
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionFindTableRowOrColumn = new ActionFindTableRowOrColumn(digitalActionManager.getAutoSystemName(), null);
+        actionFindTableRowOrColumn.setComment("A comment");
+        actionFindTableRowOrColumn.getSelectNamedBean().setNamedBean(csvTable);
+        actionFindTableRowOrColumn.setIncludeCellsWithoutHeader(true);
+        maleSocket = digitalActionManager.registerAction(actionFindTableRowOrColumn);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
@@ -806,6 +910,30 @@ public class CreateLogixNGTreeScaffold {
         }
 
 
+        ActionListenOnBeansLocalVariable actionListenOnBeansLocalVariable = new ActionListenOnBeansLocalVariable(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(actionListenOnBeansLocalVariable);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionListenOnBeansLocalVariable = new ActionListenOnBeansLocalVariable(digitalActionManager.getAutoSystemName(), null);
+        actionListenOnBeansLocalVariable.setComment("A comment");
+        actionListenOnBeansLocalVariable.setNamedBeanType(NamedBeanType.Turnout);
+        actionListenOnBeansLocalVariable.setListenOnAllProperties(true);
+        actionListenOnBeansLocalVariable.setLocalVariableBeanToListenOn("beanToListenOn");
+        actionListenOnBeansLocalVariable.setLocalVariableNamedBean("bean");
+        actionListenOnBeansLocalVariable.setLocalVariableEvent("event");
+        actionListenOnBeansLocalVariable.setLocalVariableNewValue("value");
+        maleSocket = digitalActionManager.registerAction(actionListenOnBeansLocalVariable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        DigitalMany manyTemp_ActionListenOnBeansLocalVariable =
+                new DigitalMany(digitalActionManager.getAutoSystemName(), null);
+        manyTemp_ActionListenOnBeansLocalVariable.setComment("Action socket 1");
+        maleSocket = digitalActionManager.registerAction(manyTemp_ActionListenOnBeansLocalVariable);
+        maleSocket.setEnabled(false);
+        actionListenOnBeansLocalVariable.getChild(0).connect(maleSocket);
+
+
         ActionListenOnBeansTable actionListenOnBeansTable = new ActionListenOnBeansTable(digitalActionManager.getAutoSystemName(), null);
         maleSocket = digitalActionManager.registerAction(actionListenOnBeansTable);
         maleSocket.setEnabled(false);
@@ -824,6 +952,9 @@ public class CreateLogixNGTreeScaffold {
         actionListenOnBeansTable.setTableRowOrColumn(TableRowOrColumn.Row);
         actionListenOnBeansTable.setIncludeCellsWithoutHeader(false);
         actionListenOnBeansTable.setListenOnAllProperties(false);
+        actionListenOnBeansTable.setLocalVariableNamedBean("variableNamedBean");
+        actionListenOnBeansTable.setLocalVariableEvent("variableEvent");
+        actionListenOnBeansTable.setLocalVariableNewValue("variableNewValue");
         maleSocket = digitalActionManager.registerAction(actionListenOnBeansTable);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
@@ -862,9 +993,22 @@ public class CreateLogixNGTreeScaffold {
         actionLocalVariable = new ActionLocalVariable(digitalActionManager.getAutoSystemName(), null);
         actionLocalVariable.setComment("A comment");
         actionLocalVariable.setLocalVariable("result");
+        actionLocalVariable.setVariableOperation(ActionLocalVariable.VariableOperation.CopyReferenceToVariable);
+        actionLocalVariable.setConstantValue("1");
+        actionLocalVariable.setOtherLocalVariable("SomeVar");
+        actionLocalVariable.setReference("{{MyVarName}}");
+        actionLocalVariable.getSelectMemoryNamedBean().setNamedBean(memory3);
+        actionLocalVariable.setFormula("a+b");
+        maleSocket = digitalActionManager.registerAction(actionLocalVariable);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionLocalVariable = new ActionLocalVariable(digitalActionManager.getAutoSystemName(), null);
+        actionLocalVariable.setComment("A comment");
+        actionLocalVariable.setLocalVariable("result");
         actionLocalVariable.setVariableOperation(ActionLocalVariable.VariableOperation.CalculateFormula);
         actionLocalVariable.setConstantValue("1");
         actionLocalVariable.setOtherLocalVariable("SomeVar");
+        actionLocalVariable.setReference("{{MyVarName}}");
         actionLocalVariable.getSelectMemoryNamedBean().setNamedBean(memory3);
         actionLocalVariable.setFormula("a+b");
         maleSocket = digitalActionManager.registerAction(actionLocalVariable);
@@ -1322,6 +1466,28 @@ public class CreateLogixNGTreeScaffold {
         maleSocket = digitalActionManager.registerAction(actionSensor);
         maleSocket.setEnabled(false);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        ActionShutDownTask shutDownTask = new ActionShutDownTask(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(shutDownTask);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        shutDownTask = new ActionShutDownTask(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(shutDownTask);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        And shutDownTaskCallChild = new And(digitalExpressionManager.getAutoSystemName(), null);
+        maleSocket = digitalExpressionManager.registerExpression(shutDownTaskCallChild);
+        maleSocket.setEnabled(false);
+        shutDownTask.getCallSocket().connect(maleSocket);
+
+        DigitalMany shutDownTaskRunChild = new DigitalMany(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(shutDownTaskRunChild);
+        maleSocket.setEnabled(false);
+        shutDownTask.getRunSocket().connect(maleSocket);
 
 
         ActionSignalHead actionSignalHead = new ActionSignalHead(digitalActionManager.getAutoSystemName(), null);
@@ -1870,7 +2036,7 @@ public class CreateLogixNGTreeScaffold {
         actionWarrant.getSelectEnum().setEnum(ActionWarrant.DirectOperation.SetTrainName);
 
         actionWarrant.setDataAddressing(NamedBeanAddressing.Direct);
-        actionWarrant.setTrainIdName("ABC");
+        actionWarrant.setTrainData("ABC");
 
         maleSocket = digitalActionManager.registerAction(actionWarrant);
         maleSocket.setErrorHandlingType(MaleSocket.ErrorHandlingType.AbortExecution);
@@ -1977,6 +2143,35 @@ public class CreateLogixNGTreeScaffold {
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
+        jmri.jmrit.logixng.actions.ActionRequestUpdateAllSensors actionRequestUpdateAllSensors =
+                new jmri.jmrit.logixng.actions.ActionRequestUpdateAllSensors(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
+        maleSocket = digitalActionManager.registerAction(actionRequestUpdateAllSensors);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        actionRequestUpdateAllSensors =
+                new jmri.jmrit.logixng.actions.ActionRequestUpdateAllSensors(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
+        actionRequestUpdateAllSensors.setMemo(null);
+        maleSocket = digitalActionManager.registerAction(actionRequestUpdateAllSensors);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionRequestUpdateAllSensors =
+                new jmri.jmrit.logixng.actions.ActionRequestUpdateAllSensors(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
+        actionRequestUpdateAllSensors.setMemo(_mqttMemo);
+        maleSocket = digitalActionManager.registerAction(actionRequestUpdateAllSensors);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionRequestUpdateAllSensors =
+                new jmri.jmrit.logixng.actions.ActionRequestUpdateAllSensors(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
+        actionRequestUpdateAllSensors.setMemo(_locoNetMemo);
+        maleSocket = digitalActionManager.registerAction(actionRequestUpdateAllSensors);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
         jmri.jmrix.loconet.logixng.ActionClearSlots actionClearSlots =
                 new jmri.jmrix.loconet.logixng.ActionClearSlots(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
         maleSocket = digitalActionManager.registerAction(actionClearSlots);
@@ -1987,6 +2182,13 @@ public class CreateLogixNGTreeScaffold {
         jmri.jmrix.loconet.logixng.ActionUpdateSlots actionUpdateSlots =
                 new jmri.jmrix.loconet.logixng.ActionUpdateSlots(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
         maleSocket = digitalActionManager.registerAction(actionUpdateSlots);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        jmri.jmrix.loconet.logixng.SetSpeedZero setSpeedZero =
+                new jmri.jmrix.loconet.logixng.SetSpeedZero(digitalActionManager.getAutoSystemName(), null, _locoNetMemo);
+        maleSocket = digitalActionManager.registerAction(setSpeedZero);
         maleSocket.setEnabled(false);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
@@ -2259,6 +2461,52 @@ public class CreateLogixNGTreeScaffold {
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
+        ForEach actionForEach =
+                new ForEach(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(actionForEach);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionForEach = new ForEach(digitalActionManager.getAutoSystemName(), null);
+        actionForEach.setComment("A comment");
+        actionForEach.setUseCommonSource(false);
+        actionForEach.setCommonManager(ForEach.CommonManager.Turnouts);
+        actionForEach.setUserSpecifiedSource(ForEach.UserSpecifiedSource.Variable);
+        actionForEach.setFormula("turnouts");
+        actionForEach.setLocalVariableName("myVar");
+        maleSocket = digitalActionManager.registerAction(actionForEach);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionForEach = new ForEach(digitalActionManager.getAutoSystemName(), null);
+        actionForEach.setComment("A comment");
+        actionForEach.setUseCommonSource(false);
+        actionForEach.setCommonManager(ForEach.CommonManager.Turnouts);
+        actionForEach.setUserSpecifiedSource(ForEach.UserSpecifiedSource.Memory);
+        actionForEach.setFormula("turnouts");
+        actionForEach.setLocalVariableName("myVar");
+        maleSocket = digitalActionManager.registerAction(actionForEach);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        actionForEach = new ForEach(digitalActionManager.getAutoSystemName(), null);
+        actionForEach.setComment("A comment");
+        actionForEach.setUseCommonSource(false);
+        actionForEach.setCommonManager(ForEach.CommonManager.Turnouts);
+        actionForEach.setUserSpecifiedSource(ForEach.UserSpecifiedSource.Formula);
+        actionForEach.setFormula("turnouts");
+        actionForEach.setLocalVariableName("myVar");
+        maleSocket = digitalActionManager.registerAction(actionForEach);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        for (ForEach.CommonManager manager : ForEach.CommonManager.values()) {
+            actionForEach = new ForEach(digitalActionManager.getAutoSystemName(), null);
+            actionForEach.setComment("A comment");
+            actionForEach.setUseCommonSource(true);
+            actionForEach.setCommonManager(manager);
+            maleSocket = digitalActionManager.registerAction(actionForEach);
+            actionManySocket.getChild(indexAction++).connect(maleSocket);
+        }
+
+
         IfThenElse ifThenElse = new IfThenElse(digitalActionManager.getAutoSystemName(), null);
         maleSocket = digitalActionManager.registerAction(ifThenElse);
         maleSocket.setEnabled(false);
@@ -2266,13 +2514,13 @@ public class CreateLogixNGTreeScaffold {
 
         ifThenElse = new IfThenElse(digitalActionManager.getAutoSystemName(), null);
         ifThenElse.setComment("A comment");
-        ifThenElse.setType(IfThenElse.Type.ExecuteOnChange);
+        ifThenElse.setExecuteType(IfThenElse.ExecuteType.ExecuteOnChange);
         maleSocket = digitalActionManager.registerAction(ifThenElse);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
         ifThenElse = new IfThenElse(digitalActionManager.getAutoSystemName(), null);
         ifThenElse.setComment("A comment");
-        ifThenElse.setType(IfThenElse.Type.AlwaysExecute);
+        ifThenElse.setExecuteType(IfThenElse.ExecuteType.AlwaysExecute);
         maleSocket = digitalActionManager.registerAction(ifThenElse);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
@@ -2393,6 +2641,44 @@ public class CreateLogixNGTreeScaffold {
         many = new DigitalMany(digitalActionManager.getAutoSystemName(), null);
         many.setComment("A comment");
         maleSocket = digitalActionManager.registerAction(many);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        Break breakAction = new Break(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(breakAction);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        Continue continueAction = new Continue(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(continueAction);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        jmri.jmrit.logixng.actions.Error errorAction =
+                new jmri.jmrit.logixng.actions.Error(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(errorAction);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        errorAction = new jmri.jmrit.logixng.actions.Error(digitalActionManager.getAutoSystemName(), null);
+        errorAction.setMessage("Some error has occurred");
+        maleSocket = digitalActionManager.registerAction(errorAction);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        Exit exitAction = new Exit(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(exitAction);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+        Return returnAction = new Return(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(returnAction);
+        maleSocket.setEnabled(false);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
@@ -2547,6 +2833,19 @@ public class CreateLogixNGTreeScaffold {
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
+        SimulateTurnoutFeedback simulateTurnoutFeedback =
+                new SimulateTurnoutFeedback(digitalActionManager.getAutoSystemName(), null);
+        maleSocket = digitalActionManager.registerAction(simulateTurnoutFeedback);
+        maleSocket.setEnabled(false);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+        simulateTurnoutFeedback = new SimulateTurnoutFeedback(digitalActionManager.getAutoSystemName(), null);
+        simulateTurnoutFeedback.setComment("A comment");
+        maleSocket = digitalActionManager.registerAction(simulateTurnoutFeedback);
+        actionManySocket.getChild(indexAction++).connect(maleSocket);
+
+
+
         TableForEach tableForEach = new TableForEach(digitalActionManager.getAutoSystemName(), null);
         tableForEach.setRowOrColumn(TableRowOrColumn.Column);
         maleSocket = digitalActionManager.registerAction(tableForEach);
@@ -2669,18 +2968,20 @@ public class CreateLogixNGTreeScaffold {
 
         ifThenElse = new IfThenElse(digitalActionManager.getAutoSystemName(), null);
         ifThenElse.setComment("A comment");
-        ifThenElse.setType(IfThenElse.Type.ExecuteOnChange);
+        ifThenElse.setExecuteType(IfThenElse.ExecuteType.ExecuteOnChange);
         maleSocket = digitalActionManager.registerAction(ifThenElse);
         actionManySocket.getChild(indexAction++).connect(maleSocket);
 
 
         And and1 = new And(digitalExpressionManager.getAutoSystemName(), null);
+        and1.setType(And.Type.EvaluateAll);
         maleSocket = digitalExpressionManager.registerExpression(and1);
         maleSocket.setEnabled(false);
         ifThenElse.getChild(0).connect(maleSocket);
 
         And and = new And(digitalExpressionManager.getAutoSystemName(), null);
         and.setComment("A comment");
+        and.setType(And.Type.EvaluateNeeded);
         maleSocket = digitalExpressionManager.registerExpression(and);
         and1.getChild(0).connect(maleSocket);
 
@@ -2719,6 +3020,17 @@ public class CreateLogixNGTreeScaffold {
         antecedent = new Antecedent(digitalExpressionManager.getAutoSystemName(), null);
         maleSocket = digitalExpressionManager.registerExpression(antecedent);
         maleSocket.setErrorHandlingType(MaleSocket.ErrorHandlingType.ThrowException);
+        and.getChild(indexExpr++).connect(maleSocket);
+
+
+        ConnectionName connectionType = new ConnectionName(digitalExpressionManager.getAutoSystemName(), null);
+        maleSocket = digitalExpressionManager.registerExpression(connectionType);
+        maleSocket.setEnabled(false);
+        and.getChild(indexExpr++).connect(maleSocket);
+
+        connectionType = new ConnectionName(digitalExpressionManager.getAutoSystemName(), null);
+        connectionType.setComment("A comment");
+        maleSocket = digitalExpressionManager.registerExpression(connectionType);
         and.getChild(indexExpr++).connect(maleSocket);
 
 
@@ -3078,6 +3390,7 @@ public class CreateLogixNGTreeScaffold {
         expressionLocalVariable.setConstantValue("10");
         expressionLocalVariable.setCaseInsensitive(true);
         expressionLocalVariable.setCompareTo(ExpressionLocalVariable.CompareTo.Value);
+        expressionLocalVariable.setCompareType(CompareUtil.CompareType.NumberOrString);
         expressionLocalVariable.setVariableOperation(ExpressionLocalVariable.VariableOperation.GreaterThan);
         maleSocket = digitalExpressionManager.registerExpression(expressionLocalVariable);
         and.getChild(indexExpr++).connect(maleSocket);
@@ -3088,6 +3401,7 @@ public class CreateLogixNGTreeScaffold {
         expressionLocalVariable.getSelectMemoryNamedBean().setNamedBean(memory2);
         expressionLocalVariable.setCaseInsensitive(false);
         expressionLocalVariable.setCompareTo(ExpressionLocalVariable.CompareTo.Memory);
+        expressionLocalVariable.setCompareType(CompareUtil.CompareType.String);
         expressionLocalVariable.setVariableOperation(ExpressionLocalVariable.VariableOperation.LessThan);
         set_LogixNG_SelectTable_Data(csvTable, expressionLocalVariable.getSelectTable(), NamedBeanAddressing.LocalVariable);
         maleSocket = digitalExpressionManager.registerExpression(expressionLocalVariable);
@@ -3100,6 +3414,7 @@ public class CreateLogixNGTreeScaffold {
         expressionLocalVariable.setOtherLocalVariable("MyOtherVar");
         expressionLocalVariable.setCaseInsensitive(false);
         expressionLocalVariable.setCompareTo(ExpressionLocalVariable.CompareTo.LocalVariable);
+        expressionLocalVariable.setCompareType(CompareUtil.CompareType.Number);
         expressionLocalVariable.setVariableOperation(ExpressionLocalVariable.VariableOperation.LessThan);
         set_LogixNG_SelectTable_Data(csvTable, expressionLocalVariable.getSelectTable(), NamedBeanAddressing.Reference);
         maleSocket = digitalExpressionManager.registerExpression(expressionLocalVariable);
@@ -3316,8 +3631,25 @@ public class CreateLogixNGTreeScaffold {
 
         expressionPower = new ExpressionPower(digitalExpressionManager.getAutoSystemName(), null);
         expressionPower.setComment("A comment");
-        expressionPower.setBeanState(ExpressionPower.PowerState.Other);
+        expressionPower.setBeanState(ExpressionPower.PowerState.Idle);
         expressionPower.set_Is_IsNot(Is_IsNot_Enum.IsNot);
+        expressionPower.setIgnoreUnknownState(true);
+        maleSocket = digitalExpressionManager.registerExpression(expressionPower);
+        and.getChild(indexExpr++).connect(maleSocket);
+
+        expressionPower = new ExpressionPower(digitalExpressionManager.getAutoSystemName(), null);
+        expressionPower.setComment("A comment");
+        expressionPower.setBeanState(ExpressionPower.PowerState.Unknown);
+        expressionPower.set_Is_IsNot(Is_IsNot_Enum.Is);
+        expressionPower.setIgnoreUnknownState(true);
+        maleSocket = digitalExpressionManager.registerExpression(expressionPower);
+        and.getChild(indexExpr++).connect(maleSocket);
+
+        expressionPower = new ExpressionPower(digitalExpressionManager.getAutoSystemName(), null);
+        expressionPower.setComment("A comment");
+        expressionPower.setBeanState(ExpressionPower.PowerState.OnOrOff);
+        expressionPower.set_Is_IsNot(Is_IsNot_Enum.IsNot);
+        expressionPower.setIgnoreUnknownState(false);
         maleSocket = digitalExpressionManager.registerExpression(expressionPower);
         and.getChild(indexExpr++).connect(maleSocket);
 
@@ -3856,12 +4188,14 @@ public class CreateLogixNGTreeScaffold {
 
 
         Or or = new Or(digitalExpressionManager.getAutoSystemName(), null);
+        or.setType(Or.Type.EvaluateAll);
         maleSocket = digitalExpressionManager.registerExpression(or);
         maleSocket.setEnabled(false);
         and.getChild(indexExpr++).connect(maleSocket);
 
         or = new Or(digitalExpressionManager.getAutoSystemName(), null);
         or.setComment("A comment");
+        or.setType(Or.Type.EvaluateNeeded);
         maleSocket = digitalExpressionManager.registerExpression(or);
         and.getChild(indexExpr++).connect(maleSocket);
 
@@ -3973,6 +4307,11 @@ public class CreateLogixNGTreeScaffold {
         maleSocket = analogExpressionManager.registerExpression(analogFormula);
         maleSocket.setEnabled(false);
         doAnalogAction.getChild(0).connect(maleSocket);
+
+        AnalogExpressionLocalVariable analogExpressionLocalVariable = new AnalogExpressionLocalVariable(analogExpressionManager.getAutoSystemName(), null);
+        maleSocket = analogExpressionManager.registerExpression(analogExpressionLocalVariable);
+        maleSocket.setEnabled(false);
+        analogFormula.getChild(0).connect(maleSocket);
 
         AnalogActionLightIntensity analogActionLightIntensity = new AnalogActionLightIntensity(analogActionManager.getAutoSystemName(), null);
         maleSocket = analogActionManager.registerAction(analogActionLightIntensity);
@@ -4312,7 +4651,7 @@ public class CreateLogixNGTreeScaffold {
 
 
     private static final PrimitiveIterator.OfInt iterator =
-            new Random(215).ints('a', 'z'+10).iterator();
+            JUnitUtil.getRandom().ints('a', 'z'+10).iterator();
 
     private static String getRandomString(int count) {
         StringBuilder s = new StringBuilder();
@@ -4441,9 +4780,11 @@ public class CreateLogixNGTreeScaffold {
         _locoNetMemo = new LocoNetSystemConnectionMemo(lnis, sm);
         sm.setSystemConnectionMemo(_locoNetMemo);
         InstanceManager.setDefault(LocoNetSystemConnectionMemo.class, _locoNetMemo);
+        InstanceManager.store(_locoNetMemo, SystemConnectionMemo.class);
 
         _mqttMemo = new MqttSystemConnectionMemo();
         InstanceManager.setDefault(MqttSystemConnectionMemo.class, _mqttMemo);
+        InstanceManager.store(_mqttMemo, SystemConnectionMemo.class);
 
 //        JUnitUtil.initLogixNGManager();
 

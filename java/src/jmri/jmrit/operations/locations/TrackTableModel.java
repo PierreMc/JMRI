@@ -154,7 +154,7 @@ public abstract class TrackTableModel extends AbstractTableModel implements Prop
         tcm.setColumnVisible(tcm.getColumnByModelIndex(SHIP_COLUMN), _location.hasShipLoadRestrictions());
         tcm.setColumnVisible(tcm.getColumnByModelIndex(ROAD_COLUMN), _location.hasRoadRestrictions());
         tcm.setColumnVisible(tcm.getColumnByModelIndex(DESTINATION_COLUMN), _location.hasDestinationRestrictions());
-        tcm.setColumnVisible(tcm.getColumnByModelIndex(ROUTED_COLUMN), _trackType.equals(Track.INTERCHANGE));
+        tcm.setColumnVisible(tcm.getColumnByModelIndex(ROUTED_COLUMN), _trackType.equals(Track.INTERCHANGE) || _trackType.equals(Track.STAGING));
         tcm.setColumnVisible(tcm.getColumnByModelIndex(HOLD_COLUMN), _location.hasSchedules() && _trackType.equals(Track.SPUR));
         tcm.setColumnVisible(tcm.getColumnByModelIndex(PLANPICKUP_COLUMN), _location.hasPlannedPickups());
         tcm.setColumnVisible(tcm.getColumnByModelIndex(POOL_COLUMN), _location.hasPools());
@@ -513,10 +513,10 @@ public abstract class TrackTableModel extends AbstractTableModel implements Prop
                         e.getPropertyName().equals(Track.ROADS_CHANGED_PROPERTY) ||
                         e.getPropertyName().equals(Track.DESTINATION_OPTIONS_CHANGED_PROPERTY) ||
                         e.getPropertyName().equals(Track.POOL_CHANGED_PROPERTY) ||
-                        e.getPropertyName().equals(Track.PLANNEDPICKUPS_CHANGED_PROPERTY) ||
+                        e.getPropertyName().equals(Track.PLANNED_PICKUPS_CHANGED_PROPERTY) ||
                         e.getPropertyName().equals(Track.ALTERNATE_TRACK_CHANGED_PROPERTY) ||
                         e.getPropertyName().equals(Track.SERVICE_ORDER_CHANGED_PROPERTY) ||
-                        e.getPropertyName().equals(Track.TRACK_REPORTER_PROPERTY))) {
+                        e.getPropertyName().equals(Track.TRACK_REPORTER_CHANGED_PROPERTY))) {
             setColumnsVisible();
         }
         if (e.getSource() instanceof TableColumn && e.getPropertyName().equals("preferredWidth")) {
