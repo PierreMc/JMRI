@@ -1,7 +1,9 @@
 package jmri.jmrit.operations.trains;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -477,8 +479,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
         for (_carIndex = 0; _carIndex < _carList.size(); _carIndex++) {
             Car car = _carList.get(_carIndex);
             // second pass deals with cars that have a final destination equal
-            // to this
-            // location.
+            // to this location.
             // therefore a local move can be made. This causes "off spots" to be
             // serviced.
             if (isSecondPass && !car.getFinalDestinationName().equals(rl.getName())) {
@@ -530,8 +531,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
                     car.getDestination() == null &&
                     car.getTrack() != _departStageTrack) {
                 // done with this car, it has a custom load, and there are
-                // spurs/schedules, but
-                // no destination found
+                // spurs/schedules, but no destination found
                 addLine(_buildReport, FIVE,
                         MessageFormat.format(Bundle.getMessage("buildNoDestForCar"), new Object[]{car.toString()}));
                 addLine(_buildReport, FIVE, BLANK_LINE);
@@ -604,7 +604,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             log.debug(
                     "No load generation for car ({}) isAddLoadsAnySpurEnabled: {}, car load ({}) destination ({}) final destination ({})",
                     car.toString(), car.getTrack().isAddCustomLoadsAnySpurEnabled() ? "true" : "false",
-                    car.getLoadName(), car.getDestinationName(), car.getFinalDestinationName()); // NOI18N
+                    car.getLoadName(), car.getDestinationName(), car.getFinalDestinationName());
             // if car has a destination or final destination add "no load
             // generated" message to report
             if (car.getTrack().isStaging() &&
@@ -947,8 +947,8 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             if (!car.getTrack().isDestinationAccepted(track.getLocation())) {
                 addLine(_buildReport, SEVEN, MessageFormat.format(Bundle.getMessage("buildDestinationNotServiced"),
                         new Object[]{track.getLocation().getName(), car.getTrackName()}));
-                locationsNotServiced.add(track.getLocation()); // location not
-                                                               // reachable
+                // location not reachable
+                locationsNotServiced.add(track.getLocation());
                 continue;
             }
             // only use the termination staging track for this train
@@ -1169,8 +1169,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             // Now determine if we should move the car or just leave it
             if (track.isHoldCarsWithCustomLoadsEnabled()) {
                 // determine if this car can be routed to the spur
-                String id = track.getScheduleItemId(); // save the tracks
-                                                       // schedule item id
+                String id = track.getScheduleItemId();
                 if (router.isCarRouteable(car, _train, track, _buildReport)) {
                     // hold car if able to route to track
                     _routeToTrackFound = true;
@@ -1211,7 +1210,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             car.setFinalDestinationTrack(null);
             return false;
         }
-        car.updateKernel(); // car part of kernel?
+        car.updateKernel();
         if (car.getDestinationTrack() != track) {
             track.bumpMoves();
             // car is being routed to this track
@@ -1268,7 +1267,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             car.setFinalDestinationTrack(null);
             return false;
         }
-        car.updateKernel(); // car part of kernel?
+        car.updateKernel();
         return true; // done, car has a new final destination
     }
 
@@ -1379,7 +1378,7 @@ public class TrainBuilderCars extends TrainBuilderEngines {
                               // exit from this routine
             }
             if (car.getTrack() == _departStageTrack) {
-                log.debug("Car ({}) departing staging with final destination ({}) and no destination", // NOI18N
+                log.debug("Car ({}) departing staging with final destination ({}) and no destination",
                         car.toString(), car.getFinalDestinationName());
                 return false; // try and move this car out of staging
             }
@@ -1423,14 +1422,15 @@ public class TrainBuilderCars extends TrainBuilderEngines {
             rld = _routeList.get(k);
             // if car can be picked up later at same location, skip
             if (checkForLaterPickUp(car, rl, rld)) {
-                return true; // done
+                addLine(_buildReport, SEVEN, BLANK_LINE);
+                return true;
             }
             if (!rld.getName().equals(car.getDestinationName())) {
                 continue;
             }
             // is the car's destination the terminal and is that allowed?
             if (!checkThroughCarsAllowed(car, car.getDestinationName())) {
-                return true; // done
+                return true;
             }
             log.debug("Car ({}) found a destination in train's route", car.toString());
             // are drops allows at this location?

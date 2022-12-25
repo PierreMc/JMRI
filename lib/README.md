@@ -95,8 +95,10 @@ which checks the dates of the control files to make sure they've been updated wh
 ##### commons-logging-1.2.jar
 - version 1.2
 
-##### commons-net-3.6.jar
-- version 3.6
+##### commons-net-3.9.0.jar
+- version 3.9.0
+- not used in direct compilation, not clear where it is used
+- from https://commons.apache.org/proper/commons-net/download_net.cgi
 
 ##### commons-text-1.2.jar
 - version 1.2
@@ -312,10 +314,6 @@ bluecove-gpl-2.1.1-SNAPSHOT.jar
   and https://github.com/usb4java/usb4java-javax/releases/tag/usb4java-javax-1.3.0
 - lib/libusb4java-1.3.0-darwin-aarch64.jar made from a .dylib found at https://github.com/developersu/ns-usbloader/issues/91
 
-##### antlr-3.4-complete
-- version 3.4
-- ANother Tool for Language Recognition
-
 ##### beansbinding-1.2.1.jar
 - version 1.2.1
 - used in web server preference panels
@@ -439,14 +437,6 @@ bluecove-gpl-2.1.1-SNAPSHOT.jar
 
 ##### junit-vintage-engine-5.9.1.jar
 
-##### i18nchecker.jar
-- Internationalization checker: used in source code development, for checking proper implementation of text internationalization.
-- From https://github.com/JMRI/i18nchecker
-- Note: We use a custom version of the original in https://github.com/phamernik/i18nchecker
-- See license https://github.com/phamernik/i18nchecker/blob/master/i18nchecker/LICENSE-2.0.txt
-- Usage info at https://github.com/phamernik/i18nchecker/blob/master/README.md
-- Additional useful information at https://blogs.oracle.com/geertjan/entry/i18nchecker and https://blogs.oracle.com/geertjan/entry/i18nchecker_part_2
-
 ##### mockito-core mockito-inline mockito-junit-jupiter
 - version 3.5.11
 
@@ -486,10 +476,10 @@ bluecove-gpl-2.1.1-SNAPSHOT.jar
 - From FindBugs 3.0.0 from http://findbugs.sourceforge.net
 - Only needed at compile/build time, not runtime
 
-##### spotbugs-annotations-3.1.7.jar
-- From SpotBugs 3.1.7
+##### spotbugs-annotations-4.7.3.jar
+- From SpotBugs 4.7.3
 - Only needed at compile/build time, not runtime
-- http://repo1.maven.org/maven2/com/github/spotbugs/spotbugs-annotations/3.1.7/
+- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations/4.7.3
 
 ##### picocontainer-2.15.jar
 - version 2.15
