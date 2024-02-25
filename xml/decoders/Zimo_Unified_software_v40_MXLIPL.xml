@@ -13,6 +13,13 @@
 <!-- for more details.                                                      -->
 <decoder-config xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/decoder-4-15-2.xsd">
   <version version="1" author="Pierre Billon, pierre.bln@me.com" lastUpdated="20240225"/>
+  <!-- This decoder configuration file is based on the work of Ronald Kuhn on the            -->
+  <!-- MX685 function decoder, for software 32+. Some CV definitions                         -->
+  <!-- for Unified Software v40+ may not be present yet                                      -->
+  <!--                                                                                       -->
+  <!-- Tested on N scale light bar model LIPLDNW1 for N scale, and included defs             -->
+  <!-- for other models as per Zimo official decoder ID list and manuals                     -->
+  <!--                                                                                       -->
   <decoder>
     <family name="Zimo Function Decoders" mfg="Zimo">
       <model model="MXLIPL1 light bars version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
@@ -48,7 +55,7 @@
         </output>
         <size length="166" width="8.2" height="2.8" units="mm"/>
       </model>
-      <model model="MXLIPL3 light bars version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="179" formFactor="HO" numOuts="10" numFns="14">
+      <model model="MXLIPL3 light bars version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="179" formFactor="HO" numOuts="11" numFns="14">
         <output name="1" label="Front Light">
           <label xml:lang="de">Lvor</label>
         </output>
@@ -79,7 +86,10 @@
         <output name="10" label="LED Gp7">
           <label xml:lang="de">LED Gp7</label>
         </output>
-        <size length="296" width="8.2" height="2.8" units="mm"/>
+        <output name="11" label="FO 9">
+          <label xml:lang="de">FA9</label>
+        </output>
+        <size length="380" width="18" height="7.3" units="mm"/>
       </model>
     </family>
     <programming direct="yes" paged="yes" register="yes" ops="yes"/>
