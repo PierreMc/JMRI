@@ -1,24 +1,22 @@
 package jmri.jmrix.nce.consist;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jmri.jmrix.nce.NceBinaryCommand;
 import jmri.jmrix.nce.NceMessage;
 import jmri.jmrix.nce.NceReply;
 import jmri.jmrix.nce.NceTrafficController;
 import jmri.util.FileUtil;
 import jmri.util.StringUtil;
+import jmri.util.swing.JmriJOptionPane;
 import jmri.util.swing.TextFilter;
 
 /**
@@ -33,10 +31,10 @@ import jmri.util.swing.TextFilter;
  * appropriate consist address.
  *
  * @author Dan Boudreau Copyright (C) 2007
+ * @author Ken Cameron Copyright (C) 2023
  */
 public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListener {
 
-    private static final int CS_CONSIST_MEM = 0xF500; // start of NCE CS Consist memory
     private static final int CONSIST_LNTH = 16; // 16 bytes per consist line
     private static final int REPLY_1 = 1; // reply length of 1 byte expected
     private int replyLen = 0; // expected byte length
@@ -57,7 +55,7 @@ public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListe
     public void run() {
 
         // Get file to read from
-        JFileChooser fc = new JFileChooser(FileUtil.getUserFilesPath());
+        JFileChooser fc = new jmri.util.swing.JmriJFileChooser(FileUtil.getUserFilesPath());
         fc.addChoosableFileFilter(new TextFilter());
         int retVal = fc.showOpenDialog(null);
         if (retVal != JFileChooser.APPROVE_OPTION) {
@@ -86,7 +84,7 @@ public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListe
             waiting = 0;
             fileValid = false; // in case we break out early
             int consistNum = 0; // for user status messages
-            int curConsist = CS_CONSIST_MEM; // load the start address of the NCE consist memory
+            int curConsist = tc.csm.getConsistHeadAddr(); // load the start address of the NCE consist memory
             byte[] consistData = new byte[CONSIST_LNTH]; // NCE Consist data
             String line;
 
@@ -120,11 +118,11 @@ public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListe
                 }
 
                 // consist file found, give the user the choice to continue
-                if (curConsist == CS_CONSIST_MEM) {
-                    if (JOptionPane.showConfirmDialog(null,
+                if (curConsist == tc.csm.getConsistHeadAddr()) {
+                    if (JmriJOptionPane.showConfirmDialog(null,
                             Bundle.getMessage("RestoreTakesAwhile"),
                             Bundle.getMessage("NceConsistRestore"),
-                            JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                            JmriJOptionPane.YES_NO_OPTION) != JmriJOptionPane.YES_OPTION) {
                         break;
                     }
                 }
@@ -168,15 +166,15 @@ public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListe
             fstatus.dispose();
 
             if (fileValid) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         Bundle.getMessage("SuccessfulRestore"),
                         Bundle.getMessage("NceConsistRestore"),
-                        JOptionPane.INFORMATION_MESSAGE);
+                        JmriJOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         Bundle.getMessage("RestoreFailed"),
                         Bundle.getMessage("NceConsistRestore"),
-                        JOptionPane.ERROR_MESSAGE);
+                        JmriJOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException e) {
             // this is the end of the try-with-resources that opens in.
@@ -227,6 +225,6 @@ public class NceConsistRestore extends Thread implements jmri.jmrix.nce.NceListe
         }
     }
 
-    private final static Logger log = LoggerFactory.getLogger(NceConsistRestore.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(NceConsistRestore.class);
 
 }

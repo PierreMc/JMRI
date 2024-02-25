@@ -4,10 +4,10 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI: Multi-connection Update</title>
   <meta name="keywords" content="JMRI jmrix connections hardware">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -100,12 +100,12 @@ serial/network refactoring.
 
       <p>To make startup actions work with more than one connection of their type, they should
       implement the <a href=
-      "https://jmri.org/JavaDoc/doc/jmri/jmrix/swing/SystemConnectionAction.html">jmri.jmrix.SystemConnectionAction</a>
+      "https://www.jmri.org/JavaDoc/doc/jmri/jmrix/swing/SystemConnectionAction.html">jmri.jmrix.SystemConnectionAction</a>
       interface. This will connected them to their specific <a href=
-      "https://jmri.org/JavaDoc/doc/jmri/jmrix/SystemConnectionMemo.html">SystemConnectionMemo</a>.
-      <!--#include virtual="/Footer.shtml" --></p>
+      "https://www.jmri.org/JavaDoc/doc/jmri/SystemConnectionMemo.html">SystemConnectionMemo</a>.
+      <!--#include virtual="/help/en/parts/Footer.shtml" --></p>
     </div>
   </div>
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

@@ -2,11 +2,14 @@ package jmri.jmrit.logixng.util.swing;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import jmri.*;
 import jmri.jmrit.logixng.*;
@@ -15,6 +18,7 @@ import jmri.jmrit.logixng.swing.SwingConfiguratorInterface;
 import jmri.jmrit.logixng.util.LogixNG_SelectTable;
 import jmri.jmrit.logixng.util.parser.ParserException;
 import jmri.util.swing.BeanSelectPanel;
+import jmri.util.swing.JmriJOptionPane;
 
 /**
  * Swing class for jmri.jmrit.logixng.util.LogixNG_SelectTable.
@@ -53,6 +57,8 @@ public class LogixNG_SelectTableSwing {
     private JTextField _tableColumnReferenceTextField;
     private JTextField _tableColumnLocalVariableTextField;
     private JTextField _tableColumnFormulaTextField;
+
+    private final List<ChangeListener> _changeListeners = new ArrayList<>();
 
 
     public LogixNG_SelectTableSwing(
@@ -153,16 +159,19 @@ public class LogixNG_SelectTableSwing {
     private void selectTableNameFinished() {
         _tableNameAddressing = _logixNG_DataDialog.getAddressing();
         _tableNameLabel.setText(getTableNameDescription());
+        fireChange();
     }
 
     private void selectTableRowFinished() {
         _tableRowAddressing = _logixNG_DataDialog.getAddressing();
         _rowNameLabel.setText(getTableRowDescription());
+        fireChange();
     }
 
     private void selectTableColumnFinished() {
         _tableColumnAddressing = _logixNG_DataDialog.getAddressing();
         _columnNameLabel.setText(getTableColumnDescription());
+        fireChange();
     }
 
     private void setupRowOrColumnNameComboBox(@CheckForNull LogixNG_SelectTable selectTable) {
@@ -193,6 +202,21 @@ public class LogixNG_SelectTableSwing {
         }
     }
 
+
+    public void addChangeListener(ChangeListener l) {
+        _changeListeners.add(l);
+    }
+
+
+    public void removeChangeListener(ChangeListener l) {
+        _changeListeners.remove(l);
+    }
+
+    private void fireChange() {
+        for (var l : _changeListeners) {
+            l.stateChanged(new ChangeEvent(this));
+        }
+    }
 
     public JPanel createPanel(@CheckForNull LogixNG_SelectTable selectTable) {
 
@@ -486,10 +510,10 @@ public class LogixNG_SelectTableSwing {
 
     public boolean canClose() {
         if (_logixNG_DataDialog.checkOpenDialog()) {
-            JOptionPane.showMessageDialog(_dialog,
+            JmriJOptionPane.showMessageDialog(_dialog,
                     Bundle.getMessage("Error_InSelectMode"), // NOI18N
                     Bundle.getMessage("ErrorTitle"), // NOI18N
-                    JOptionPane.ERROR_MESSAGE);
+                    JmriJOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

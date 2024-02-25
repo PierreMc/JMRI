@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import jmri.Sensor;
 import jmri.jmrit.roster.Roster;
 import jmri.jmrit.roster.RosterEntry;
 import jmri.jmrit.vsdecoder.LoadVSDFileAction;
@@ -29,8 +31,7 @@ import jmri.jmrit.vsdecoder.VSDConfig;
 import jmri.jmrit.vsdecoder.VSDecoder;
 import jmri.jmrit.vsdecoder.VSDecoderManager;
 import jmri.util.JmriJFrame;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jmri.util.swing.JmriJOptionPane;
 
 /**
  * Main frame for the GUI VSDecoder Manager.
@@ -38,17 +39,18 @@ import org.slf4j.LoggerFactory;
  * <hr>
  * This file is part of JMRI.
  * <p>
- * JMRI is free software; you can redistribute it and/or modify it under 
- * the terms of version 2 of the GNU General Public License as published 
+ * JMRI is free software; you can redistribute it and/or modify it under
+ * the terms of version 2 of the GNU General Public License as published
  * by the Free Software Foundation. See the "COPYING" file for a copy
  * of this license.
  * <p>
- * JMRI is distributed in the hope that it will be useful, but WITHOUT 
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+ * JMRI is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
  * for more details.
  *
  * @author Mark Underwood Copyright (C) 2011
+ * @author Klaus Killinger Copyright (C) 2024
  */
 public class VSDManagerFrame extends JmriJFrame {
 
@@ -79,6 +81,7 @@ public class VSDManagerFrame extends JmriJFrame {
     private VSDConfigDialog cd;
     private List<JMenu> menuList;
     private boolean is_auto_loading;
+    private boolean is_block_using;
     private boolean is_viewing;
     private List<VSDecoder> vsdlist;
 
@@ -86,9 +89,10 @@ public class VSDManagerFrame extends JmriJFrame {
      * Constructor
      */
     public VSDManagerFrame() {
-        super(false, false);
+        super(true, true);
         this.addPropertyChangeListener(VSDecoderManager.instance());
-        is_auto_loading = VSDecoderManager.instance().getVSDecoderPreferences().isAutoLoadingDefaultVSDFile();
+        is_auto_loading = VSDecoderManager.instance().getVSDecoderPreferences().isAutoLoadingVSDFile();
+        is_block_using = VSDecoderManager.instance().getVSDecoderPreferences().getUseBlocksSetting();
         is_viewing = VSDecoderManager.instance().getVSDecoderList().isEmpty() ? false : true;
         initGUI();
     }
@@ -196,7 +200,7 @@ public class VSDManagerFrame extends JmriJFrame {
                     // Allow <max_decoder> roster entries
                     int entry_counter = 1;
                     for (RosterEntry entry : rosterList) {
-                        if (entry_counter <= VSDecoderManager.max_decoder) { 
+                        if (entry_counter <= VSDecoderManager.max_decoder) {
                             addButton.doClick(); // simulate an Add-button-click
                             cd.setRosterItem(entry); // forward the roster entry
                             entry_counter++;
@@ -212,7 +216,7 @@ public class VSDManagerFrame extends JmriJFrame {
                 msg = "Roster Group \"" + vsdRosterGroup + "\" not found";
             }
             if (!msg.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Auto-Loading: " + msg);
+                JmriJOptionPane.showMessageDialog(null, "Auto-Loading: " + msg);
                 log.warn("Auto-Loading VSDecoder aborted");
             }
         }
@@ -238,7 +242,7 @@ public class VSDManagerFrame extends JmriJFrame {
         // If the maximum number of VSDecoders (Controls) is reached, don't create a new Control
         // In Viewing Mode up to 4 existing VSDecoders are possible, so skip the check
         if (! is_viewing && VSDecoderManager.instance().getVSDecoderList().size() >= VSDecoderManager.max_decoder) {
-            JOptionPane.showMessageDialog(null, 
+            JmriJOptionPane.showMessageDialog(null,
                     "VSDecoder cannot be created. Maximal number is " + String.valueOf(VSDecoderManager.max_decoder));
         } else {
             config = new VSDConfig(); // Create a new Config for the new VSDecoder.
@@ -263,10 +267,11 @@ public class VSDManagerFrame extends JmriJFrame {
         log.debug("internal config dialog handler");
         // If this decoder already exists, don't create a new Control
         // In Viewing Mode up to 4 existing VSDecoders are possible, so skip the check
+        VSDecoder newDecoder = null;
         if (! is_viewing && VSDecoderManager.instance().getVSDecoderByAddress(config.getLocoAddress().toString()) != null) {
-            JOptionPane.showMessageDialog(null, Bundle.getMessage("MgrAddDuplicateMessage"));
+            JmriJOptionPane.showMessageDialog(null, Bundle.getMessage("MgrAddDuplicateMessage"));
         } else {
-            VSDecoder newDecoder = VSDecoderManager.instance().getVSDecoder(config);
+            newDecoder = VSDecoderManager.instance().getVSDecoder(config);
             if (newDecoder == null) {
                 log.error("Lost context, VSDecoder is null. Quit JMRI and start over. No New Decoder constructed! Address: {}, profile: {}",
                         config.getLocoAddress(), config.getProfileName());
@@ -302,6 +307,36 @@ public class VSDManagerFrame extends JmriJFrame {
             //this.setVisible(true);
             // Do we need to make newControl a listener to newDecoder?
         }
+        if (newDecoder != null) {
+            getStartBlock(newDecoder);
+        }
+    }
+
+    private void getStartBlock(VSDecoder vsd) {
+        jmri.Block start_block = null;
+        for (jmri.Block blk : jmri.InstanceManager.getDefault(jmri.BlockManager.class).getNamedBeanSet()) {
+            if (VSDecoderManager.instance().possibleStartBlocks.containsKey(blk)) {
+                int locoAddress = VSDecoderManager.instance().getLocoAddr(blk);
+                if (locoAddress == vsd.getAddress().getNumber()) {
+                    log.debug("found start block: {}, loco address: {}", blk, locoAddress);
+                    Sensor s = blk.getSensor();
+                    if (s != null && is_block_using) {
+                        if (s.getKnownState() == Sensor.UNKNOWN) {
+                            try {
+                                s.setState(Sensor.ACTIVE);
+                            } catch (jmri.JmriException ex) {
+                                log.debug("Exception setting sensor");
+                            }
+                        }
+                    }
+                    start_block = blk;
+                    break; // one loco address per block
+                }
+            }
+        }
+        if (start_block != null) {
+           VSDecoderManager.instance().atStart(start_block);
+        }
     }
 
     /**
@@ -319,7 +354,7 @@ public class VSDManagerFrame extends JmriJFrame {
                 return;
             }
             if (vsd.getEngineSound().isEngineStarted()) {
-                JOptionPane.showMessageDialog(null, Bundle.getMessage("MgrDeleteWhenEngineStopped"));
+                JmriJOptionPane.showMessageDialog(null, Bundle.getMessage("MgrDeleteWhenEngineStopped"));
                 return;
             } else {
                 this.removePropertyChangeListener(vsd);
@@ -378,6 +413,6 @@ public class VSDManagerFrame extends JmriJFrame {
         this.addHelpMenu("package.jmri.jmrit.vsdecoder.swing.VSDManagerFrame", true);
     }
 
-    private static final Logger log = LoggerFactory.getLogger(VSDManagerFrame.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(VSDManagerFrame.class);
 
 }

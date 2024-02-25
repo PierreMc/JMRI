@@ -2,8 +2,6 @@ package jmri.jmrix.loconet.pr4;
 
 import jmri.jmrix.loconet.LnSystemConnectionMemoTestBase;
 import jmri.jmrix.loconet.LocoNetInterfaceScaffold;
-import jmri.util.JUnitUtil;
-
 import org.junit.jupiter.api.*;
 
 /**
@@ -19,7 +17,7 @@ public class PR4SystemConnectionMemoTest extends LnSystemConnectionMemoTestBase<
         scm = new PR4SystemConnectionMemo();
         LocoNetInterfaceScaffold lnis = new LocoNetInterfaceScaffold(scm);
         scm.setLnTrafficController(lnis);
-        scm.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false);
+        scm.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false, false);
         scm.configureManagers();
     }
 

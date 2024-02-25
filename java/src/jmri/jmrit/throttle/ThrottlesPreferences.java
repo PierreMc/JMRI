@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
  * A singleton instance is provided by a call to
  * <code>jmri.InstanceManager.getDefault(ThrottlesPreferences.class);</code> or
  * <code>jmri.InstanceManager.getNullableDefault(ThrottlesPreferences.class)</code>;
- * <p>
  * @author Lionel Jeanson - 2009-2021
  *
  */
@@ -28,8 +27,8 @@ public class ThrottlesPreferences implements jmri.InstanceManagerAutoDefault {
 
     private boolean _useExThrottle = true;
     private boolean _useToolBar = true;
-    private boolean _useFunctionIcon = false;
-    private boolean _useLargeSpeedSlider = false;
+    private boolean _useFunctionIcon = true;
+    private boolean _useLargeSpeedSlider = true;
     private boolean _resizeWinImg = false;
     private boolean _useRosterImage = true;
     private boolean _enableRosterSearch = true;

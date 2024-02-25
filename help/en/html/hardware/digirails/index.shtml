@@ -3,10 +3,10 @@
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI Hardware Support - Digikeijs (Digirails)</title>
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../SidebarUp.shtml" -->
@@ -46,7 +46,7 @@
 
         <li>Leave the port number at 15471</li>
 
-        <li>Click "Save" & restart</li>
+        <li>Click "Save" &amp; restart</li>
       </ul>
 
       <h4>Digitrax/LocoNet</h4>
@@ -70,7 +70,7 @@
 
       <h4>Via USB</h4>
       First, make sure your computer has the <a href=
-      "https://www.ftdichip.com/Drivers/VCP.htm">correct USB drivers installed</a>.
+      "https://ftdichip.com/drivers/vcp-drivers/">correct USB drivers installed</a>.
       <p>Then, set the JMRI connection preferences to:</p>
 
       <ul>
@@ -127,11 +127,11 @@
           Digikeijs DR5000 documentation</a>
         </li>
       </ul>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

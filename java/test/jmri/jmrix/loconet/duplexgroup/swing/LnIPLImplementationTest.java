@@ -1672,7 +1672,7 @@ public class LnIPLImplementationTest {
         lnis = new LocoNetInterfaceScaffold(memo);
         memo.setLnTrafficController(lnis);
 
-        memo.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_DCS100,false,false,false,false);
+        memo.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_DCS100,false,false,false,false,false);
 
         memo.configureManagers();
         jmri.InstanceManager.store(memo,jmri.jmrix.loconet.LocoNetSystemConnectionMemo.class);
@@ -1686,6 +1686,7 @@ public class LnIPLImplementationTest {
         memo.dispose();
         JUnitUtil.removeMatchingThreads("LnPowerManager LnTrackStatusUpdateThread");
         JUnitUtil.removeMatchingThreads("LnSensorUpdateThread");
+        JUnitUtil.deregisterBlockManagerShutdownTask();
         JUnitUtil.tearDown();
     }
 }

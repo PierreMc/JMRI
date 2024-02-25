@@ -4,11 +4,11 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI: Loading and Storing Your Work</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="Author" content="Jerry Grochow"><!--#include virtual="/Style.shtml" -->
+  <meta name="Author" content="Jerry Grochow"><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head><!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -67,11 +67,12 @@
       data from one run of JMRI to the next. For example, saving changes to roster entries is
       separate from storing away your layout configuration.</p>
 
-      <p>Unfortunately, JMRI does not always notify you if there is unsaved data when it exits
-      (although the community of developers is constantly working to improve this). For example,
-      when you create a Sensor in the Sensor Table, it will appear in the Sensor Table Window, but
-      it will be gone if you close JMRI - unless you take one of the actions listed below to save
-      it.</p>
+      <p>As of JMRI 5.1.1, PanelPro will check for changes to tables and panels that have not been
+      stored.  This occurs when <strong>Quit</strong> has been selected and provides an opportunity
+      to store the changes. For details, see <a href=
+      "https://www.jmri.org/help/en/package/apps/TabbedPreferences.shtml#Shutdown">Preferences &rArr;
+      Shutdown</a>.  Previously some of the tables would have reminders, but there was no consistent
+      checking.  This meant there was the possibility of losing changes to tables and panels.</p>
 
       <p>To ensure that data you create (or is created and updated for you) is kept as you require,
       you should understand when and how the different kinds of data get saved to a disk file, or
@@ -359,7 +360,7 @@
         "Store Only table content (No Panels)... {Store configuration}" rather than "Store ALL
         table content and panels... {Store configuration and panels}" and overwrote an existing
         panel file. Don't panic - the backup copy (in the directory "backupPanels" in the <a href=
-        "../doc/Technical/ProfileFileStructure.shtml">Profile Location</a>) is there. Best practice
+        "../doc/Technical/ProfileFileStructure.shtml">User Files Location</a>) is there. Best practice
         in working with PanelPro is to almost always use <strong>"Store ALL table content and
         panels...</strong> {<em>Old: <strong>Store configuration and panels</strong></em>}" or
         <strong>"Store ALL table content and panels...</strong> {<em>Old: <strong>Store
@@ -434,11 +435,11 @@
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
       <!--   <p><a href="#TopOfPage">[Go to top of page]</a></p>     -->
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

@@ -3,8 +3,6 @@ package jmri.jmrix.loconet.usb_dcs240Plus;
 import jmri.jmrix.loconet.LnSystemConnectionMemoTestBase;
 import jmri.jmrix.loconet.LnCommandStationType;
 import jmri.jmrix.loconet.LocoNetInterfaceScaffold;
-import jmri.util.JUnitUtil;
-
 import org.junit.jupiter.api.*;
 
 /**
@@ -20,7 +18,7 @@ public class UsbDcs240PlusSystemConnectionMemoTest extends LnSystemConnectionMem
         scm = new UsbDcs240PlusSystemConnectionMemo();
         LocoNetInterfaceScaffold lnis = new LocoNetInterfaceScaffold(scm);
         scm.setLnTrafficController(lnis);
-        scm.configureCommandStation(LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false);
+        scm.configureCommandStation(LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false, false);
         scm.configureManagers();
     }
 

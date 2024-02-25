@@ -4,10 +4,10 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <!-- Copyright Bob Jacobsen 2008 -->
 
-  <title>JMRI: Startup Scripts</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI: Startup Scripts</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -23,7 +23,7 @@
 
       <ul>
         <li>
-          <a href="#linux">Linux</a>
+          <a href="#Linux">Linux</a>
         </li>
 
         <li>
@@ -126,7 +126,7 @@
 
         <dt>jmri.log</dt>
 
-        <dd>Full or partial pathname of the logging control file, by default "default.lcf"</dd>
+        <dd>Full or partial pathname of the logging configuration file, by default "default_lcf.xml"</dd>
 
         <dt>jmri.log.path</dt>
 
@@ -271,7 +271,7 @@
       <h3>Script Details</h3>
 
       <p>Each bundle has a startup bash shell script in the Contents/MacOSX directory that performs
-      the actual startup. This is the same script as used for Linux, see <a href="#linux">that
+      the actual startup. This is the same script as used for Linux, see <a href="#Linux">that
       section</a> for details.</p>
 
       <h3>Uniform Type Identifiers</h3>
@@ -655,9 +655,9 @@
             <li>This will launch the legacy DecoderPro interface.</li>
           </ul></li>
       </ol>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

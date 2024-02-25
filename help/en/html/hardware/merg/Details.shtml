@@ -4,10 +4,10 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <meta name="keywords" content="JMRI help CBUS Connecting connection canusb4 network">
   <title>JMRI Hardware Support - CBUS&reg; - Tech Details</title>
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -161,11 +161,11 @@
       <p>Methods using this option include:</p>
 
       <ul>
+        <li><a href="../../../package/jmri/jmrix/can/cbus/swing/hubpane/CbusHubPane.shtml">CBUS Hub Control</a></li>
         <li>CANPiCAP - The canpi service has to be active to accept connections.</li>
-
         <li>CANether</li>
-
-        <li>CBUS Server</li>
+        <li><a href="https://github.com/phillipsnj/mergCbusServer">CBUS Server</a> ( Node.js )</li>
+        <li>CANGC1e</li>
       </ul>
 
       <p>IP Address/Host Name : (none) - enter an IP address for fully manual configuration.<br>
@@ -329,11 +329,11 @@
       Guide</p>
 
       <p>CBUS&reg; is a registered trade mark of Dr Michael Bolton</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

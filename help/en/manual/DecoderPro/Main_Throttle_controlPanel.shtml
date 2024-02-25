@@ -2,22 +2,16 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>DecoderPro Throttle</title><!--#include virtual="/Style.shtml" -->
+  <title>DecoderPro Throttle</title><!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- DecoderPro Styles -->
 
   <style>
     .dp-center {text-align: center;}
-    .dp-middle {text-align: middle;}
     .dp-right {text-align: right;}
-    .dp-none {list-style-type: none;}
-    .dp-square {list-style-type: square;}
-    .dp-upper-alpha {ist-style-type: upper-alpha;}
-    .dp-lower-alpha {list-style-type: lower-alpha;}
-    .dp-border-2 {border: 2px solid;}
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -83,11 +77,9 @@
                       the function from the <strong>Function Panel</strong> that you want to
                       use.</p>
 
-                      <p><input name="button3" id="button3" value="OK" type="button"> Sets the
-                      selections</p>
+                      <p><span class="textbutton">OK</span> button sets the selections.</p>
 
-                      <p><input name="button4" id="button4" value="Cancel" type="button"> Cancels
-                      any settings</p>
+                      <p><span class="textbutton">Cancel</span> button cancels any settings.</p>
                     </td>
                   </tr>
                 </tbody>
@@ -138,13 +130,13 @@
               "radio"> Forward</strong> and <input name="radio2" id="radio2" value="radio2" type=
               "radio"> <strong>Reverse</strong> set the locomotives direction.</p>
 
-              <p><strong><input name="button9" id="button9" value="Stop!" type="submit"></strong>
+              <p><span class="textbutton">Stop!</span> button
               executes an emergency stop, locomotive stops immediately overriding any BEMF or
               momentum programmed into the decoder.</p>
 
-              <p><strong><input name="button10" id="button10" value="Idle" type="submit"></strong>
+              <p><span class="textbutton">Idle</span> button
               stops the locomotive smoothly using any momentum setting programmed into the
-              decoder..</p>
+              decoder.</p>
             </td>
           </tr>
         </tbody>
@@ -160,11 +152,11 @@
         <p><a href="Main_Throttle.shtml">Back</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

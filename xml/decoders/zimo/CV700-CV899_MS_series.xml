@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="../XSLT/decoder.xsl"?>
 <!-- version 1 - 24 Nov 2022.  Merging MX and MS series files to single unit for CVs700-899, Nigel Cliffe -->
-<variables xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/decoder.xsd">
+<variables xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jmri.org/xml/schema/decoder-4-15-2.xsd">
   <!-- include this CV to put it onto the Sound Levels pane -->
 
   <variable CV="738" item="Switch input 1 Sound Sample" >
@@ -718,25 +718,25 @@
   
   <variable CV="830" item="stopping distance fwd high">
     <decVal/>
-    <label>stopping distance forward high byte</label>
+    <label>Alternative Stopping Distance Fwd High Byte</label>
     <label xml:lang="de">Bremsweg Vorwärts High</label>
     <label xml:lang="cs">Brzdná dráha vpřed horní byte</label>
   </variable>
   <variable CV="831" item="stopping distance fwd low">
     <decVal/>
-    <label>stopping distance forward low byte</label>
+    <label>Alternative Stopping Distance Fwd Low Byte</label>
     <label xml:lang="de">Bremsweg Vorwärts Low</label>
     <label xml:lang="cs">Brzdná dráha vpřed dolní byte</label>
   </variable>
   <variable CV="832" item="stopping distance rev high">
     <decVal/>
-    <label>stopping distance reverse high byte</label>
+    <label>Alternative Stopping Distance Rev High Byte</label>
     <label xml:lang="de">Bremsweg Rückwärts High</label>
     <label xml:lang="cs">Brzdná dráha vzad horní byte</label>
   </variable>
   <variable CV="833" item="stopping distance rev low">
     <decVal/>
-    <label>stopping distance reverse low byte</label>
+    <label>Alternative Stopping Distance Rev Low Byte</label>
     <label xml:lang="de">Bremsweg Rückwärts Low</label>
     <label xml:lang="cs">Brzdná dráha vzad dolní byte</label>
   </variable>

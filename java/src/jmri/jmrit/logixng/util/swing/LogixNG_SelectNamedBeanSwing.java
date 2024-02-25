@@ -1,6 +1,7 @@
 package jmri.jmrit.logixng.util.swing;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -25,6 +26,8 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
     private final @Nonnull Manager<E> _manager;
     private final JDialog _dialog;
     private final LogixNG_SelectTableSwing _selectTableSwing;
+
+    private boolean onlyDirectAddressing = false;
 
     private JTabbedPane _tabbedPane;
     private BeanSelectPanel<E> _namedBeanPanel;
@@ -52,6 +55,15 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
 
     public JPanel createPanel(
             @CheckForNull LogixNG_SelectNamedBean<E> selectNamedBean) {
+        return createPanel(selectNamedBean, null);
+    }
+
+    public JPanel createPanel(
+            @CheckForNull LogixNG_SelectNamedBean<E> selectNamedBean,
+            @CheckForNull Predicate<E> filter) {
+
+        onlyDirectAddressing = selectNamedBean != null
+                && selectNamedBean.getOnlyDirectAddressingAllowed();
 
         JPanel panel = new JPanel();
 
@@ -81,7 +93,7 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
         _tabbedPane.addTab(NamedBeanAddressing.Formula.toString(), _panelFormula);
         _tabbedPane.addTab(NamedBeanAddressing.Table.toString(), _panelTable);
 
-        _namedBeanPanel = new BeanSelectPanel<>(_manager, null);
+        _namedBeanPanel = new BeanSelectPanel<>(_manager, null, NamedBean.DisplayOptions.DISPLAYNAME, true, filter);
         _panelDirect.add(_namedBeanPanel);
 
         _referenceTextField = new JTextField();
@@ -117,7 +129,11 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
             _formulaTextField.setText(selectNamedBean.getFormula());
         }
 
-        panel.add(_tabbedPane);
+        if (!onlyDirectAddressing) {
+            panel.add(_tabbedPane);
+        } else {
+            panel.add(_panelDirect);
+        }
         return panel;
     }
 
@@ -148,7 +164,7 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
 
     public void updateObject(@Nonnull LogixNG_SelectNamedBean<E> selectNamedBean) {
 
-        if (_tabbedPane.getSelectedComponent() == _panelDirect) {
+        if (onlyDirectAddressing || _tabbedPane.getSelectedComponent() == _panelDirect) {
             E namedBean = _namedBeanPanel.getNamedBean();
             if (namedBean != null) {
                 NamedBeanHandle<E> handle
@@ -203,6 +219,10 @@ public class LogixNG_SelectNamedBeanSwing<E extends NamedBean> {
     }
 
     public NamedBeanAddressing getAddressing() {
+        if (onlyDirectAddressing) {
+            return NamedBeanAddressing.Direct;
+        }
+
         if (_tabbedPane.getSelectedComponent() == _panelDirect) {
             return NamedBeanAddressing.Direct;
         } else if (_tabbedPane.getSelectedComponent() == _panelReference) {

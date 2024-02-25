@@ -4,10 +4,10 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI Setup - Sharing Files with DropBox</title>
   <meta name="keywords" content="java model railroad JMRI install Dropbox">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -66,7 +66,7 @@
 
         <li>Note that neither Dropbox or a shared network drive provide a fully isolated non-live
         off-line copy (external device such as USB drive or CD/DVD) by default. That responsibility
-        is still up to you.</li>
+        is still up to you.
       </ul>
 
       <p>The following approach should also work with other cloud-based file-synchronisation
@@ -74,7 +74,11 @@
       and <a href="https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage"
       target="_blank">OneDrive</a>. However the <a href="https://www.dropbox.com" target=
       "_blank">Dropbox</a> solution is well tested, having been used by a number of JMRI developers
-      and users for quite some time.</p>
+      and users for quite some time.
+      You can also use a revision control system like Git;
+      <a href="git.shtml">those instructions</a>
+      are somewhat different.</li>
+      </p>
 
       <h3>Step 1</h3>
 
@@ -132,11 +136,11 @@
         <li>Preferences &#8209;&gt; File Locations &#8209;&gt; User Files Location and set it to the JMRI folder you
         created in Dropbox.</li>
       </ul>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

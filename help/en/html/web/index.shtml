@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI Web Access</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI Web Access</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -227,7 +227,9 @@
 
       <p>Two files <code>web/css/user.css</code> and <code>web/js/user.js</code> are provided for
       convenience to make simple appearance and javascript additions and overrides. These files are
-      automatically included in all JMRI web pages, and include instructions for usage.</p>
+      automatically included in all JMRI web pages and include instructions for usage. JMRI, as of 
+      version 5.5.4, allows the targeting of CSS to a specific panel by name. See user.css, located 
+      in the current JMRI distribution, for details.</p>
 
       <p>The standard web services use templates in the <code>web/servlet</code> directory. Note
       that these templates are tightly linked with JMRI. While modifying these templates is the
@@ -302,11 +304,11 @@
       response to requests. This is not air-tight security, however, and you should be careful to
       not put important content in those directories or link them to other parts of your
       computer.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

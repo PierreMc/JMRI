@@ -1,11 +1,7 @@
 package jmri.jmrix.nce;
 
-import javax.swing.JOptionPane;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import jmri.jmrix.ConnectionStatus;
+import jmri.util.swing.JmriJOptionPane;
 
 /**
  * Continuously checks and confirms that the communication link to the NCE
@@ -20,6 +16,7 @@ import jmri.jmrix.ConnectionStatus;
  * Confirms connection to PowerCab by issuing dummy loco command.
  *
  * @author Daniel Boudreau (C) 2007, 2010, 2012, 2021
+ * @author Ken Cameron (C) 2023
  *
  */
 public class NceConnectionStatus implements NceListener {
@@ -37,7 +34,7 @@ public class NceConnectionStatus implements NceListener {
     private static final int WARN1_STATE = 8; // Serial interface is not functioning properly
     private static final int WARN2_STATE = 9; // Detected 2007 March EPROM
 
-    // all of the error states below display a JOptionPane error message
+    // all of the error states below display a JmriJOptionPane error message
     private static final int ERROR1_STATE = 16; // Wrong revision EPROM, 2004 or earlier
     private static final int ERROR2_STATE = 17; // Wrong revision EPROM, 2006 or later
     private static final int ERROR4_STATE = 19; // Wrong NCE System
@@ -45,6 +42,7 @@ public class NceConnectionStatus implements NceListener {
     private static final int ERROR6_STATE = 21; // Wrong NCE System, detected Smart Booster SB3
     private static final int ERROR7_STATE = 22; // Wrong NCE System, detected Power Pro
     private static final int ERROR8_STATE = 23; // Wrong NCE System, detected SB5
+    private static final int ERROR9_STATE = 24; // Wrong NCE System, detected PH5
 
     private int epromState = INIT_STATE; // EPROM state
     private boolean epromChecked = false;
@@ -70,7 +68,11 @@ public class NceConnectionStatus implements NceListener {
 
     private static final int VV_2012 = 7; // Revision 2012 EPROM VV.MM.mm = 7.2.0
     private static final int MM_2012 = 2;
-
+    
+    // PH5 details, 2023
+    private static final int VV_PH5 = 8;    // 1st Edition
+    private static final int MM_PH5 = 0;
+    
     // USB -> Cab bus adapter:
     // When used with PowerCab V1.28 - 6.3.0
     // When used with SB3 V1.28 - 6.3.1 (No program track on an SB3)
@@ -101,6 +103,7 @@ public class NceConnectionStatus implements NceListener {
     private static final int mm_USB_V7_SB3 = 5; // SB3 with 1.28c
     private static final int mm_USB_V7_PH = 6; // PowerPro with 3.1.2007
     // private static final int mm_USB_V7_ALL = 7; // All systems
+    
 
     private NceTrafficController tc = null;
 
@@ -150,11 +153,11 @@ public class NceConnectionStatus implements NceListener {
         if (epromState == WAIT_STATE) {
             log.warn("Incorrect or no response from NCE command station");
             if (JOptPane_WARNING_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "JMRI could not establish communication with NCE command station. \n" +
                                 "Check the \"Serial port:\" and \"Baud rate:\" in Edit -> Preferences. \n" +
                                 "Confirm cabling and that the NCE system is powered up.",
-                        Bundle.getMessage("WarningTitle"), JOptionPane.WARNING_MESSAGE);
+                        Bundle.getMessage("WarningTitle"), JmriJOptionPane.WARNING_MESSAGE);
             }
             epromState = WARN1_STATE;
         }
@@ -166,10 +169,10 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR1_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong revision of Command Station EPROM selected in Preferences \n" +
                                 "Change the Command Station EPROM selection to \"2004 or earlier\"",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -177,10 +180,10 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR2_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong revision of Command Station EPROM selected in Preferences \n" +
                                 "Change the Command Station EPROM selection to \"2006 or later\"",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -191,10 +194,10 @@ public class NceConnectionStatus implements NceListener {
             // Need to add checkbox "Do not show this message again" otherwise
             // the message can be a pain.
             if (JOptPane_WARNING_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "The 2007 March EPROM doesn't provide reliable feedback," +
                                 " contact NCE if you want to use MONITORING feedback ",
-                        Bundle.getMessage("WarningTitle"), JOptionPane.INFORMATION_MESSAGE);
+                        Bundle.getMessage("WarningTitle"), JmriJOptionPane.INFORMATION_MESSAGE);
             }
             ConnectionStatus.instance().setConnectionState(tc.getUserName(), tc.getPortName(),
                     ConnectionStatus.CONNECTION_UP);
@@ -204,14 +207,14 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR4_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong NCE System Connection selected in Preferences. " +
                                 "Change the System Connection to \"" +
                                 jmri.jmrix.nce.serialdriver.ConnectionConfig.NAME +
                                 "\" or \"" +
                                 jmri.jmrix.nce.networkdriver.ConnectionConfig.NAME +
                                 "\".",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -219,12 +222,12 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR5_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong NCE System Connection selected in Preferences. " +
                                 "The System Connection \"" +
                                 jmri.jmrix.nce.usbdriver.ConnectionConfig.NAME +
                                 "\" should change the system to \"Power Cab\".",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -232,12 +235,12 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR6_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong NCE System Connection selected in Preferences. " +
                                 "The System Connection \"" +
                                 jmri.jmrix.nce.usbdriver.ConnectionConfig.NAME +
                                 "\" should change the system to \"Smart Booster SB3\".",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -245,12 +248,12 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR7_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong NCE System Connection selected in Preferences. " +
                                 "The System Connection \"" +
                                 jmri.jmrix.nce.usbdriver.ConnectionConfig.NAME +
                                 "\" should change the system to \"Power Pro\".",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -258,12 +261,12 @@ public class NceConnectionStatus implements NceListener {
 
         if (epromState == ERROR8_STATE) {
             if (JOptPane_ERROR_MESSAGES_ENABLED) {
-                JOptionPane.showMessageDialog(null,
+                JmriJOptionPane.showMessageDialog(null,
                         "Wrong NCE System Connection selected in Preferences. " +
                                 "The System Connection \"" +
                                 jmri.jmrix.nce.usbdriver.ConnectionConfig.NAME +
                                 "\" should change the system to \"SB5\".",
-                        Bundle.getMessage("ErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                        Bundle.getMessage("ErrorTitle"), JmriJOptionPane.ERROR_MESSAGE);
             }
             epromState = NORMAL_STATE;
             return null;
@@ -304,7 +307,7 @@ public class NceConnectionStatus implements NceListener {
             // Is the reply valid? Check major revision, there are only three valid
             // responses
             // note that VV_2004 = VV_2007 = VV_USB
-            if (VV != VV_2012 && VV != VV_2004 && VV != VV_1999) {
+            if (VV != VV_PH5 && VV != VV_2012 && VV != VV_2004 && VV != VV_1999) {
                 log.error("Wrong major revision: {}", Integer.toHexString(VV & 0xFF));
                 // show the entire revision number
                 log.info("NCE EPROM revision = {}", tc.getPwrProVersHexText());
@@ -417,8 +420,22 @@ public class NceConnectionStatus implements NceListener {
                 epromState = ERROR8_STATE;
             }
         }
+        // check for PH5 not on PH5 connection
+        if ((VV == VV_PH5) && (MM == MM_PH5)) {
+            if (tc.getCommandOptions() != NceTrafficController.OPTION_PH5) {
+                log.error("System Connection is incorrect, detected PH5 not connected as a PH5");
+                epromState = ERROR9_STATE;
+            }
+        }
+        // check for PH5 connection to a non-PH5 command station
+        if (tc.getCommandOptions() == NceTrafficController.OPTION_PH5) {
+            if ((VV != VV_PH5) || (MM != MM_PH5)) {
+                log.error("System Connection is incorrect, detected something other than a PH5");
+                epromState = ERROR4_STATE;
+            }
+        }
     }
 
-    private final static Logger log = LoggerFactory.getLogger(NceConnectionStatus.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(NceConnectionStatus.class);
 
 }

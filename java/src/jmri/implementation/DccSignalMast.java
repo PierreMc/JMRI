@@ -48,11 +48,11 @@ public class DccSignalMast extends AbstractSignalMast {
 
     public DccSignalMast(String sys, String user, String mastSubType) {
         super(sys, user);
-        mastType = mastSubType;
+        theMastType = mastSubType;
         configureFromName(sys);
     }
 
-    private String mastType = "F$dsm";
+    private String theMastType = "F$dsm";
     private boolean useAddressOffSet = false;
 
     protected void configureFromName(String systemName) {
@@ -62,8 +62,8 @@ public class DccSignalMast extends AbstractSignalMast {
             log.error("SignalMast system name needs at least three parts: {}", systemName);
             throw new IllegalArgumentException("System name needs at least three parts: " + systemName);
         }
-        if (!parts[0].endsWith(mastType)) {
-            log.warn("First part of SignalMast system name is incorrect {} : {}", systemName, mastType);
+        if (!parts[0].endsWith(theMastType)) {
+            log.warn("First part of SignalMast system name is incorrect {} : {}", systemName, theMastType);
         } else {
             String commandStationPrefix = parts[0].substring(0, parts[0].indexOf("$") - 1);
             java.util.List<jmri.CommandStation> connList = jmri.InstanceManager.getList(jmri.CommandStation.class);
@@ -98,7 +98,7 @@ public class DccSignalMast extends AbstractSignalMast {
         configureAspectTable(system, mast);
     }
 
-    protected HashMap<String, Integer> appearanceToOutput = new HashMap<String, Integer>();
+    protected HashMap<String, Integer> appearanceToOutput = new HashMap<>();
 
     public void setOutputForAppearance(String appearance, int number) {
         if (appearanceToOutput.containsKey(appearance)) {
@@ -176,7 +176,6 @@ public class DccSignalMast extends AbstractSignalMast {
         return useAddressOffSet;
     }
 
-
     @Override
     public void setLit(boolean newLit) {
         if (!allowUnLit() || newLit == getLit()) {
@@ -184,7 +183,10 @@ public class DccSignalMast extends AbstractSignalMast {
         }
         super.setLit(newLit);
         if (newLit) {
-            setAspect(getAspect());
+            String newAspect = getAspect();
+            if (newAspect != null){
+                setAspect(newAspect);
+            }
         } else {
             if (useAddressOffSet) {
                 c.sendPacket(NmraPacket.accSignalDecoderPkt(dccSignalDecoderAddress, unLitId), packetSendCount);

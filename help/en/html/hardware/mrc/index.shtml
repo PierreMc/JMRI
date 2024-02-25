@@ -3,10 +3,10 @@
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI Hardware Support - MRC Prodigy Advanced 2</title>
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../SidebarUp.shtml" -->
@@ -14,10 +14,10 @@
     <div id="mainContent">
       <h1>Hardware Support: MRC/GaugeMaster Prodigy Advanced<sup>2</sup></h1>
 
-      <p>Please download the <a href="https://jmri.org/download/index.shtml">latest JMRI
+      <p>Please download the <a href="https://www.jmri.org/download/index.shtml">latest JMRI
       release</a> to get the most recent version of JMRI's MRC/GaugeMaster support. Support for MRC
       Prodigy is available starting with <a href=
-      "https://jmri.org/releasenotes/jmri3.9.1.shtml">JMRI version 3.9.1</a>.</p>
+      "https://www.jmri.org/releasenotes/jmri3.9.1.shtml">JMRI version 3.9.1</a>.</p>
 
       <p>In the UK the MRC systems is rebranded, rebadged and sold by Gaugemaster. The two systems
       are exactly the same in operation and components.</p>
@@ -90,11 +90,11 @@
           Prodigy website</a>
         </li>
       </ul>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

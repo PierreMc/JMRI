@@ -5,10 +5,10 @@
   <title>JMRI: LogixNG Table Editor</title>
   <meta name="author" content="Dave Sand">
   <meta name="keywords" content="JMRI logixng conditionalng">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../../../../html/tools/logixng/Sidebar.shtml"-->
@@ -72,6 +72,13 @@
         <dd>The thread field shows the currently assigned thread name. It is changed by using the
         <strong>Edit threads</strong> button. This is particular useful when using the
         <a href="ConditionalNGDebugger.shtml">LogixNG Debugger</a>.</dd>
+
+        <dt>Startup</dt>
+
+        <dd>Enabled LogixNGs start automatically after the layout configuration has been loaded.
+        The resulting actions will depend on the current state of the expressions.  Sometimes a
+        LogixNG ConditionalNG should wait until a specific event occurs.  Unchecking the
+        <strong>Startup</strong> checkbox will bypass the automatic process.</dd>
 
         <dt>Edit</dt>
 
@@ -191,11 +198,11 @@
       <p>When the <strong>Delete</strong> button is pressed, the LogixNG, its ConditionalNGs and
       related content will be deleted. The LogixNG delete confirmation dialog will be
       displayed.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

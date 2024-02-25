@@ -2,7 +2,6 @@ package jmri.managers;
 
 import java.beans.PropertyChangeListener;
 
-import jmri.JmriException;
 import jmri.Turnout;
 import jmri.TurnoutManager;
 import jmri.util.JUnitAppender;
@@ -27,7 +26,6 @@ public abstract class AbstractTurnoutMgrTestBase extends AbstractProvidingManage
     /**
      * Overload to load l with actual object; create scaffolds as needed
      */
-    @BeforeEach
     abstract public void setUp();
 
     protected boolean listenerResult = false;

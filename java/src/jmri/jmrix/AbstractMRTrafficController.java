@@ -5,11 +5,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
+
+import javax.annotation.Nonnull;
 import javax.swing.SwingUtilities;
 
 import jmri.InstanceManager;
 import jmri.ShutDownManager;
-import jmri.ShutDownTask;
 
 /**
  * Abstract base for TrafficControllers in a Message/Reply protocol.
@@ -128,6 +129,10 @@ public abstract class AbstractMRTrafficController {
 
     protected final Vector<AbstractMRListener> cmdListeners = new Vector<>();
 
+    /**
+     * Add a Listener to the Listener list.
+     * @param l The Listener to be added, not null.
+     */
     protected synchronized void addListener(AbstractMRListener l) {
         // add only if not already registered
         if (l == null) {
@@ -138,6 +143,24 @@ public abstract class AbstractMRTrafficController {
         }
     }
 
+    /**
+     * Add a Listener to start of the Listener list.
+     * Intended for use only by system Consoles which may prefer notification
+     * before other objects have processed a Message and sent a Reply.
+     * @param l The Listener to be added, not null.
+     */
+    protected synchronized void addConsoleListener(@Nonnull AbstractMRListener l){
+        // add only if not already registered
+        if (!cmdListeners.contains(l)) {
+            cmdListeners.insertElementAt(l, 0);
+        }
+    }
+
+    /**
+     * Remove a Listener from the Listener list.
+     * The Listener will receive no further notifications.
+     * @param l The Listener to be removed.
+     */
     protected synchronized void removeListener(AbstractMRListener l) {
         if (cmdListeners.contains(l)) {
             cmdListeners.removeElement(l);
@@ -572,22 +595,26 @@ public abstract class AbstractMRTrafficController {
         return timeoutFlag;
     }
 
-    private boolean timeoutFlag = false;
-    private int timeouts = 0;
+    protected boolean timeoutFlag = false;
+    protected int timeouts = 0;
     protected boolean flushReceiveChars = false;
 
     protected void handleTimeout(AbstractMRMessage msg, AbstractMRListener l) {
         //log.debug("Timeout mCurrentState: {}", mCurrentState);
-        String[] packages = this.getClass().getName().split("\\.");
-        String name = (packages.length>=2 ? packages[packages.length-2]+"." :"")
-                +(packages.length>=1 ? packages[packages.length-1] :"");
-
-        log.warn("Timeout on reply to message: {} consecutive timeouts = {} in {}", msg, timeouts, name);
+        warnOnTimeout(msg, l);
         timeouts++;
         timeoutFlag = true;
         flushReceiveChars = true;
     }
 
+    protected void warnOnTimeout(AbstractMRMessage msg, AbstractMRListener l) {
+        String[] packages = this.getClass().getName().split("\\.");
+        String name = (packages.length>=2 ? packages[packages.length-2]+"." :"")
+                +(packages.length>=1 ? packages[packages.length-1] :"");
+
+        log.warn("Timeout on reply to message: {} consecutive timeouts = {} in {}", msg, timeouts, name);
+    }
+    
     protected void resetTimeout(AbstractMRMessage msg) {
         if (timeouts > 0) {
             log.debug("Reset timeout after {} timeouts", timeouts);
@@ -897,7 +924,8 @@ public abstract class AbstractMRTrafficController {
         }
         if (!threadStopRequest) { // if e.g. unexpected end
             ConnectionStatus.instance().setConnectionState(controller.getUserName(), controller.getCurrentPortName(), ConnectionStatus.CONNECTION_DOWN);
-            log.error("Exit from rcv loop in {}", this.getClass());
+            log.debug("Exit from rcv loop in {}", this.getClass());
+            log.info("Exiting receive loop");
             recovery(); // see if you can restart
         }
     }
@@ -941,8 +969,7 @@ public abstract class AbstractMRTrafficController {
     /**
      * Read a single byte, protecting against various timeouts, etc.
      * <p>
-     * When a port is set to have a receive timeout (via the
-     * {@link purejavacomm.SerialPort#enableReceiveTimeout(int)} method), some will return
+     * When a port is set to have a receive timeout, some will return
      * zero bytes or an EOFException at the end of the timeout. In that case, the read
      * should be repeated to get the next real character.
      *

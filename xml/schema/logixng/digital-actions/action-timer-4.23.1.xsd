@@ -77,6 +77,7 @@
 
               <xs:element name="startImmediately" type="yesNoType" />
               <xs:element name="runContinuously" type="yesNoType" />
+              <xs:element name="startAndStopByStartExpression" type="yesNoType" minOccurs="0" maxOccurs="1" />
 
               <xs:element name="unit" minOccurs="1" maxOccurs="1">
                 <xs:simpleType>
@@ -88,6 +89,9 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+
+              <xs:element name="delayByLocalVariables" type="yesNoType" minOccurs="0" maxOccurs="1" />
+              <xs:element name="delayLocalVariablePrefix" type="xs:string" minOccurs="0" maxOccurs="1" />
 
               <xs:element name="MaleSocket" type="LogixNG_MaleSocket_Type" minOccurs="0" maxOccurs="1"/>
 

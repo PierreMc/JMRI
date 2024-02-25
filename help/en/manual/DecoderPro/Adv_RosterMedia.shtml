@@ -3,16 +3,12 @@
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>Comprehensive Programmer - Advanced Features Pane</title>
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- DecoderPro Styles -->
 
   <style>
     .dp-ctr {
       text-align: center;
-    }
-
-    .dp-mid {
-      text-align: middle;
     }
 
     .dp-right {
@@ -23,14 +19,6 @@
       list-style-type: none;
     }
 
-    .dp-sq {
-      list-style-type: square;
-    }
-
-    .dp-ua {
-      list-style-type: upper-alpha
-    }
-
     .dp-la {
       list-style-type: lower-alpha
     }
@@ -38,7 +26,7 @@
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -165,8 +153,8 @@
         the images for reference</p>
       </blockquote>
 
-      <p><input type="submit" name="button" id="button" value="Save to Roster"> After adding images
-      to the image boxes for main image and icon, click on this button to store images in your
+      <p>After adding images to the image boxes for main image and icon, click on the
+      <span class="textbutton">Save to Roster</span> button to store images in your
       Roster.</p>
 
       <p><strong>Links for icons in GIF and images of most Locomotives</strong> <strong>are listed
@@ -195,11 +183,11 @@
         <p><a href="index.shtml">Back to Index</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

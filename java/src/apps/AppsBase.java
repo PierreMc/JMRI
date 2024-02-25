@@ -34,7 +34,7 @@ import apps.util.Log4JUtil;
  * There are a series of steps in the configuration:
  * <dl>
  * <dt>preInit<dd>Initialize log4j, invoked from the main()
- * <dt>ctor<dd>
+ * <dt>ctor<dd>Construct the basic application object
  * </dl>
  *
  * @author Bob Jacobsen Copyright 2009, 2010
@@ -119,7 +119,8 @@ public abstract class AppsBase {
         jmri.jmrit.logixng.LogixNG_Manager logixNG_Manager =
                 InstanceManager.getDefault(jmri.jmrit.logixng.LogixNG_Manager.class);
         logixNG_Manager.setupAllLogixNGs();
-        if (InstanceManager.getDefault(LogixNGPreferences.class).getStartLogixNGOnStartup()) {
+        if (InstanceManager.getDefault(LogixNGPreferences.class).getStartLogixNGOnStartup()
+                && InstanceManager.getDefault(jmri.jmrit.logixng.LogixNG_Manager.class).isStartLogixNGsOnLoad()) {
             logixNG_Manager.activateAllLogixNGs();
         }
     }
@@ -197,7 +198,8 @@ public abstract class AppsBase {
 
     protected void installManagers() {
         // record startup
-        InstanceManager.getDefault(FileHistory.class).addOperation("app", Application.getApplicationName(), null);
+        String appString = String.format("%s (v%s)", Application.getApplicationName(), Version.getCanonicalVersion());
+        InstanceManager.getDefault(FileHistory.class).addOperation("app", appString, null);
 
         // install the abstract action model that allows items to be added to the, both
         // CreateButton and Perform Action Model use a common Abstract class
@@ -396,13 +398,12 @@ public abstract class AppsBase {
     /**
      * The application decided to quit, handle that.
      *
-     * @return true if successfully ran all shutdown tasks and can quit; false
-     *         otherwise
+     * @return always returns false
      */
     static public boolean handleQuit() {
         log.debug("Start handleQuit");
         try {
-            return InstanceManager.getDefault(jmri.ShutDownManager.class).shutdown();
+            InstanceManager.getDefault(jmri.ShutDownManager.class).shutdown();
         } catch (Exception e) {
             log.error("Continuing after error in handleQuit", e);
         }
@@ -411,18 +412,14 @@ public abstract class AppsBase {
 
     /**
      * The application decided to restart, handle that.
-     *
-     * @return true if successfully ran all shutdown tasks and can quit; false
-     *         otherwise
      */
-    static public boolean handleRestart() {
+    static public void handleRestart() {
         log.debug("Start handleRestart");
         try {
-            return InstanceManager.getDefault(jmri.ShutDownManager.class).restart();
+            InstanceManager.getDefault(jmri.ShutDownManager.class).restart();
         } catch (Exception e) {
             log.error("Continuing after error in handleRestart", e);
         }
-        return false;
     }
 
 

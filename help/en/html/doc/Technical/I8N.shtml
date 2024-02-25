@@ -5,10 +5,10 @@
   <title>JMRI: Code Internationalization</title>
   <meta name="author" content="Bob Jacobsen">
   <meta name="keywords" content="JMRI technical code I18N internationalization">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -212,7 +212,7 @@ string; to the right of the equals sign is the String that will be displayed.
       <p>There are XSLT transforms that can insert default language elements into the files. They
       still have English content, but it's perhaps easier to just translate English text than to
       edit in new XML elements, make sure the structure is correct, etc. For more information, see
-      the <a href="https://jmri.org:/xml/XSLT/I18N">xml/XSLT/I18N file</a> or ask on the
+      the <a href="https://www.jmri.org:/xml/XSLT/I18N">xml/XSLT/I18N file</a> or ask on the
       jmri-developers list. <a id="help"></a></p>
 
       <h3>Translating Help files</h3>
@@ -242,20 +242,16 @@ string; to the right of the equals sign is the String that will be displayed.
       references on how to do this:
       <ul>
         <li>
-          <a href="http://docs.oracle.com/javase/6/docs/technotes/guides/intl/">Java
+          <a href="https://docs.oracle.com/en/java/javase/11/intl/internationalization-overview.html">Java 11
           Internationalization main page</a>
         </li>
 
         <li>
-          <a href="http://docs.oracle.com/javase/tutorial/i18n/index.html">Sun internationalization
+          <a href="https://docs.oracle.com/javase/tutorial/i18n/index.html">Sun internationalization
           tutorial</a> (highly recommended)
         </li>
       </ul>
-      <strong>Note: Those are Java 6 links. There are useful advanced features in <a href=
-      "http://docs.oracle.com/javase/7/docs/technotes/guides/intl/enhancements.7.html">Java 7</a>
-      and <a href=
-      "https://docs.oracle.com/javase/8/docs/technotes/guides/intl/enhancements.8.html">Java
-      8</a>.</strong>
+
       <p>JMRI is moving toward a set of conventions on how to structure and use the large amount of
       I18N information required. You'll still find code with older approaches, but you should write
       new code using the new conventions described below.</p>
@@ -271,7 +267,7 @@ string; to the right of the equals sign is the String that will be displayed.
       <code>jmri.jmrix</code>, are discouraged and existing ones are being removed.</p>
 
       <p>Access is via a Bundle class local to each package. A typical one is <code><a href=
-      "https://jmri.org/JavaDoc/doc/jmri/jmrit/Bundle.html">jmri.jmrit.Bundle</a></code>. It
+      "https://www.jmri.org/JavaDoc/doc/jmri/jmrit/Bundle.html">jmri.jmrit.Bundle</a></code>. It
       provides two key methods you use to access (translated) resource strings:<br>
       <code>static String <strong>getMessage</strong>(String&nbsp;key)<br>
       static String <strong>getMessage</strong>(String&nbsp;key, Object...&nbsp;subs)</code></p>
@@ -351,8 +347,7 @@ log.debug("The process failed account of user error"); // NOI18N
         Copy <code>java/test/jmri/jmrit/BundleTest.java</code> to
         <code>java/test/jmri/mypackage/BundleTest.java</code> and then edit the "package" statement
         in that file to point to your package, adding a few of your strings for testing (including
-        ones you reference from parent bundles, if any), and including a reference in your
-        PackageTest class.</li>
+        ones you reference from parent bundles, if any).</li>
       </ul>
 
       <h4>Older code</h4>
@@ -550,11 +545,11 @@ String s = jmri.util.IntlUtilities.valueOf(1002.3);
       <a href="images/TranslatorsHelperFiles.png"><img src="images/TranslatorsHelperFiles.png"
       alt="tab Files"></a>
 
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

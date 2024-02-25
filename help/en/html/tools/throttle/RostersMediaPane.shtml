@@ -6,10 +6,10 @@
   <meta name="keywords" content="JMRI decoderpro dcc nmra throttle throttlepro">
   <meta name="Description" content="Throttle documentation for JMRI project">
   <meta name="Author" content="Lionel Jeanson">
-  <meta name="Language" content="EN"><!--#include virtual="/Style.shtml" -->
+  <meta name="Language" content="EN"><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -52,9 +52,24 @@
       GIF" or look at resources linked to the Traffic  Screensaver in your favorite Internet search engine.</span></p>
 
       <h3>Web reference</h3>
-      This entry is dedicated towards storing an URL, on the above screenshot it points to the Wikipedia entry for that
-      roster prototype.<br>
+      <p>This entry is dedicated towards storing an URL, on the above screenshot it points to the Wikipedia entry for that
+      roster prototype.<br></p>
 
+      <h3>Custom attributes</h3>
+      <p>This is a list of key value pairs allowing to set some custom setting per roster entry.</p>
+      <p>It is possible to manualy add custom values here, don't forget to validate the entry (click somewhere else) before saving to roster.</p>
+
+      <p>Some known special settings :
+      <ul>
+       <li>speedLabels : a json formated array of labels to be displayed on the JMRI throttle speed sliders, for instance the entry could be : <br> 
+        <br>[ { "value" : 40, "label" : "SS" } , { "value" : 80, "label": "NS"} , { "value" : 100, "label": "FS"} ] <br><br>
+        where "value" is a number of speed increment and "label" a text string. <br><br>Note that label support HTML text formating, 
+        for instance : "&lt;html&gt;&lt;font color=red&gt;SS&lt;/font&gt;&lt;/html&gt;" would display the SS label red  
+       or "&lt;html&gt;&lt;font size=25 color=green&gt;FS&lt;/font&gt;&lt;/html&gt;" FS with color green and size 25</li>
+       <br>
+       <li>... many more custom settings from various JMRI tools</li>
+      </ul>
+      </p><br>
       <h2>Roster Function Labels</h2>
       <img src="images/DecProFunctionLabels.png" alt="">
       <p>It is also recommended to fill in the Function Labels entries in the Function Labels pane
@@ -83,11 +98,11 @@
       "ThrottleWindowMenus.shtml">Throttle Windows menu</a> will update these entries from the
       Function Panel if required. See the Functions Panel documentation in the <a href="BasicThrottleWindow.shtml">Basic
       Throttle Window description</a>.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

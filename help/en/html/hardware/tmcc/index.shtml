@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI Hardware Support - Lionel TMCC</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI Hardware Support - Lionel TMCC</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../SidebarUp.shtml" -->
@@ -70,7 +70,7 @@
 
       <p>The functions below will take care of all Engine Controls on TMCC and the basic commands
       on Legacy. The Accessory and Route and Train ( multi Lash Ups ) are not implimented. The
-      Switch commands should also work even if you are using CMRI to control the switches.</p>
+      Switch commands should also work.</p>
 
       <p>Listed are the common actions for Railsounds 4, ERR conversion boards, and TAS boards. Any
       Accessory that uses Engine ID commands will also work however the function buttons will have
@@ -195,6 +195,21 @@
         <dd>Set</dd>
       </dl>
 
+      <p>In addition, if you have a TMCC 2 Legacy system and JMRI
+      is connected via a SER2 adapter, you can use additional Legacy
+      functions:</p>
+
+      <dl>
+        <dt>F28</dt><dd>Start Up Sequence 1 (Delayed Prime Mover)</dd>
+        <dt>F29</dt><dd>Start Up Sequence 2 (Immediate Start Up)</dd>
+        <dt>F30</dt><dd>Shut Down Sequence 1 (Delay w/ Announcement)</dd>
+        <dt>F31</dt><dd>Shut down Sequence 2 (Immediate Shut Down)</dd>
+      </dl>
+
+      If you have suggestions for usage of additional function keys,
+      please make a suggestion via the
+      <a href="https://groups.io/g/jmriusers">JMRIusers list</a>.
+
       <h2 id="tools">JMRI TMCC Tools</h2>
 
       <h3 id="documentation">TMCC New Entry Format Summary</h3>
@@ -235,11 +250,11 @@
       <h2>Documentation</h2>
 
       <h3>Third Party info</h3>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

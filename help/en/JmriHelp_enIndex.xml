@@ -30,6 +30,10 @@
 
  <indexitem text="Bachrus - Hardware, Connection, Tools " target="html.hardware.bachrus.index"/>
 
+ <indexitem text="BiDiB - Hardware, Connection, Tools " target="html.hardware.bidib.index">
+  <indexitem text="Signal Masts " target="html.hardware.bidib.BiDiB-SignalMast"/>
+
+ </indexitem>
  <indexitem text="Blocks " target="html.tools.Blocks">
   <indexitem text="Add Blocks " target="package.jmri.jmrit.beantable.BlockAddEdit"/>
 
@@ -151,6 +155,8 @@
 
  </indexitem>
  <indexitem text="DCC Specialties - Hardware, Connection, Tools " target="html.hardware.misc.DccSpecialties"/>
+
+ <indexitem text="DCC-EX EX-CommandStation Hardware, Connection, Tools " target="html.hardware.dcc-ex.index"/>
 
  <indexitem text="DCC++ Hardware, Connection, Tools " target="html.hardware.dccpp.index"/>
 
@@ -481,9 +487,18 @@
  <indexitem text="Occupancy Sensor " target="html.tools.Sensors"/>
 
  <indexitem text="OpenLCB - Hardware, Connection, Tools " target="html.hardware.openlcb.index">
-  <indexitem text="Configure Nodes " target="package.jmri.jmrix.openlcb.swing.networktree.NetworkTreePane"/>
 
-  <indexitem text="OpenLCB Signal Masts " target="html.hardware.openlcb.OlcbSignalMast"/>
+      <indexitem text="Configure Nodes " target="package.jmri.jmrix.openlcb.swing.networktree.NetworkTreePane"/>
+
+      <indexitem text="Event Table" target="package.jmri.jmrix.openlcb.swing.eventtable.EventTablePane"/>
+
+      <indexitem text="Memory Tool" target="package.jmri.jmrix.openlcb.swing.memtool.MemoryToolPane"/>
+
+      <indexitem text="Names " target="html.hardware.openlcb.Names"/>
+
+      <indexitem text="Signal Masts " target="html.hardware.openlcb.OlcbSignalMast"/>
+
+      <indexitem text="Send Frame" target="package.jmri.jmrix.openlcb.swing.send.OpenLcbCanSendFrame"/>
 
  </indexitem>
  <indexitem text="OperationsPro " target="html.apps.OperationsPro.index">
@@ -739,6 +754,8 @@
  <indexitem text="TAMs " target="html.hardware.tams.index"/>
 
  <indexitem text="TCH Tech " target="html.hardware.tchtech.index"/>
+
+ <indexitem text="TCS " target="html.hardware.openlcb.TCS"/>
 
  <indexitem text="Technical " target="html.doc.Technical.index"/>
 

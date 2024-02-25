@@ -4,13 +4,9 @@ import jmri.*;
 import jmri.configurexml.JmriConfigureXmlException;
 import jmri.jmrit.entryexit.DestinationPoints;
 import jmri.jmrit.logixng.DigitalActionManager;
-import jmri.jmrit.logixng.NamedBeanAddressing;
 import jmri.jmrit.logixng.actions.ActionEntryExit;
-import jmri.jmrit.logixng.actions.ActionTurnout;
 import jmri.jmrit.logixng.util.configurexml.LogixNG_SelectEnumXml;
 import jmri.jmrit.logixng.util.configurexml.LogixNG_SelectNamedBeanXml;
-import jmri.jmrit.logixng.util.parser.ParserException;
-
 import org.jdom2.Element;
 
 /**
@@ -43,7 +39,10 @@ public class ActionEntryExitXml extends jmri.managers.configurexml.AbstractNamed
         var selectNamedBeanXml = new LogixNG_SelectNamedBeanXml<DestinationPoints>();
         var selectEnumXml = new LogixNG_SelectEnumXml<ActionEntryExit.Operation>();
 
-        element.addContent(selectNamedBeanXml.store(p.getSelectNamedBean(), "namedBean"));
+        element.addContent(selectNamedBeanXml.store(
+                p.getSelectNamedBean(),
+                "namedBean",
+                LogixNG_SelectNamedBeanXml.StoreNamedBean.SystemName));
         element.addContent(selectEnumXml.store(p.getSelectEnum(), "operation"));
 
         return element;
@@ -60,7 +59,7 @@ public class ActionEntryExitXml extends jmri.managers.configurexml.AbstractNamed
         var selectEnumXml = new LogixNG_SelectEnumXml<ActionEntryExit.Operation>();
 
         var selectNamedBeanXml = new LogixNG_SelectNamedBeanXml<DestinationPoints>();
-        selectNamedBeanXml.load(shared.getChild("namedBean"), h.getSelectNamedBean());
+        selectNamedBeanXml.load(shared.getChild("namedBean"), h.getSelectNamedBean(), true);
         selectNamedBeanXml.loadLegacy(shared, h.getSelectNamedBean(), "destinationPoints");
 
         selectEnumXml.load(shared.getChild("operation"), h.getSelectEnum());

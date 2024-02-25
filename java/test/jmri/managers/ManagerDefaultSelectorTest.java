@@ -34,6 +34,7 @@ public class ManagerDefaultSelectorTest {
 
     @AfterEach
     public void tearDown() {
+        JUnitUtil.deregisterBlockManagerShutdownTask();
         JUnitUtil.tearDown();
     }
 
@@ -71,7 +72,7 @@ public class ManagerDefaultSelectorTest {
         LocoNetSystemConnectionMemo memo = new LocoNetSystemConnectionMemo();
         LnTrafficController lnis = new LocoNetInterfaceScaffold(memo);
         memo.setLnTrafficController(lnis);
-        memo.configureCommandStation(LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false);
+        memo.configureCommandStation(LnCommandStationType.COMMAND_STATION_DCS100, false, false, false, false, false);
         memo.configureManagers();
         return memo;
     }

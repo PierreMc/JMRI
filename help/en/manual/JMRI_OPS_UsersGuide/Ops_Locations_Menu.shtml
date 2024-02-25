@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>OperationsPro - Locations menu bar</title><!--#include virtual="/Style.shtml" -->
+  <title>OperationsPro - Locations menu bar</title><!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- OperationsPro Styles -->
 
   <style>
@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -63,7 +63,7 @@
               <a id="print"><strong>Print</strong></a>
               <p><img src="images/Ops_locations_print.png" alt="print" height="179" width=
               "195"><br>
-              Click on <input name="button10" id="button10" value="Okay" type="button"> to open the
+              Click on <span class="textbutton">Okay</span> to open the
               system printer dialog.</p>
 
               <p><img src="images/Ops_print_loc.png" alt="print location" height="608" width="718">
@@ -75,7 +75,7 @@
               <p><img src="images/Ops_locations_print.png" alt="print" height="158" width="195">
               </p>
 
-              <p>Click <input name="button11" id="button11" value="Okay" type="button"> to open the
+              <p>Click <span class="textbutton">Okay</span> to open the
               print preview window showing Location information.</p>
 
               <p><img src="images/ops_PrintPreview_loc.png" alt="Location preview" height="537"
@@ -123,7 +123,7 @@
         <p style="font-weight: bold;"><a href="index.shtml#Main">Back to Index</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
 </body>

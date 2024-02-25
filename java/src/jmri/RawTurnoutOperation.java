@@ -12,9 +12,9 @@ import jmri.implementation.RawTurnoutOperator;
  */
 public class RawTurnoutOperation extends CommonTurnoutOperation {
 
-    // This class should only be used with DIRECT, ONESENSOR or TWOSENSOR 
+    // This class should only be used with DIRECT, ONESENSOR or TWOSENSOR
     // feedback modes.
-    final int feedbackModes
+    static final int SUPPORTED_FEEDBACK_MODES
             = Turnout.DIRECT | Turnout.EXACT | Turnout.INDIRECT
             | Turnout.ONESENSOR | Turnout.TWOSENSOR | Turnout.LNALTERNATE ;
 
@@ -26,7 +26,7 @@ public class RawTurnoutOperation extends CommonTurnoutOperation {
 
     public RawTurnoutOperation(String n, int i, int mt) {
         super(n, i, mt);
-        setFeedbackModes(feedbackModes);
+        setFeedbackModes(SUPPORTED_FEEDBACK_MODES);
     }
 
     /**
@@ -69,6 +69,11 @@ public class RawTurnoutOperation extends CommonTurnoutOperation {
     @Override
     public TurnoutOperator getOperator(AbstractTurnout t) {
         return new RawTurnoutOperator(t, interval, maxTries);
+    }
+
+    @Override
+    public String getToolTip(){
+        return Bundle.getMessage("TurnoutOperationRawTip");
     }
 
 }

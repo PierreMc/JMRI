@@ -12,7 +12,6 @@ import jmri.JmriException;
 import jmri.NamedBean;
 import jmri.Sensor;
 import jmri.jmrix.AbstractSerialPortController;
-import jmri.SystemConnectionMemo;
 import jmri.jmrix.DefaultSystemConnectionMemo;
 
 import org.slf4j.Logger;
@@ -196,15 +195,6 @@ public class SerialSensorAdapter extends AbstractSerialPortController {
     @Override
     public int defaultBaudIndex() {
         return 0;
-    }
-
-    /**
-     * {@inheritDoc}
-     * This currently does nothing, as there's only one
-     * possible value.
-     */
-    @Override
-    public void configureBaudRate(String rate) {
     }
 
     // private control members

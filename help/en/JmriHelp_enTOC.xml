@@ -35,6 +35,8 @@
 
   <tocitem text="Bachrus Speedo " target="package.jmri.jmrix.bachrus.SpeedoConsoleFrame"/>
 
+  <tocitem text="BiDiB " target="html.hardware.bidib.index"/>
+
   <tocitem text="CAN Bus Overview " target="html.hardware.can.index"/>
 
   <tocitem text="CBUS " target="html.hardware.can.cbus.index"/>
@@ -44,6 +46,8 @@
   <tocitem text="CTI Acela " target="html.hardware.acela.index"/>
 
   <tocitem text="CVP EasyDCC " target="html.hardware.easydcc.EasyDCC"/>
+
+  <tocitem text="DCC-EX EX-CommandStation " target="html.hardware.dcc-ex.index"/>
 
   <tocitem text="DCC++ " target="html.hardware.dccpp.index"/>
 
@@ -120,6 +124,8 @@
   <tocitem text="SRCP " target="html.hardware.qsi.index"/>
 
   <tocitem text="TAMs Master Control " target="html.hardware.tams.index"/>
+
+  <tocitem text="TCS CS-105 " target="html.hardware.openlcb.TCS"/>
 
   <tocitem text="X10 " target="html.hardware.powerline.index"/>
 
@@ -628,6 +634,10 @@
    <tocitem text="Speedo Console " target="package.jmri.jmrix.bachrus.SpeedoConsoleFrame"/>
 
   </tocitem>
+  <tocitem text="BiDiB " target="html.hardware.bidib.index">
+   <tocitem text="Signal Masts " target="html.hardware.bidib.BiDiB-SignalMast"/>
+
+  </tocitem>
   <tocitem text="C/MRI ">
    <tocitem text="Check Pin Assignments " target="package.jmri.jmrix.cmri.serial.assignment.ListFrame"/>
 
@@ -771,13 +781,18 @@
 
   </tocitem>
   <tocitem text="OpenLCB " target="html.hardware.openlcb.index">
-   <tocitem text="Names " target="html.hardware.openlcb.Names"/>
 
-   <tocitem text="Signal Masts " target="html.hardware.openlcb.OlcbSignalMast"/>
+      <tocitem text="Configure Nodes " target="package.jmri.jmrix.openlcb.swing.networktree.NetworkTreePane"/>
 
-   <tocitem text="Configure Nodes " target="package.jmri.jmrix.openlcb.swing.networktree.NetworkTreePane"/>
+      <tocitem text="Event Table" target="package.jmri.jmrix.openlcb.swing.eventtable.EventTablePane"/>
 
-   <tocitem text="Send OpenLCB Frame " target="package.jmri.jmrix.openlcb.swing.send.OpenLcbCanSendFrame"/>
+      <tocitem text="Memory Tool" target="package.jmri.jmrix.openlcb.swing.memtool.MemoryToolPane"/>
+
+      <tocitem text="Names " target="html.hardware.openlcb.Names"/>
+
+      <tocitem text="Signal Masts " target="html.hardware.openlcb.OlcbSignalMast"/>
+
+      <tocitem text="Send Frame" target="package.jmri.jmrix.openlcb.swing.send.OpenLcbCanSendFrame"/>
 
   </tocitem>
   <tocitem text="Powerline " target="html.hardware.powerline.index">

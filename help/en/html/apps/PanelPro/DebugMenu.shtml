@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI: Debug Menu</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI: Debug Menu</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <div id="mainContent" class="no-sidebar">
@@ -60,7 +60,7 @@
       <dl style="margin-left: 2em">
         <dt>Log Message</dt>
 
-        <dt>Display Log Categories</dt>
+        <dt><a href="../../../package/apps/jmrit/log/Log4JTreePane.shtml">Display / Edit Log Categories</a></dt>
 
         <dd>
         </dd>
@@ -94,7 +94,7 @@
       <hr>
 
       <dl style="margin-left: 2em">
-        <dt>USB Input Control</dt>
+        <dt><a href="../../../package/jmri/jmrix/jinput/treemodel/TreeFrame.shtml">USB Input Control</a></dt>
 
         <dt>USB Devices</dt>
 
@@ -124,10 +124,13 @@
       </dl>
 
       <hr>
-      <!--#include virtual="/Footer.shtml" -->
+
+      <p>Also see <a href="../Debug.shtml">Debugging and System Logging</a></p>
+
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
   <!-- close #mBody -->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

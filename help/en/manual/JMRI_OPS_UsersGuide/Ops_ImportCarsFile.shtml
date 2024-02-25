@@ -3,7 +3,7 @@
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI OperationsPro - Importing Cars from a File</title>
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- OperationsPro Styles -->
 
   <style>
@@ -12,7 +12,7 @@
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -48,8 +48,8 @@
 
       <p>After importing your Car data, you must save the newly added entries if you want to keep
       them as part of your Roster. Select any Car in the Cars window list by pressing the
-      <strong>Edit</strong> button and then press the <input name="button" id="button" value="Save"
-      type="submit"> that can be found at the bottom right of the <a href=
+      <strong>Edit</strong> button and then press the <span class="textbutton">Save</span> button
+      that can be found at the bottom right of the <a href=
       "Ops_AddCars.shtml"><strong>Edit Car</strong></a> window.</p>
 
       <p>If you already have a list of Cars records in a database, you can import these into the
@@ -106,7 +106,7 @@
         <p><a href="index.shtml#Operations">Back to Index</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
 </body>

@@ -146,6 +146,20 @@ public class InstanceManagerTest {
     }
 
     @Test
+    public void testListTwoDifferentTypes() {
+        PowerManager m1 = new PowerManagerScaffold();
+        TurnoutManager t1 = new TurnoutManagerScaffold();
+
+        InstanceManager.store(m1, PowerManager.class);
+        InstanceManager.store(t1, TurnoutManager.class);
+
+        var set = InstanceManager.getInstanceClasses();
+        
+        Assert.assertTrue("PowerManager", set.contains(PowerManager.class));
+        Assert.assertTrue("TurnoutManager", set.contains(TurnoutManager.class));
+    }
+
+    @Test
     public void testGetInstance() throws ClassNotFoundException {
         // for sync usage, check a predicate - Class.forName returns same object always
         Assert.assertTrue("access by string",
@@ -227,7 +241,7 @@ public class InstanceManagerTest {
         public static final String MESSAGE = "dispose called";
         private static int times = 0;
 
-        private static void setUp() {
+        private static void startUp() {
             times = 0;
         }
 
@@ -407,7 +421,8 @@ public class InstanceManagerTest {
     @BeforeEach
     public void setUp() {
         JUnitUtil.setUp();
-        OkToDispose.setUp();
+        OkToDispose.startUp();
+        InstanceManager.getDefault().clearAll();
     }
 
     @AfterEach

@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI Hardware Support - IEEE801254</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI Hardware Support - IEEE801254</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../SidebarUp.shtml" -->
@@ -18,10 +18,6 @@
 
         <li>
           <a href="#hardware">Hardware</a>
-        </li>
-
-        <li>
-          <a href="#limitations">Limitations</a>
         </li>
 
         <li>
@@ -57,7 +53,7 @@
 
       <ul>
         <li>Nodes can be configured with the <a href=
-        "../../../package/jmri/jmrix/ieee802154/nodeconfig/NodeConfigFrame.shtml">Configure
+        "../../../package/jmri/jmrix/ieee802154/swing/nodeconfig/NodeConfigFrame.shtml">Configure
         Nodes</a> tool
         </li>
       </ul>
@@ -66,18 +62,15 @@
 
       <h3>JMRI Help</h3>
 
-      <p>Naming of IEEE801254 outputs is described on a <a href="Names.shtml">separate
-      page</a>.</p>
-
       <h3>Third Party info</h3>
 
       <p>More information on the IEEE_802.15.4 protocol and hardware can be found on the <a href=
       "https://en.wikipedia.org/wiki/IEEE_802.15.4">wikipedia IEEE_802.15.4 website</a>.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

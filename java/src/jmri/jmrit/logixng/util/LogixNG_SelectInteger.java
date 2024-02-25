@@ -81,6 +81,10 @@ public class LogixNG_SelectInteger implements VetoableChangeListener {
         parseFormula();
     }
 
+    public boolean isDirectAddressing() {
+        return _addressing == NamedBeanAddressing.Direct;
+    }
+
     public NamedBeanAddressing getAddressing() {
         return _addressing;
     }
@@ -232,6 +236,10 @@ public class LogixNG_SelectInteger implements VetoableChangeListener {
     }
 
     public String getDescription(Locale locale) {
+        return getDescription(locale, true);
+    }
+
+    public String getDescription(Locale locale, boolean thousandsSeparator) {
         String enumName;
 
         String memoryName;
@@ -243,7 +251,11 @@ public class LogixNG_SelectInteger implements VetoableChangeListener {
 
         switch (_addressing) {
             case Direct:
-                enumName = Bundle.getMessage(locale, "AddressByDirect", _value);
+                if (thousandsSeparator) {
+                    enumName = Bundle.getMessage(locale, "AddressByDirect", _value);
+                } else {
+                    enumName = Bundle.getMessage(locale, "AddressByDirect", Long.toString(_value));
+                }
                 break;
 
             case Reference:

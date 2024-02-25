@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI Hardware Support - Modbus</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI Hardware Support - Modbus</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="../SidebarUp.shtml" -->
 
     <div id="mainContent">
-      <img src="http://www.modbus.org/images/logo_new.jpg" alt="Modbus logo" height="40" width=
+      <img src="https://modbus.org/images/logo_new.jpg" alt="Modbus logo" height="40" width=
       "145" class="floatRight">
       <h1>Hardware Support: Modbus</h1>
 
@@ -39,7 +39,7 @@
         </li>
       </ul>
 
-      <p><a href="http://www.modbus.org">Modbus is an industrial control system</a> that's usually
+      <p><a href="https://modbus.org">Modbus is an industrial control system</a> that's usually
       used with pretty tough, highly-engineering equipment. The Modbus nodes are often
       "programmable logic controllers" (PLCs) which can do their own calculations of how to control
       devices.</p>
@@ -165,13 +165,13 @@
 
       <h3>Third Party info</h3>
 
-      <p><a href="http://www.modbus.org">Modbus website</a>
+      <p><a href="https://modbus.org">Modbus website</a>
       </p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

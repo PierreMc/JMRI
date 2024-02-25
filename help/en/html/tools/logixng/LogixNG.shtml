@@ -7,10 +7,10 @@
   <meta name="author" content="Daniel Bergqvist">
   <meta name="author" content="Dave Sand">
   <meta name="keywords" content="java model railroad JMRI LogixNG">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -231,6 +231,23 @@
           <p>For macOS, use Cmd instead of Ctrl.</p>
         </dd>
 
+        <dt>Use strict typing of global variables / Use strict typing of local variables
+        <span class="since">since 5.7.4</span></dt>
+
+        <dd>
+          <p>Strict variable typing can be selected for global and/or local variables.  The default
+          is that strict variable typing is not enabled for either.</p>
+
+          <p>When strict typing is enabled, variables that are are assigned the
+          <strong>String</strong>, <strong>Integer</strong> or <strong>Floating number</strong> type
+          cannot be set to a value of another type. LogixNG will try to convert the new value to the
+          desired type, for example a local variable of type floating number will be assigned the
+          value 12.0 if it's assigned 12 and it will be assigned the value 32.5 if it's assigned the
+          string "32.5".</p>
+
+          <p>Local and global variables that are assigned any of the other variable types are not affected.</p>
+        </dd>
+
         <dt>Show system names in exceptions<span class="since">since 5.1.6</span></dt>
 
         <dd>
@@ -248,20 +265,20 @@
           <a href="ErrorHandling.shtml">Error Handling</a></p>
         </dd>
 
+        <dt>If Then Else &mdash; Default execution<span class="since">since 5.7.4</span></dt>
+
         <dd>
+          When the <strong>If Then Else</strong> action is added, the execution mode is set to
+          <strong>Execute on change</strong>. The default can be changed to <strong>Always execute</strong>.
         </dd>
       </dl>
 
-      <p><em><strong>Note</strong>: LogixNG execution can be stopped using <strong>Tools &rArr; LogixNG
-      &rArr; Stop LogixNG</strong>.</em>
-      </p>
-
       <h2 id="tools">LogixNG Tools</h2>
 
-      <p>LogixNG has five system level tools at <strong>Tools &rArr; LogixNG</strong>.</p>
+      <p>LogixNG has six system level tools at <strong>Tools &rArr; LogixNG</strong>.</p>
 
       <p><strong>Start LogixNG</strong> and <strong>Stop LogixNG</strong> are used to control the
-      processing of LogixNG ConditionalNG defintions. When LogixNG is <strong>active</strong> ,
+      processing of LogixNG ConditionalNG definitions. When LogixNG is <strong>active</strong> ,
       then the <strong>enabled</strong> LogixNGs will run its ConditionalNGs.
       <strong>Note:</strong> The execution of currently running ConditionalNGs doesn't stop
       immediately when "Stop LogixNG" is selected. The ConditonalNGs will continue to run until
@@ -279,6 +296,10 @@
       attached to panel items.  For details, see
       <a href="../../../package/jmri/jmrit/logixng/InlineLogixNG.shtml">Inline LogixNG</a>.</p>
 
+      <p>The <strong>Where Used</strong> tool displays the LogixNG definitions that have references
+      to JMRI table items.  For details, see
+      <a href="../../../package/jmri/jmrit/logixng/LogixNGWhereUsed.shtml">LogixNG Where used</a>.</p>
+
       <h2>Documentation</h2>
 
       <p>This document is an introduction and overview of LogixNG. The sidebar contains links to
@@ -288,6 +309,32 @@
       <p>The reference has two sections. The <strong>Standard Features</strong> section covers the
       LogixNG components that are similar to Logix. The <strong>Advance Features</strong> section
       covers new features that did not exist in Logix or were incomplete.</p>
+
+      <h2 id="disable">Disabling LogixNG during PanelPro start up</h2>
+
+      <p>In addition to the preference settings and the LogixNG tools, it is possible to disable
+      LogixNG during PanelPro startup.  This can be necessary if there is a bad logic that locks up
+      PanelPro immediately after file loading.</p>
+
+      <p>When the PanelPro startup splash dialog is displayed, press <strong>F8</strong> or
+      <strong>F9</strong>.</p>
+
+      <div style="margin-left: 2em">
+        <a href="../../setup/images/StartDialog.png"><img src="../../setup/images/StartDialog.png" alt=
+        "PanelPro startup dialog"></a>
+      </div>
+
+      <p>If <strong>F8</strong> is selected <strong><em>and</em></strong> a layout data xml file is
+      being loaded using a start up action, the LogixNG table entries will be disabled. The F8 key
+      has no impact when a file is loaded using <strong>File &rArr; Load table content and panels...
+      </strong>.  In this case, use <strong>Tools &rArr; LogixNG &rArr; Stop LogixNG</strong>
+      before loading the file.</p>
+
+      <p>If <strong>F9</strong> is selected, LogixNG will not start after layout data file loading
+      is done, whether as a start up action or manually.  The LogixNG table entries will be
+      enabled/disabled based on their state in the xml file.  When the problem has been resolved then
+      <strong>Tools &rArr; LogixNG &rArr; Start LogixNG</strong> can be used to activate LogixNG
+      processing.</p>
 
       <h2>Sample</h2>
 
@@ -331,11 +378,11 @@
         <a href="images/sample_initialization.png"><img src="images/sample_initialization.png" alt=
         "LogixNG sample initialization"></a>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

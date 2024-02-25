@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI OperationsPro - Locomotives</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI OperationsPro - Locomotives</title><!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- OperationsPro Styles -->
 
   <style>
@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -57,15 +57,13 @@
       <p><strong>Sort by</strong> -- select the radio button for the attribute you wish to sort by.
       (Last sorts by last moved)</p>
 
-      <p><input name="button" id="button" value="Add" type="submit"> when selected opens the
+      <p><span class="textbutton">Add</span> when selected opens the
       <a href="Ops_AddEngine.shtml">Add Locomotive</a> window.</p>
 
-      <p><input name="button3" id="button3" value="Save" type="button"> Saves the locomotive roster
-      to disk.</p>
+      <p><span class="textbutton">Save</span> button Saves the locomotive roster to disk.</p>
 
-      <p><input name="button2" id="button2" value="Find" type="submit"> <input name="textfield" id=
-      "textfield" type="text"> Locate a Locomotive in your Roster, when you type the road number
-      into the text box.</p>
+      <p><span class="textbutton">Find</span> <input name="textfield" id="textfield" type="text"> Locate
+      a Locomotive in your Roster, when you type the road number into the text box.</p>
 
       <hr>
 
@@ -75,7 +73,7 @@
         <p><a href="index.shtml#Operations">Back to Index</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
 </body>

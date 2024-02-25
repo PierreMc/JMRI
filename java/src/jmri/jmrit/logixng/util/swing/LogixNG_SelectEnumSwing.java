@@ -1,5 +1,6 @@
 package jmri.jmrit.logixng.util.swing;
 
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -52,6 +53,11 @@ public class LogixNG_SelectEnumSwing<E extends Enum<?>> {
 
     public JPanel createPanel(
             @CheckForNull LogixNG_SelectEnum<E> selectEnum, E[] enumArray) {
+        return createPanel(selectEnum, enumArray, null);
+    }
+
+    public JPanel createPanel(
+            @CheckForNull LogixNG_SelectEnum<E> selectEnum, E[] enumArray, E defaultValue) {
 
         JPanel panel = new JPanel();
 
@@ -86,6 +92,7 @@ public class LogixNG_SelectEnumSwing<E extends Enum<?>> {
             _enumComboBox.addItem(e);
         }
         JComboBoxUtil.setupComboBoxMaxRows(_enumComboBox);
+        _enumComboBox.setRenderer(new ComboBoxRenderer<>(_enumComboBox.getRenderer()));
         _panelDirect.add(_enumComboBox);
 
         _referenceTextField = new JTextField();
@@ -100,6 +107,10 @@ public class LogixNG_SelectEnumSwing<E extends Enum<?>> {
         _formulaTextField.setColumns(30);
         _panelFormula.add(_formulaTextField);
 
+
+        if (defaultValue != null) {
+            _enumComboBox.setSelectedItem(defaultValue);
+        }
 
         if (selectEnum != null) {
             switch (selectEnum.getAddressing()) {
@@ -236,6 +247,27 @@ public class LogixNG_SelectEnumSwing<E extends Enum<?>> {
 
     public void dispose() {
         _selectTableSwing.dispose();
+    }
+
+
+    private static class ComboBoxRenderer<E> extends JLabel implements ListCellRenderer<E> {
+
+        private final JSeparator _separator = new JSeparator(JSeparator.HORIZONTAL);
+        private final ListCellRenderer<E> _old;
+
+        private ComboBoxRenderer(ListCellRenderer<E> old) {
+            this._old = old;
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList<? extends E> list,
+                E value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (Base.SEPARATOR.equals(value.toString())) {
+                return _separator;
+            } else {
+                return _old.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            }
+        }
     }
 
 }

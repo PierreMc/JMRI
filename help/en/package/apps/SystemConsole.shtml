@@ -4,10 +4,11 @@
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
   <title>JMRI: System Console</title>
   <meta name="author" content="Egbert Broerse">
-  <meta name="keywords" content="JMRI help System Console"><!--#include virtual="/Style.shtml" -->
+  <meta name="keywords" content="JMRI help System Console logging debug">
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <div id="mainContent" class="no-sidebar">
@@ -59,12 +60,15 @@
       So if you see timeouts and "AA" commands you have either poor or failed connection, or a
       powered down or failed command station.</p>
 
+      <p>See <a href="../../html/doc/Technical/Logging.shtml">JMRI Logging</a> for details of how to change the logging levels.</p>
+
+
       <p>This is the apps.SystemConsole.shtml help page.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

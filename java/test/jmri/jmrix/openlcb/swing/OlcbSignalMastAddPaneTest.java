@@ -1,5 +1,6 @@
 package jmri.jmrix.openlcb.swing;
 
+import jmri.jmrix.openlcb.OlcbSystemConnectionMemoScaffold;
 import jmri.*;
 import jmri.jmrit.beantable.signalmast.*;
 import jmri.jmrix.openlcb.*;
@@ -28,11 +29,15 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
     @Test
     public void testSetMast() {
         OlcbSignalMast s1 = new OlcbSignalMast("MF$olm:basic:one-searchlight($0001)", "user name");
+        OlcbSignalMast s2 = new OlcbSignalMast("SF$olm:basic:one-low($0002)", "user name");
+        OlcbSignalMast s3 = new OlcbSignalMast("M3F$olm:basic:two-searchlight($0003)", "user name");
         MatrixSignalMast m1 = new MatrixSignalMast("IF$xsm:basic:one-low($0001)-3t", "user");
 
         OlcbSignalMastAddPane vp = new OlcbSignalMastAddPane();
 
         Assert.assertTrue(vp.canHandleMast(s1));
+        Assert.assertTrue(vp.canHandleMast(s2));
+        Assert.assertTrue(vp.canHandleMast(s3));
         Assert.assertFalse(vp.canHandleMast(m1));
 
         vp.setMast(null);
@@ -44,6 +49,10 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
 
         vp.setAspectNames(s1.getAppearanceMap(), ss );
         vp.setMast(s1);
+        vp.setAspectNames(s2.getAppearanceMap(), ss );
+        vp.setMast(s2);
+        vp.setAspectNames(s3.getAppearanceMap(), ss );
+        vp.setMast(s3);
 
         vp.setAspectNames(m1.getAppearanceMap(), ss );
         vp.setMast(m1);
@@ -120,7 +129,7 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
         // disable Approach Medim, change some of the event IDs
         // then build the mast, all on Swing thread
         ThreadingUtil.runOnGUI(() -> {
-            var approachMed = vp.disabledAspects.get("Approach Medium");
+            var approachMed = vp.allAspectsCheckBoxes.get("Approach Medium");
             Assert.assertNotNull(approachMed);
             approachMed.setSelected(true);
 
@@ -206,11 +215,11 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
         // disable Approach, change some of the event IDs
         // then build the mast, all on Swing thread
         ThreadingUtil.runOnGUI(() -> {
-            var approach = vp.disabledAspects.get("Approach");
+            var approach = vp.allAspectsCheckBoxes.get("Approach");
             Assert.assertNotNull(approach);
             approach.setSelected(true);
             
-            var unlit = vp.disabledAspects.get("Unlit");
+            var unlit = vp.allAspectsCheckBoxes.get("Unlit");
             Assert.assertNotNull(unlit);
             unlit.setSelected(false);
 
@@ -247,11 +256,16 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
         ThreadingUtil.runOnGUI(frame::dispose);
     }
 
+    // TODO: GUI test of icons in Add/Edit pane
 
     // from here down is testing infrastructure
-    private static OlcbSystemConnectionMemo memo;
+    private static OlcbSystemConnectionMemoScaffold memo;
+    private static OlcbSystemConnectionMemoScaffold memo1;
+    private static OlcbSystemConnectionMemoScaffold memo2;
     static Connection connection;
     static NodeID nodeID = new NodeID(new byte[]{1, 0, 0, 0, 0, 0});
+    static NodeID nodeID1 = new NodeID(new byte[]{2, 0, 0, 0, 0, 0});
+    static NodeID nodeID2 = new NodeID(new byte[]{3, 0, 0, 0, 0, 0});
     static java.util.ArrayList<Message> messages;
 
     private static void resetMessages(){
@@ -274,6 +288,8 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
         JUnitUtil.resetProfileManager();
         JUnitUtil.initInternalTurnoutManager();
         nodeID = new NodeID(new byte[]{1, 0, 0, 0, 0, 0});
+        nodeID1 = new NodeID(new byte[]{2, 0, 0, 0, 0, 0});
+        nodeID2 = new NodeID(new byte[]{3, 0, 0, 0, 0, 0});
 
         messages = new java.util.ArrayList<>();
         connection = new AbstractConnection() {
@@ -283,9 +299,26 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
             }
         };
 
-        memo = new OlcbSystemConnectionMemo(); // this self-registers as 'M'
+        // Enable multiple OpenLCB connections for tests.
+        memo = new OlcbSystemConnectionMemoScaffold(); // this self-registers as 'M'
         memo.setProtocol(jmri.jmrix.can.ConfigurationManager.OPENLCB);
         memo.setInterface(new OlcbInterface(nodeID, connection) {
+            @Override
+            public Connection getOutputConnection() {
+                return connection;
+            }
+        });
+        memo1 = new OlcbSystemConnectionMemoScaffold("S");
+        memo1.setProtocol(jmri.jmrix.can.ConfigurationManager.OPENLCB);
+        memo1.setInterface(new OlcbInterface(nodeID1, connection) {
+            @Override
+            public Connection getOutputConnection() {
+                return connection;
+            }
+        });
+        memo2 = new OlcbSystemConnectionMemoScaffold("M3");
+        memo2.setProtocol(jmri.jmrix.can.ConfigurationManager.OPENLCB);
+        memo2.setInterface(new OlcbInterface(nodeID2, connection) {
             @Override
             public Connection getOutputConnection() {
                 return connection;
@@ -305,9 +338,19 @@ public class OlcbSignalMastAddPaneTest extends AbstractSignalMastAddPaneTestBase
         if(memo != null && memo.getInterface() !=null ) {
            memo.getInterface().dispose();
         }
+        if(memo1 != null && memo1.getInterface() !=null ) {
+           memo1.getInterface().dispose();
+        }
+        if(memo2 != null && memo2.getInterface() !=null ) {
+           memo2.getInterface().dispose();
+        }
         memo = null;
+        memo1 = null;
+        memo2 = null;
         connection = null;
         nodeID = null;
+        nodeID1 = null;
+        nodeID2 = null;
         JUnitUtil.tearDown();
     }
 }

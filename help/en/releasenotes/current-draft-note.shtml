@@ -9,12 +9,17 @@
                 <li></li>
             </ul>
 
-	    <h4>Anyma DMX512</h4>
+        <h4>Anyma DMX512</h4>
             <ul>
                 <li></li>
             </ul>
 
-	    <h4>Bachrus Speedo</h4>
+        <h4>Bachrus Speedo</h4>
+            <ul>
+                <li></li>
+            </ul>
+
+        <h4><a href="http://bidib.org/index_e.html">BiDiB</a></h4>
             <ul>
                 <li></li>
             </ul>
@@ -74,6 +79,11 @@
                 <li></li>
             </ul>
 
+        <h4>Lenz XPressNet</h4>
+            <ul>
+                <li></li>
+            </ul>
+
         <h4>LocoNet</h4>
             <ul>
                 <li></li>
@@ -115,6 +125,18 @@
             </ul>
 
         <h4><a href="http://openlcb.org">OpenLCB</a> / LCC</h4>
+            <ul>
+                <li>Updated the OpenLCB_Java library ot version 0.7.35 with improvements:
+                    <ul>
+                        <li>Better display of frames with leading zeros on their aliases
+                        <li>Better handling of unexpected alias collisions.  These shouldn't
+                            actually happen if all goes well, but just in case it doesn't...
+                        <li>Adds support for the Verify Node Addressed message
+                    </ul>
+                </li>
+            </ul>
+
+        <h4>Powerline</h4>
             <ul>
                 <li></li>
             </ul>
@@ -314,7 +336,7 @@
                 <li></li>
             </ul>
 
-	    <h4>Team Digital</h4>
+        <h4>Team Digital</h4>
             <ul>
                 <li></li>
             </ul>
@@ -392,7 +414,7 @@
     <h3>Layout Editor</h3>
         <a id="LE" name="LE"></a>
         <ul>
-	        <li></li>
+            <li></li>
         </ul>
 
         <h4>NX - Entry/Exit Tool</h4>
@@ -409,6 +431,36 @@
     <h3>LogixNG</h3>
         <a id="LogixNG" name="LogixNG"></a>
         <ul>
+          <li>Conversion to boolean has changed. Before JMRI 5.7.5,
+              conversion from a string to boolean returned
+              <strong>True</strong> if the string was not empty, and
+              <strong>False</strong> if the string was empty. With JMRI 5.7.5,
+              this has changed so that a string that's <strong>true</strong>
+              (case insensitive) returns a boolean <strong>True</strong>
+              and a string that's <strong>false</strong> (case insensitive)
+              returns a boolean <strong>False</strong>. All other string
+              values throw an exception. The earlier behaviour was not
+              documented so it's unlikely that this affects users.<br>
+              The old behaviour was based on how Jython converts a string
+              to boolean. If you want the old behaviour, you can use the
+              LogixNG formula function <strong>boolJython()</strong>.</li>
+          <li>Local variables and Global variables can now be initialized
+              to boolean values as well. True or false. Case insensitive.</li>
+          <li>The action <strong>Log local variables</strong> now has the
+              option <strong>Show class name</strong>.If it is selected,
+              the name of the class will be shown after the value. This
+              is useful for debugging, when you want to know the type of
+              the value.</li>
+          <li>The LogixNG function <strong>int()</strong> previously returned a Java
+              <strong>Integer</strong> instead of a Java <strong>Long</strong>.
+              This bug is now corrected. It shouldn't affect any existing
+              LogixNGs. The difference between <strong>Integer</strong> and
+              <strong>Long</strong> is that <strong>Long</strong> can handle
+              much bigger integer values than <strong>Integer</strong>.</li>
+          <li>The LogixNG action <strong>Enable/Disable LogixNG</strong>
+              has been added.</li>
+          <li>The LogixNG action <strong>Set reporter</strong> has been
+              added.</li>
           <li></li>
         </ul>
 
@@ -421,7 +473,7 @@
     <h3>Operations</h3>
         <a id="Operations" name="Operations"></a>
         <ul>
-            <li></li>
+            <li>New feature allows users to quickly create a custom load for all car types.</li>
         </ul>
 
    <h3>Panel Editor</h3>
@@ -496,22 +548,22 @@
                 <li></li>
             </ul>
 
-    	<h4>Signal Groups</h4>
+        <h4>Signal Groups</h4>
             <ul>
                 <li></li>
             </ul>
 
-	    <h4>Cab Signals</h4>
+        <h4>Cab Signals</h4>
             <ul>
                 <li></li>
             </ul>
 
-    	<h4>Simple Signal Logic</h4>
+        <h4>Simple Signal Logic</h4>
             <ul>
                 <li></li>
             </ul>
 
-	    <h4>USS CTC Logic</h4>
+        <h4>USS CTC Logic</h4>
             <ul>
                 <li></li>
             </ul>
@@ -585,6 +637,7 @@
     <h3>Miscellaneous</h3>
         <a id="Misc" name="Misc"></a>
         <ul>
-            <li></li>
+            <li>Improve handling of block values that contain IdTags 
+                across shutdown and startup.</li>
         </ul>
 

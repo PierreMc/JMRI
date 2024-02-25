@@ -24,7 +24,7 @@
 # Group (macro) checks - we accept the group, then adjust specific subitems
 #
 -err:+hiding
-  # 195 cases of members hiding superclass members
+  # 81 cases of members hiding superclass members
 -err:-fieldHiding
   # thousands of places where parameters are named for members
 -err:-localHiding
@@ -56,8 +56,8 @@
 -err:-unusedAllocation
   # cases of the `catch (FooException ex)` and then not using `ex`
 -err:-unusedExceptionParam
-  # allow unused imports as a convenience
--err:-unusedImport
+  # unused imports removed Oct 2023
+-err:+unusedImport
 -err:+unusedLabel
 -err:+unusedLocal
   # our APIs routinely have "may need in future" parameters
@@ -117,7 +117,6 @@
 -err:+semicolon
 -err:+specialParamHiding
 -err:+switchDefault
--err:+syncOverride
 -err:+unavoidableGenericProblems
 -err:+unchecked
 -err:+uselessTypeCheck

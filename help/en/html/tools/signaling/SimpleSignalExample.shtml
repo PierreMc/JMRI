@@ -6,10 +6,10 @@
 
   <title>JMRI: Simple Signal Logic Example</title>
   <meta name="author" content="Bob Jacobsen, Egbert Broerse">
-  <meta name="Date.Modified" content="20151107"><!--#include virtual="/Style.shtml" -->
+  <meta name="Date.Modified" content="20151107"><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -112,8 +112,8 @@
           the block on the right side (Block 1), the messages are:
 
           <pre>
-<!-- Updated for panel included in JMRI 4.1.3 -->
-  Sensor LS1  (Block 1) is Hi.  (BDL16 #1, DS1; DS54/64/SE8c #1, AuxA/A1/DS01)
+
+  Sensor LS1  (Block 1) is Hi
   Requesting Switch at LT285 () to Thrown (output On).
   Requesting Switch at LT291 () to Thrown (output On).
   Requesting Switch at LT282 () to Thrown (output On).
@@ -331,10 +331,10 @@ respectively.
       Logic help page</a>.</p>
 
       <p>Located at en\html\tools\signaling\</p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
   </div>
   <!-- close #mBody -->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

@@ -4,16 +4,12 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 
-import javax.annotation.Nonnull;
-
 import jmri.*;
 import jmri.jmrit.entryexit.DestinationPoints;
 import jmri.jmrit.logixng.*;
 import jmri.jmrit.logixng.util.*;
 import jmri.jmrit.logixng.util.parser.*;
-import jmri.jmrit.logixng.util.parser.RecursiveDescentParser;
 import jmri.util.ThreadingUtil;
-import jmri.util.TypeConversionUtil;
 
 /**
  * This action triggers a entryExit.
@@ -91,6 +87,29 @@ public class ActionEntryExit extends AbstractDigitalAction
                     jmri.InstanceManager.getDefault(jmri.jmrit.entryexit.EntryExitPairs.class).
                             setSingleSegmentRoute(entryExit.getSystemName());
                     break;
+                case SetNXPairInactive:
+                    if (entryExit.isActive()) {
+                        jmri.InstanceManager.getDefault(jmri.jmrit.entryexit.EntryExitPairs.class).
+                                setSingleSegmentRoute(entryExit.getSystemName());
+                    }
+                    break;
+                case SetNXPairActive:
+                    if (!entryExit.isActive()) {
+                        jmri.InstanceManager.getDefault(jmri.jmrit.entryexit.EntryExitPairs.class).
+                                setSingleSegmentRoute(entryExit.getSystemName());
+                    }
+                    break;
+                case SetNXPairReversed:
+                    if (entryExit.isUniDirection()) {
+                        throw new IllegalArgumentException("\"" + entryExit.getDisplayName() +
+                                "\" is not enabled for reversed activation (Both Way)");
+                    }
+
+                    if (!entryExit.isActive()) {
+                        jmri.InstanceManager.getDefault(jmri.jmrit.entryexit.EntryExitPairs.class).
+                                setReversedRoute(entryExit.getSystemName());
+                    }
+                    break;
                 default:
                     throw new IllegalArgumentException("invalid oper state: " + theOper.name());
             }
@@ -123,7 +142,7 @@ public class ActionEntryExit extends AbstractDigitalAction
     /** {@inheritDoc} */
     @Override
     public void setup() {
-        // Do nothing
+        getSelectNamedBean().setup();
     }
 
     /** {@inheritDoc} */
@@ -149,7 +168,11 @@ public class ActionEntryExit extends AbstractDigitalAction
     public enum Operation {
         SetNXPairEnabled(Bundle.getMessage("ActionEntryExit_SetNXPairEnabled")),
         SetNXPairDisabled(Bundle.getMessage("ActionEntryExit_SetNXPairDisabled")),
-        SetNXPairSegment(Bundle.getMessage("ActionEntryExit_SetNXPairSegment"));
+        SetNXPairSegment(Bundle.getMessage("ActionEntryExit_SetNXPairSegment")),
+        Separator1(Base.SEPARATOR),
+        SetNXPairInactive(Bundle.getMessage("ActionEntryExit_SetNXPairInactive")),
+        SetNXPairActive(Bundle.getMessage("ActionEntryExit_SetNXPairActive")),
+        SetNXPairReversed(Bundle.getMessage("ActionEntryExit_SetNXPairReversed"));
 
         private final String _text;
 

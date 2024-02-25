@@ -61,6 +61,10 @@ public abstract class TrainCustomCommon {
         directoryName = name;
     }
 
+    public String getDirectoryPathName() {
+        return InstanceManager.getDefault(OperationsManager.class).getFile(getDirectoryName()).getPath();
+    }
+
     /**
      * Adds one CSV file path to the collection of files to be processed.
      *
@@ -114,7 +118,7 @@ public abstract class TrainCustomCommon {
     public synchronized boolean process() {
 
         // check to see it the Excel program is available
-        if (!excelFileExists()) {
+        if (!excelFileExists() || getFileName().isBlank()) {
             return false;
         }
 

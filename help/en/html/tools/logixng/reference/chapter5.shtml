@@ -6,10 +6,10 @@
   <meta name="author" content="Daniel Bergqvist">
   <meta name="author" content="Dave Sand">
   <meta name="keywords" content="jmri LogixNG reference action items">
-  <!--#include virtual="/Style.shtml" -->
+  <!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <div id="mainContent" class="no-sidebar">
@@ -103,7 +103,7 @@
 
       <p>For some actions, for example Signal head, you need to first select the item and then you
       can select the action to do on that item. For example, for Signal head, you first select the
-      signal head to act on and then you can select the appearence to set for that signal head.</p>
+      signal head to act on and then you can select the appearance to set for that signal head.</p>
 
       <div style="margin-left: 2em;">
         <a href="images/chapter5/typical_action.png"><img src="images/chapter5/typical_action.png"
@@ -148,22 +148,14 @@
           These are explained in the <a href="chapter9.shtml">Formula</a> chapter.
         </dd>
 
-        <dd>
-        </dd>
-
         <dt>Cancel</dt>
 
         <dd>Close the dialog without applying any changes.</dd>
-
-        <dd>
-        </dd>
 
         <dt>Create/OK</dt>
 
         <dd>Save the new action or the changes to an existing action.</dd>
 
-        <dd>
-        </dd>
       </dl>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
@@ -177,31 +169,16 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Audio</h4>
+      <h4 id="audio_action">Audio</h4>
 
-      <p>Control the selected Audio item.</p>
+      <p>Control an Audio source.</p>
 
-      <ul>
-        <li>Play</li>
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/audio_action.png"><img src=
+        "images/chapter5/audio_action.png" alt="Chapter 5 audio action"></a>
+      </div>
 
-        <li>Play toggle</li>
-
-        <li>Pause</li>
-
-        <li>Pause toggle</li>
-
-        <li>Resume</li>
-
-        <li>Stop</li>
-
-        <li>Fade in</li>
-
-        <li>Fade out</li>
-
-        <li>Rewind</li>
-
-        <li>Reset position</li>
-      </ul>
+      <p>Select an audio source from the list and the action to be performed.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -324,19 +301,42 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Entry/Exit</h4>
+      <h4 id="EntryExitActions">Entry/Exit</h4>
 
-      <ul>
-        <li><strong>Set NX Pair Enabled:</strong> Enables the specified Entry/Exit Pair. Specify
-        the Entry/Exit Pair to enable by selecting its name.</li>
+      <p>Manage an Entry/Exit pair.  The last three items are implemented in JMRI 5.5.7.</p>
 
-        <li><strong>Set NX Pair Disabled:</strong> Disables the specified Entry/Exit Pair. Specify
-        the Entry/Exit Pair to disable by selecting its name.</li>
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/entryexit_action.png"><img src=
+        "images/chapter5/entryexit_action.png" alt="Chapter 5 entryexit action"></a>
+      </div>
 
-        <li><strong>Set NX Pair Segment Active / Inactive</strong> Request that the route segment
-        for the specified Entry/Exit Pair be activated if not active or deactivated if active.
-        Specify the Entry/Exit Pair to enable by selecting its name.</li>
-      </ul>
+      <dl>
+        <dt>Set NX Pair Enabled</dt>
+        <dd>Enable the selected Entry/Exit pair.</dd>
+
+        <dt>Set NX Pair Disabled</dt>
+        <dd>Disable the selected Entry/Exit pair.</dd>
+
+        <dt>Set Set NX Pair Segment Active / Inactive</dt>
+        <dd>Request that the route segment for the selected Entry/Exit Pair be activated if not
+        active or deactivated if active.  This toggles the active state.</dd>
+
+        <dt>Set NX Pair Inactive</dt>
+        <dd>Deactivate the Entry/Exit route for the selected Entry/Exit pair if it is currently
+        active.  The <strong>Cancel/Clear Down</strong> dialog will be displayed if a default action
+        has not been defined in the Entry/Exit options.</dd>
+
+        <dt>Set NX Pair Active</dt>
+        <dd>Activate the Entry/Exit route for the selected Entry/Exit pair if the route is not
+        currently active.  Depending on the types of conflicts, the activation may silently fail or
+        display a <strong>Route Not Clear</strong> dialog.</dd>
+
+        <dt>Set NX Pair Reversed</dt>
+        <dd>Activate the Entry/Exit route for the selected Entry/Exit pair in the reverse direction
+        if the route is not currently active.  Depending on the types of conflicts, the activation
+        may silently fail or display a <strong>Route Not Clear</strong> dialog.  This option is only
+        enabled for selected Entry/Exit pairs that have the <strong>Both Way</strong> option enabled.</dd>
+      </dl>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -403,8 +403,15 @@
         <li><strong>Null:</strong> Select the <strong>Null</strong> tab to set the selected local
         variable to the null value.</li>
 
-        <li><strong>Constant:</strong> Select the <strong>Constant</strong> tab and enter a string
-        value for the selected local variable.</li>
+        <li><strong>Constant:</strong> Select the <strong>Constant</strong> tab, select the value <strong>Type</strong>
+        and enter a value for the selected local variable.
+          <ul>
+            <li>String</li>
+            <li>Integer</li>
+            <li>Floating number</li>
+            <li>Boolean (True/False)</li>
+          </ul>
+        </li>
 
         <li><strong>Memory:</strong> Select the <strong>Memory</strong> tab and select the memory
         which will provide the value for the selected local variable.</li>
@@ -498,6 +505,22 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
+      <h4>Program On Main<span class="since">since 5.7.3</span></h4>
+
+      <p>The Program on Main action provides the ability to change CV settings.  This is similar to
+      the <strong>Single CV Programmer</strong>.
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/prog_on_main.png"><img class="image-border" src=
+        "images/chapter5/prog_on_main.png" alt="Chapter 5 program on main"></a>
+      </div>
+
+      <p>The roster is not used or updated.</p>
+
+      <p>A local variable can be assigned which will contain the results of the operation.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
       <h4>Reporter</h4>
 
       <p>The Reporter action is used to copy the report content to a memory variable or a LogixNG
@@ -519,7 +542,7 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Request update of all sensors<span class="since">since 5.1.6</span></h4>
+      <h4 id="requestUpdateAll">Request update of all sensors<span class="since">since 5.1.6</span></h4>
 
       <p>Request the current status of sensors.  The request can be limited to specific connections
       or all connections.  The action depends on whether the connection supports sensor state
@@ -528,6 +551,18 @@
       <div style="margin-left: 2em;">
         <a href="images/chapter5/request_sensor_update.png">
         <img src="images/chapter5/request_sensor_update.png" alt="Chapter 5 request sensor update"></a>
+      </div>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Request update of sensor<span class="since">since 5.7.4</span></h4>
+
+      <p>Request the current status of a specific sensor.  The action depends on whether the
+      connection supports sensor state requests.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/request_sensor_state.png">
+        <img src="images/chapter5/request_sensor_state.png" alt="Chapter 5 request sensor state"></a>
       </div>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
@@ -636,6 +671,20 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
+      <h4>Table<span class="since">since 5.7.4</span></h4>
+
+      <p>Replace the content of the specified table cell.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/table_action.png">
+        <img src="images/chapter5/table_action.png" alt="Chapter 5 table action"></a>
+      </div>
+
+      <p class="noted">Note: Since tables are created from CSV files during PanelPro startup, the content
+      changes are temporary.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
       <h4>Throttle</h4>
 
       <p>The Throttle action controls a throttle.</p>
@@ -677,6 +726,21 @@
 
       <p>The digital expressions are either <strong>Always true</strong> or <strong>Always false
       </strong>.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Throttle function<span class="since">since 5.5.6</span></h4>
+
+
+      <p>The <strong>Throttle function</strong> action is similar to the <strong>Throttle</strong>
+       action, except that it only sets a throttle function <strong>On</strong> or <strong>Off</strong>.</p>
+
+      <div style="margin-left: 2em">
+        <a href="images/chapter5/throttle_function.png"><img src="images/chapter5/throttle_function.png"
+        alt="Chapter 5 throttle function"></a>
+      </div>
+
+      <p>The <strong>Connection</strong> drop down can be used to specify the connection to be used.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -836,14 +900,38 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Timer</h4>
+      <h4 id="timeraction">Timer</h4>
 
       <p><strong>Timer</strong> has a number of actions, each executed after a period of time. The
-      time to wait can be 0, which means the related action is executed immediately. The Timer can
-      be configured to only execute the actions once or continuously. The Timer can also be
-      configured to start when the xml data file is loaded or only start when the "Start"
-      expression returns True. The Timer stops when the "Stop" expression returns True. The time
-      unit is selected from the combo box.</p>
+      time to wait can be 0, which means the related action is executed immediately.</p>
+
+      <p>Options:</p>
+      <dl style="margin-left: 2em;">
+        <dt>Start timer immediately on load</dt>
+        <dd>When selected, the timer steps will start when the LogixNG has been loaded.  If this
+        option is not selected, a <strong>Start</strong> expression will be used to start the timer
+        steps when the expression becomes true.</dd>
+
+        <dt>Run timer continuously</dt>
+        <dd>If not selected, the timer will run one time and then stop.  When selected, the timer
+        steps will repeat.  A <strong>Stop</strong> expression can be used to stop the timer
+        steps when the expression becomes true.  The Stop expression can use the same object, such
+        as a sensor that starts the timer when active and then stops the timer when the sensor is
+        inactive.</dd>
+
+        <dt>Start/Stop by Start expression</dt>
+        <dd>When selected, the timer will start when the <strong>Start</strong> expression becomes
+        true and will stop when the <strong>Start</strong> expression becomes false.  The <strong>
+        Stop</strong> expression is ignored.</dd>
+
+        <dt>Combo Box</dt>
+        <dd>Select the time unit.</dd>
+
+        <dt>Delay by local variables</dt>
+        <dd>Instead of using fixed delay times, it is possible to assign delay times to local
+        variables.  The timer step number will be appended to the prefix value, such as delay1,
+        delay2, etc.</dd>
+      </dl>
 
       <div style="margin-left: 2em;">
         <a href="images/chapter5/timer_dialog.png"><img src="images/chapter5/timer_dialog.png" alt=
@@ -872,6 +960,21 @@
       a Light action that toggles the light on/off. If you want different times for on and off,
       create a Timer with two sockets where the first socket turns the light on and the second
       socket turns the light off.</p>
+
+      <p>The <strong>Timer</strong> action can be used in LogixNG Modules.  Due to the nature of
+      repetitive timer events, there are some restrictions.</p>
+
+      <ul>
+        <li>The calling LogixNG and the Module run all of their actions with each Timer step.
+        Avoid including any other logic in the calling LogixNG or the Module.</li>
+
+        <li>The trigger event for the LogixNG can be either a if-then-else with the expression
+        set for <strong>Always execute</strong> or a <strong>Listen on beans</strong> item.</li>
+
+        <li><strong>Start/Stop by Start expression</strong> is selected.</li>
+
+        <li>The <strong>Start</strong> expression for the Timer should be the <strong>Always true</strong> expression.</li>
+      </ul>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1007,6 +1110,8 @@
         is executed, regardless of whether the expression has changed value.</dd>
       </dl>
 
+      <p class="noted">The default execution setting can be change using
+      <strong>Preferences &rArr; LogixNG</strong>.</p>
 
       <p><u>How is the If expression evaluated</u><span class="since">since 5.1.6</span></p>
 
@@ -1083,11 +1188,12 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Sequence</h4>
+      <h4 id="sequence_id">Sequence</h4>
 
       <p>The Sequence action executes a series of action/expression pairs. For each pair, the
       action will be performed and then the expression will wait until it becomes true. When it is
-      true, the next action/expression pair will be started.</p>
+      true, the next action/expression pair will be started.  The <a href="chapter6#timer_id">Timer</a>
+      expression can be used to do a time based step instead of an event based step.</p>
 
       <div style="margin-left: 2em">
         <a href="images/chapter5/action_sequence_options.png"><img src=
@@ -1143,9 +1249,72 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
+      <h4 id="layout_audio_icon">Audio icon on web panel<span class="since">since 5.5.6</span></h4>
+
+      <p>The Audio Icons on JMRI panels can be used to play sounds on devices displaying JMRI panels
+      using a web browser.  The <strong>Audio icon on web panel</strong> action can be used to start
+      and stop the audio source assigned to the audio icon.  For example, LogixNG can play notification
+      sounds on a dispatcher panel.</p>
+
+      <p>Note: The sound will not be played on the computer running JMRI. If desired, use the
+      <strong>Audio</strong> action to play the sound locally.</p>
+
+      <p>Before creating the action, assign an id to the Audio Icon using <strong>Edit Id</strong>
+      from the icon context menu.</p>
+
+      <p>Select the panel, the id for the Audio Icon and whether to <strong>Play</strong> or
+      <strong>Stop</strong> the sound.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/layout_audio_icon.png"><img src=
+        "images/chapter5/layout_audio_icon.png" alt="Chapter 5 layout audio icon"></a>
+      </div>
+
+      <p>If the Audio Icon is to be used only by the action, the icon can be hidden.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Icon/Label by class on panel<span class="since">since 5.5.4</span></h4>
+
+      <p>Disable/Enable/Hide/Show all of the icons or labels on a specific panel that been assigned
+      a class name.</p>
+
+      <p>Icons and labels don't have names.  To identify the icon or label, the <strong>Edit Classes...
+      </strong> menu item in the right click context menu is used to assign a class name.  A class
+      name cannot have a comma.  Multiple classes separated by commas can be assigned.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/layout_icon_label_classes.png"><img src=
+        "images/chapter5/layout_icon_label_classes.png" alt="Chapter 5 layout icon/label classes"></a>
+      </div>
+
+      <p>Select the panel and one of the classes.  Select the desired action.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/layout_icon_label_class.png"><img src=
+        "images/chapter5/layout_icon_label_class.png" alt="Chapter 5 layout icon/label class action"></a>
+      </div>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
       <h4>Icon/Label on panel</h4>
 
       <p>Disable/Enable/Hide/Show an icon or label on a specific panel.</p>
+
+      <p>Icons and labels don't have names.  To identify the icon or label, the <strong>Edit Id...
+      </strong> menu item in the right click context menu is used to assign a name.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/layout_icon_label_id.png"><img src=
+        "images/chapter5/layout_icon_label_id.png" alt="Chapter 5 layout icon/label id"></a>
+      </div>
+
+      <p>Select the panel and one of the ids.  Select the desired action.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/layout_icon_label.png"><img src=
+        "images/chapter5/layout_icon_label.png" alt="Chapter 5 layout icon/label action"></a>
+      </div>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1166,6 +1335,21 @@
         <a href="images/chapter5/layout_turnout_foreach.png"><img class="image-border" src=
         "images/chapter5/layout_turnout_foreach.png" alt="Chapter 5 layout turnout for each"></a>
       </div>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Window to front<span class="since">since 5.7.4</span></h4>
+
+      <p>The selected window will be moved in front of the other windows.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/window_to_front.png"><img src=
+        "images/chapter5/window_to_front.png" alt="Chapter 5 window to front action"></a>
+      </div>
+
+      <p>A simple implementation of this can done using the LogixNG icon with an inline LogixNG.
+      See <a href="../../../../package/jmri/jmrit/logixng/InlineLogixNG.shtml">
+      Inline LogixNG and LogixNG icon</a>.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1193,7 +1377,7 @@
       <h4>Subscribe</h4>
 
       <p>This action subscribes to a topic. When someone publishes a message, this action triggers
-      the execution of the CondtionalNG. It can also optionally put the topic and the message into
+      the execution of the ConditionalNG. It can also optionally put the topic and the message into
       local variables. The topic can use wildcard, like loco/# where # is the wildcard.</p>
 
       <div style="margin-left: 2em;">
@@ -1242,6 +1426,61 @@
       <h4>Create beans from table<span class="since">since 5.1.6</span></h4>
 
       <p>See <a href="chapter11.shtml#TableActions">Chapter 11 - Table Actions</a> for details.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Decode JSON<span class="since">since 5.7.4</span></h4>
+
+      <p>A JSON string in the first variable is decoded as a JsonNode tree and placed in the second
+      variable.</p>
+
+      <div style="margin-left: 2em">
+        <a href="images/chapter5/decode_json.png">
+        <img src="images/chapter5/decode_json.png"
+        alt="Chapter 5 decode json"></a>
+      </div>
+
+      <p>The decoding process translates the JSON string into a nested set of LogixNG
+      <strong>Maps</strong> and <strong>Arrays</strong>.  Use a LogixNG formula to access a particular
+      node.</p>
+
+      <p>Here is a sample JSON structure.</p>
+
+<pre style="border: 2px solid #778899; margin: 1em; padding: 0.1em;">
+{"menu": {
+  "id": "file",
+  "value": "File",
+  "popup": {
+    "menuitem": [
+      {"value": "New", "onclick": "CreateNewDoc()"},
+      {"value": "Open", "onclick": "OpenDoc()"},
+      {"value": "Close", "onclick": "CloseDoc()"}
+    ]
+  }
+}}
+</pre>
+
+      <p>Here is a LogixNG that gets the second menuitem value and prints it to the JMRI system
+      console.  In this example, <strong>node value = Open</strong> is printed </p>
+
+<pre style="border: 2px solid #778899; margin: 1em; padding: 0.1em;">
+       1:  LogixNG: test read
+       2:      ConditionalNG: IQC:AUTO:0002
+       3:          ! A
+       4:              Many
+       5:                 ::: Local variable "node", init to String ""
+       6:                  ! A1
+       7:                      Set variable node to the result of formula "str(jsondecoded{"menu"}{"popup"}{"menuitem"}[1]{"value"})"
+       8:                  ! A2
+       9:                      Log data: String.format: node value = %s
+</pre>
+
+      <p><strong>jsondecoded</strong> is the global variable that has the result of the Decode JSON
+      action.  The items in the JSON tree are delimited by braces.  The JSON list rows are referenced
+      by row number in brackets.  Note:  The first row is zero.  In this example, all of the node
+      values are strings, so the formula is enclosed with a str() command.  Node values can also be
+      other data types such as integer and float.  LogixNG has int() and float() commands to handle
+      those data types.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1371,12 +1610,37 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>Logix</h4>
+      <h4 id="common_logix_action">Logix</h4>
 
-      <p>LogixNG has an action called Logix that emulates how JMRI Logix works. The action Logix
-      has one expression and a number of boolean actions. A boolean action is an action that takes
-      a boolean value (true/false) and then decides what to do. The action Logix was added mainly
-      to support import of JMRI Logix to LogixNG.</p>
+      <p>LogixNG has an action called <strong>Logix</strong> that emulates how JMRI Logix works. The
+      action Logix has one expression and a <a href="#boolean_logix_action">Logix Action</a>.  The
+      digital boolean <strong>Many</strong> action can be used to support multiple
+      <strong>Logix Actions</strong> as shown in the example.  A Logix Action responds to
+      <strong>True</strong>, <strong>False</strong>, or <strong>Either</strong> Logix evaluation
+      states.  The action Logix was added mainly to support import of JMRI Logix to LogixNG.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/other_logix_action.png"><img class="image-border" src=
+        "images/chapter5/other_logix_action.png" alt=
+        "Chapter 5 other logix action"></a>
+      </div>
+
+      <p>The Logix action supports <strong>On Change</strong> and <strong>When Triggered</strong>.</p>
+
+      <p>An example Logix within LogixNG.  This is a tweaked import from Logix.  The <strong>Log data</strong> actions
+      were added and the individual <strong>True</strong> LogixNG actions were combined within a
+      standard Many.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/logix_example.png"><img class="image-border" src=
+        "images/chapter5/logix_example.png" alt=
+        "Chapter 5 logix example"></a>
+      </div>
+
+      <p>This example uses <strong>When Triggered</strong>.  This means that one or more actions
+      will be executed when either IS101 or IS102 changes.  The <strong>On Change</strong> option
+      only executes the actions when the evaluation of the expression <strong>changes</strong>
+      between true and false.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1503,8 +1767,8 @@
 
       <h4>Shutdown</h4>
 
-      <p>The ShutdownComputer action can either shutdown or restart the computer, or shutdown or
-      restart JMRI.</p>
+      <p>The <strong>Shutdown</strong> action can either shutdown or restart the computer, or
+      shutdown or restart JMRI.  The default action is <strong>Shut down JMRI</strong>.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1549,22 +1813,151 @@
 
       <h4>Web browser</h4>
 
-      <p>The web browser action opens a web page in the web browser.</p>
+      <p>The <strong>Web Browser</strong> action opens a web page in the default web browser.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/digital_action_web_browser.png"><img src=
+        "images/chapter5/digital_action_web_browser.png" alt="web browser"></a>
+      </div>
+
+      <p>The URL is supplied using a string expression.</p>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4>Web request<span class="since">since 5.3.5</span></h4>
+
+      <p>The <strong>Web Request</strong> action sends a <strong>GET</strong> or <strong>POST</strong>
+      request to a web server.  When the request has completed, the <strong>Execute</strong> action
+      is performed.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/web_request_execute.png"><img src=
+        "images/chapter5/web_request_execute.png" alt="web request execute"></a>
+      </div>
+
+      <p>The request information is defined using the <strong>Web Request</strong> dialog. The
+      dialog settings will depend on the web server application requirements.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/digital_action_web_request.png"><img src=
+        "images/chapter5/digital_action_web_request.png" alt="web request dialog"></a>
+      </div>
+
+      <p class="noted">Note: The <strong>LogixNG_WebRequest_Test.php</strong> portion of the URL is a sample
+      application.</p>
+
+      <h5>Top Level Tabs</h5>
+
+      <dl>
+        <dt>URL</dt>
+
+        <dd>
+          <p>The URL contains the address of the web server.
+
+          For <strong>GET</strong> requests, parameters can be added to the URL using the
+          <strong><em>?name=value&amp;name2=value2</em></strong> format.  Parameters in the Parameter
+          section are also added to the GET request URL.</p>
+
+          <p>For <strong>POST</strong> requests, the parameters are defined in the <strong>
+          Parameters</strong> section.</p>
+        </dd>
+
+        <dt>Charset</dt>
+        <dd>
+          <p>Specify the character set to used for the application.</p>
+
+          <div style="margin-left: 2em;">
+          <a href="images/chapter5/web_request_charset.png"><img src=
+          "images/chapter5/web_request_charset.png" alt="web request character set"></a>
+          </div>
+        </dd>
+
+        <dt>Request method</dt>
+        <dd>
+          <p>Specify the request method to used for the application.</p>
+          <div style="margin-left: 2em;">
+          <a href="images/chapter5/web_request_method.png"><img src=
+          "images/chapter5/web_request_method.png" alt="web request method"></a>
+          </div>
+        </dd>
+
+        <dt>User agent</dt>
+        <dd>
+          <p>Specify the user agent to be used for the request.  The default is <strong><em>Mozilla/5.0
+          </em></strong>.</p>
+        </dd>
+      </dl>
+
+      <h5>Local Variables</h5>
+
+      <dl>
+        <dt>Local variable for response code</dt>
+        <dd>
+          <p>The value of the local variable will be the numeric response code from the server.  For
+          successful requests, the value will be 200.</p>
+        </dd>
+
+        <dt>Local variable for reply content</dt>
+        <dd>
+          <p>The value of the local variable will be the content returned from the server.  Sometimes
+          the content will have error messages detected by the server or the application.</p>
+        </dd>
+
+        <dt>Local variable for cookies</dt>
+        <dd>
+          <p>The value of the local variable will have a copy of the current cookie.  If the cookie
+          needs to be shared by different ConditionalNGs, use a global variable.
+        </dd>
+      </dl>
+
+      <h5>Examples</h5>
+
+      <p>There are two example files included in the JMRI distribution. They are located at
+      <a href="https://www.jmri.org/help/en/html/tools/logixng/reference/WebRequestExample/">help/en/html/tools/logixng/reference/WebRequestExample</a></p>
+
+      <dl>
+        <dt>WebRequest.xml</dt>
+        <dd>
+          <p>This is a layout config xml file that has sample table entries.</p>
+        </dd>
+
+        <dt>LogixNG_WebRequest_Test.php</dt>
+        <dd>
+          <p>This is a <strong>PHP</strong> program that acts as a web based application.  This needs
+          to be installed in a web server that has been configured to run PHP programs. The source code
+          can be downloaded from <a href="https://github.com/JMRI/JMRI/blob/master/help/en/html/tools/logixng/reference/WebRequestExample/LogixNG_WebRequest_Test.php">GitHub</a>.</p>
+        </dd>
+      </dl>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
       <h2 id="digital_boolean_action_common">Digital boolean action :: Common</h2>
 
-      <p>To make import from Logix to LogixNG easier, LogixNG has a special action, Logix, that
+      <p>To make import from Logix to LogixNG easier, LogixNG has a special action, <a href="#common_logix_action">Logix</a>, that
       works similar to a Conditional in Logix. The LogixNG Logix action has a digital expression
       socket and a digital boolean action socket. The usual setup in LogixNG is a Logix action with
-      a Many child with a number of OnChange children.</p>
+      a Many child with a number of <strong>Logix Action</strong> children.</p>
 
       <div style="margin-left: 2em;">
         <a href="images/chapter5/digital_boolean_action_common.png"><img class="image-border" src=
         "images/chapter5/digital_boolean_action_common.png" alt=
         "Chapter 5 digital boolean action common list"></a>
       </div>
+
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+
+      <h4 id="boolean_logix_action">Logix Action</h4>
+
+      <p>When a Logix expression is evaluated, a <strong>Logix Action</strong> is invoked to
+      perform the LogixNG actions if its state matches the result of the expression evaluation.</p>
+
+      <div style="margin-left: 2em;">
+        <a href="images/chapter5/logix_action.png"><img class="image-border" src=
+        "images/chapter5/logix_action.png" alt=
+        "Chapter 5 logix action"></a>
+      </div>
+
+      <p>See the example at <a href="#common_logix_action">Logix</a>.</p>
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
@@ -1575,20 +1968,6 @@
 
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
-      <h4>On change</h4>
-
-      <p>This action is used together with the LogixNG Logix action and gives you the option to
-      decide if the child action should be executed. The options are:</p>
-
-      <ul>
-        <li>On change to true</li>
-
-        <li>On change to false</li>
-
-        <li>On change</li>
-      </ul>
-
-      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 
       <h2 id="analog_action_item">Analog action :: Item</h2>
 
@@ -1669,11 +2048,11 @@
 
       <p><a href="index.shtml">Return to the Reference TOC</a>
       </p>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

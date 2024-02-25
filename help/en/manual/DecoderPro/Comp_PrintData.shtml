@@ -2,42 +2,23 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>DecoderPro&reg; Comprehensive Programmer</title><!--#include virtual="/Style.shtml" -->
+  <title>DecoderPro&reg; Comprehensive Programmer</title><!--#include virtual="/help/en/parts/Style.shtml" -->
   <!-- DecoderPro Styles -->
 
   <style>
     .dp-ctr {
       text-align: center;
     }
-
-    .dp-mid {
-      text-align: middle;
-    }
-
     .dp-right {
       text-align: right;
     }
-
     .dp-none {
       list-style-type: none;
     }
-
-    .dp-sq {
-      list-style-type: square;
-    }
-
-    .dp-ua {
-      list-style-type: upper-alpha
-    }
-
-    .dp-la {
-      list-style-type: lower-alpha
-    }
-
   </style>
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -69,7 +50,7 @@
           "254"><br>
           Select each or all of the decoder items that you want to print</p>
 
-          <p>Click <input name="button" id="button" value="Okay" type="button"> to print then Print
+          <p>Click the <span class="textbutton">Okay</span> button to print, then normally the Print
           dialog for your computer system is displayed.</p>
         </li>
 
@@ -127,11 +108,11 @@
         <p><a href="index.shtml#Advanced%20Programmer">Back to Index</a>
         </p>
       </div>
-      <!--#include virtual="/Footer.shtml" -->
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>

@@ -1,13 +1,10 @@
 package jmri.jmrit.logixng.actions.configurexml;
 
-import java.util.ResourceBundle;
 
 import jmri.*;
 import jmri.configurexml.JmriConfigureXmlException;
 import jmri.Memory;
-import jmri.MemoryManager;
 import jmri.Reporter;
-import jmri.ReporterManager;
 import jmri.jmrit.logixng.DigitalActionManager;
 import jmri.jmrit.logixng.NamedBeanAddressing;
 import jmri.jmrit.logixng.actions.ActionReporter;
@@ -24,8 +21,6 @@ import org.jdom2.Element;
  * @author Dave Sand Copyright (C) 2021
  */
 public class ActionReporterXml extends jmri.managers.configurexml.AbstractNamedBeanManagerConfigXML {
-
-    static final ResourceBundle rb = ResourceBundle.getBundle("jmri.jmrit.logixng.actions.ActionBundle");
 
     public ActionReporterXml() {
     }

@@ -1,7 +1,5 @@
 package jmri.jmrit.logixng.implementation;
 
-import static jmri.NamedBean.UNKNOWN;
-
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -10,9 +8,7 @@ import jmri.JmriException;
 import jmri.Manager;
 import jmri.NamedBean;
 import jmri.NamedBeanUsageReport;
-// import jmri.implementation.JmriSimplePropertyListener;
 import jmri.implementation.AbstractNamedBean;
-import jmri.jmrit.display.Positionable;
 import jmri.jmrit.logixng.*;
 
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -27,6 +23,7 @@ public class DefaultLogixNG extends AbstractNamedBean
         implements LogixNG {
 
     private final LogixNG_Manager _manager = InstanceManager.getDefault(LogixNG_Manager.class);
+    private boolean _startup = true;
     private boolean _inline = false;
     private InlineLogixNG _inlineLogixNG = null;
     private boolean _enabled = false;
@@ -136,6 +133,18 @@ public class DefaultLogixNG extends AbstractNamedBean
 
     /** {@inheritDoc} */
     @Override
+    public void clearStartup() {
+        _startup = false;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isStartup() {
+        return _startup;
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public void setInline(boolean inline) {
         boolean old = _inline;
         _inline = inline;
@@ -163,19 +172,32 @@ public class DefaultLogixNG extends AbstractNamedBean
     /** {@inheritDoc} */
     @Override
     public void setEnabled(boolean enable) {
+        boolean old = _enabled;
         _enabled = enable;
-        if (isActive()) {
-            registerListeners();
-            execute(true);
-        } else {
-            unregisterListeners();
-        }
+        checkIfActiveAndEnabled();
+        firePropertyChange(PROPERTY_ENABLED, old, _enabled);
     }
 
     /** {@inheritDoc} */
     @Override
     public void activate() {
         _isActive = true;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void setActive(boolean active) {
+        _isActive = active;
+        checkIfActiveAndEnabled();
+    }
+
+    private void checkIfActiveAndEnabled() {
+        if (isActive()) {
+            registerListeners();
+            execute(true);
+        } else {
+            unregisterListeners();
+        }
     }
 
     /** {@inheritDoc} */

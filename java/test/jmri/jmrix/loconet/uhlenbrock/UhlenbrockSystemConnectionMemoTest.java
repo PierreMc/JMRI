@@ -1,8 +1,6 @@
 package jmri.jmrix.loconet.uhlenbrock;
 
 import jmri.jmrix.loconet.LnSystemConnectionMemoTestBase;
-import jmri.util.JUnitUtil;
-
 import org.junit.jupiter.api.*;
 
 import jmri.jmrix.loconet.LocoNetInterfaceScaffold;
@@ -20,7 +18,7 @@ public class UhlenbrockSystemConnectionMemoTest extends LnSystemConnectionMemoTe
         scm = new UhlenbrockSystemConnectionMemo();
         LocoNetInterfaceScaffold lnis = new LocoNetInterfaceScaffold(scm);
         scm.setLnTrafficController(lnis);
-        scm.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_IBX_TYPE_2, false, false, false, false);
+        scm.configureCommandStation(jmri.jmrix.loconet.LnCommandStationType.COMMAND_STATION_IBX_TYPE_2, false, false, false, false, false);
         scm.configureManagers();
     }
 

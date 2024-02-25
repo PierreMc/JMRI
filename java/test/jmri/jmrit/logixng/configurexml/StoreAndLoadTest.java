@@ -25,12 +25,14 @@ import org.junit.*;
  */
 public class StoreAndLoadTest {
 
+    private CreateLogixNGTreeScaffold createLogixNGTreeScaffold;
+
     @Test
     public void testLogixNGs() throws PropertyVetoException, Exception {
         Assume.assumeFalse(GraphicsEnvironment.isHeadless());
 
         // Add new LogixNG actions and expressions to jmri.jmrit.logixng.CreateLogixNGTreeScaffold
-        CreateLogixNGTreeScaffold.createLogixNGTree();
+        createLogixNGTreeScaffold.createLogixNGTree();
 
         LogixNG_Manager logixNG_Manager = InstanceManager.getDefault(LogixNG_Manager.class);
 
@@ -45,8 +47,8 @@ public class StoreAndLoadTest {
             FileUtil.createDirectory(FileUtil.getUserFilesPath() + "temp");
             File firstFile = new File(FileUtil.getUserFilesPath() + "temp/" + "LogixNG_temp.xml");
             File secondFile = new File(FileUtil.getUserFilesPath() + "temp/" + "LogixNG.xml");
-            log.info("Temporary first file: %s%n", firstFile.getAbsoluteFile());
-            log.info("Temporary second file: %s%n", secondFile.getAbsoluteFile());
+            log.info("Temporary first file: {}", firstFile.getAbsoluteFile());
+            log.info("Temporary second file: {}", secondFile.getAbsoluteFile());
 
             final String treeIndent = "   ";
             StringWriter stringWriter = new StringWriter();
@@ -73,7 +75,7 @@ public class StoreAndLoadTest {
             //**********************************
             // Delete all the LogixNGs, ConditionalNGs, and so on before reading the file.
             //**********************************
-            CreateLogixNGTreeScaffold.cleanup();
+            createLogixNGTreeScaffold.cleanup();
 
             LogixNG_Thread.stopAllLogixNGThreads();
             LogixNG_Thread.assertLogixNGThreadNotRunning();
@@ -96,6 +98,20 @@ public class StoreAndLoadTest {
             log.debug(results ? "load was successful" : "store failed");
             if (results) {
                 logixNG_Manager.setupAllLogixNGs();
+                logixNG_Manager.activateAllLogixNGs(false, false);
+
+                for (SymbolTable.InitialValueType type : SymbolTable.InitialValueType.values()) {
+                    if (type == SymbolTable.InitialValueType.None) continue;
+                    if (type == SymbolTable.InitialValueType.String) continue;
+                    if (type == SymbolTable.InitialValueType.Array) continue;
+                    if (type == SymbolTable.InitialValueType.Map) continue;
+                    JUnitAppender.assertWarnMessage(String.format("Variable %s could not be initialized", "TestVariable_"+type.name()));
+                    JUnitAppender.assertWarnMessage(String.format("Variable %s could not be initialized", "TestVariable_"+type.name()+"_2"));
+
+                    if (type == SymbolTable.InitialValueType.LogixNG_Table) {
+                            JUnitAppender.assertWarnMessage(String.format("Variable %s could not be initialized", "TestVariable_"+type.name()+"_3"));
+                    }
+                }
 
                 stringWriter = new StringWriter();
                 printWriter = new PrintWriter(stringWriter);
@@ -116,14 +132,6 @@ public class StoreAndLoadTest {
                     log.error("XXX"+stringWriter.toString()+"XXX");
                     log.error("--------------------------------------------");
 
-                    System.out.println("--------------------------------------------");
-                    System.out.println("Old tree:");
-                    System.out.println("XXX"+originalTree+"XXX");
-                    System.out.println("--------------------------------------------");
-                    System.out.println("New tree:");
-                    System.out.println("XXX"+stringWriter.toString()+"XXX");
-                    System.out.println("--------------------------------------------");
-
 //                    log.error(conditionalNGManager.getBySystemName(originalTree).getChild(0).getConnectedSocket().getSystemName());
 
                     String[] originalTreeLines = originalTree.split(System.lineSeparator());
@@ -131,11 +139,12 @@ public class StoreAndLoadTest {
                     int line=0;
                     for (; line < Math.min(originalTreeLines.length, newTreeLines.length); line++) {
                         if (!originalTreeLines[line].equals(newTreeLines[line])) {
-                            System.out.format("Tree differs on line %d:%nOrig: %s%n New: %s%n", line+1, originalTreeLines[line], newTreeLines[line]);
+                            log.error("Tree differs on line {}:", line+1);
+                            log.error("Orig: {}", originalTreeLines[line]);
+                            log.error(" New: {}", newTreeLines[line]);
                             break;
                         }
                     }
-                    System.out.println("The tree has changed. The tree differs on line "+Integer.toString(line+1));
                     Assert.fail("The tree has changed. The tree differs on line "+Integer.toString(line+1));
 //                    throw new RuntimeException("tree has changed");
                 }
@@ -149,10 +158,6 @@ public class StoreAndLoadTest {
 //        for (LoggingEvent evt : JUnitAppender.getBacklog()) {
 //            System.out.format("Log: %s, %s%n", evt.getLevel(), evt.getMessage());
 //        }
-
-
-        JUnitAppender.assertErrorMessage("systemName is already registered: IH1");
-        JUnitAppender.assertErrorMessage("systemName is already registered: IH2");
     }
 
 
@@ -186,13 +191,14 @@ public class StoreAndLoadTest {
 
     @Before
     public void setUp() {
-        CreateLogixNGTreeScaffold.setUp();
+        createLogixNGTreeScaffold = new CreateLogixNGTreeScaffold();
+        createLogixNGTreeScaffold.setUp();
     }
 
     @After
     public void tearDown() {
 //        JUnitAppender.clearBacklog();    // REMOVE THIS!!!
-        CreateLogixNGTreeScaffold.tearDown();
+        createLogixNGTreeScaffold.tearDown();
     }
 
 

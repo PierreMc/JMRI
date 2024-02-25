@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0">
-  <title>JMRI Hardware Support - NAC Services RPS</title><!--#include virtual="/Style.shtml" -->
+  <title>JMRI Hardware Support - NAC Services RPS</title><!--#include virtual="/help/en/parts/Style.shtml" -->
 </head>
 <body>
-  <!--#include virtual="/Header.shtml" -->
+  <!--#include virtual="/help/en/parts/Header.shtml" -->
 
   <div id="mBody">
     <!--#include virtual="Sidebar.shtml" -->
@@ -15,10 +15,10 @@
 
       <p><em>Please note that JMRI's RPS support is being rapidly improved. This page refers to
       most recent JMRI test version. If you're using an RPS system, you should update to new test
-      versions as they <a href="https://jmri.org/download/index.shtml">are announced</a>.</em>
+      versions as they <a href="https://www.jmri.org/download/index.shtml">are announced</a>.</em>
       </p>
 
-      <p>The <a href="http://www.proto87.com/model-trains-DCC-decoders.html">RPS System</a> allows
+      <p>The <a href="https://www.proto87.com/model-trains-DCC-decoders.html">RPS System</a> allows
       you to locate the exact position of locomotives and other rolling stock that have been
       equipped with transmitter decoders. The system makes up to 10 measurements per second and
       each reading is accurate to much better than an inch, which makes many imaginative uses
@@ -235,12 +235,12 @@
       <h3>Third Party info</h3>
 
       <p>More information on the <a href=
-      "http://www.proto87.com/model-trains-DCC-decoders.html">RPS Web Site</a>.</p>
-      <!--#include virtual="/Footer.shtml" -->
+      "https://www.proto87.com/model-trains-DCC-decoders.html">RPS Web Site</a>.</p>
+      <!--#include virtual="/help/en/parts/Footer.shtml" -->
     </div>
     <!-- closes #mainContent-->
   </div>
   <!-- closes #mBody-->
-  <script src="/js/main.js"></script>
+  <script src="/js/help.js"></script>
 </body>
 </html>
