@@ -34,7 +34,7 @@
         <output name="6" label="LED Gp3">
           <label xml:lang="de">LED Gp3</label>
         </output>
-        <output name="7" label="LED Gp4>
+        <output name="7" label="LED Gp4">
           <label xml:lang="de">LED Gp4</label>
         </output>
         <output name="8" label="LED Gp5">
@@ -67,7 +67,7 @@
         <output name="6" label="LED Gp3">
           <label xml:lang="de">LED Gp3</label>
         </output>
-        <output name="7" label="LED Gp4>
+        <output name="7" label="LED Gp4">
           <label xml:lang="de">LED Gp4</label>
         </output>
         <output name="8" label="LED Gp5">
