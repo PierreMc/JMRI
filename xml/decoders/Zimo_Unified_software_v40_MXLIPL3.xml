@@ -20,8 +20,12 @@
   <!-- Tested on N scale light bar model LIPLDNW1 for N scale, and included defs             -->
   <!-- for other models as per Zimo official decoder ID list and manuals                     -->
   <!--                                                                                       -->
+  <!-- New category "Zimo Light Boards" created", to conform to Zimo's own separate          -->
+  <!-- listing of Light boards vs. function decoders present on their webpage at             -->
+  <!-- http://www.zimo.at/web2010/documents/manuals.htm                                      -->
+  <!--                                                                                       -->
   <decoder>
-    <family name="Zimo Function Decoders" mfg="Zimo">
+    <family name="Zimo Light Boards" mfg="Zimo">
       <model model="LIPLDGW1 version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="179" formFactor="HO" numOuts="9" numFns="14">
         <output name="1" label="Front Light">
           <label xml:lang="de">Lvor</label>
