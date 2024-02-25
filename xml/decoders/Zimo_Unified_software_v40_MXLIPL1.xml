@@ -22,7 +22,7 @@
   <!--                                                                                       -->
   <decoder>
     <family name="Zimo Function Decoders" mfg="Zimo">
-      <model model="MXLIPL1 light bars version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
+      <model model="LIPLDNW1 version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
         <output name="1" label="Front Light">
           <label xml:lang="de">Lvor</label>
         </output>
@@ -55,7 +55,7 @@
         </output>
         <size length="166" width="8.2" height="2.8" units="mm"/>
       </model>
-      <model model="MXLIPL3 light bars version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="179" formFactor="HO" numOuts="11" numFns="14">
+      <model model="LIPLDNY1 version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
         <output name="1" label="Front Light">
           <label xml:lang="de">Lvor</label>
         </output>
@@ -86,10 +86,73 @@
         <output name="10" label="LED Gp7">
           <label xml:lang="de">LED Gp7</label>
         </output>
-        <output name="11" label="FO 9">
-          <label xml:lang="de">FA9</label>
+        <size length="166" width="8.2" height="2.8" units="mm"/>
+      </model>
+      <model model="LIPLDHW1 version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
+        <output name="1" label="Front Light">
+          <label xml:lang="de">Lvor</label>
         </output>
-        <size length="380" width="18" height="7.3" units="mm"/>
+        <output name="2" label="Rear Light">
+          <label xml:lang="de">Lrück</label>
+        </output>
+        <output name="3" label="FO 1">
+          <label xml:lang="de">FA1</label>
+        </output>
+        <output name="4" label="LED Gp1">
+          <label xml:lang="de">LED Gp1</label>
+        </output>
+        <output name="5" label="LED Gp2">
+          <label xml:lang="de">LED Gp2</label>
+        </output>
+        <output name="6" label="LED Gp3">
+          <label xml:lang="de">LED Gp3</label>
+        </output>
+        <output name="7" label="LED Gp4">
+          <label xml:lang="de">LED Gp4</label>
+        </output>
+        <output name="8" label="LED Gp5">
+          <label xml:lang="de">LED Gp5</label>
+        </output>
+        <output name="9" label="LED Gp6">
+          <label xml:lang="de">LED Gp6</label>
+        </output>
+        <output name="10" label="LED Gp7">
+          <label xml:lang="de">LED Gp7</label>
+        </output>
+        <size length="296" width="8.2" height="2.8" units="mm"/>
+      </model>
+      <model model="LIPLDHY1 version 40+" lowVersionID="40" highVersionID="40" maxInputVolts="10-35V" productID="184" formFactor="N" numOuts="10" numFns="14">
+        <output name="1" label="Front Light">
+          <label xml:lang="de">Lvor</label>
+        </output>
+        <output name="2" label="Rear Light">
+          <label xml:lang="de">Lrück</label>
+        </output>
+        <output name="3" label="FO 1">
+          <label xml:lang="de">FA1</label>
+        </output>
+        <output name="4" label="LED Gp1">
+          <label xml:lang="de">LED Gp1</label>
+        </output>
+        <output name="5" label="LED Gp2">
+          <label xml:lang="de">LED Gp2</label>
+        </output>
+        <output name="6" label="LED Gp3">
+          <label xml:lang="de">LED Gp3</label>
+        </output>
+        <output name="7" label="LED Gp4">
+          <label xml:lang="de">LED Gp4</label>
+        </output>
+        <output name="8" label="LED Gp5">
+          <label xml:lang="de">LED Gp5</label>
+        </output>
+        <output name="9" label="LED Gp6">
+          <label xml:lang="de">LED Gp6</label>
+        </output>
+        <output name="10" label="LED Gp7">
+          <label xml:lang="de">LED Gp7</label>
+        </output>
+        <size length="296" width="8.2" height="2.8" units="mm"/>
       </model>
     </family>
     <programming direct="yes" paged="yes" register="yes" ops="yes"/>
