@@ -17,6 +17,7 @@ import jmri.jmrit.operations.routes.RouteLocation;
 import jmri.jmrit.operations.setup.Setup;
 import jmri.jmrit.operations.trains.schedules.TrainSchedule;
 import jmri.jmrit.operations.trains.schedules.TrainScheduleManager;
+import jmri.jmrit.operations.trains.trainbuilder.TrainCommon;
 
 /**
  * Builds a train's manifest. User has the ability to modify the text of the
@@ -60,14 +61,18 @@ public class TrainManifest extends TrainCommon {
             String valid = MessageFormat.format(messageFormatText = TrainManifestText.getStringValid(),
                     new Object[]{getDate(true)});
 
+            String schName = "";
+
             if (Setup.isPrintTrainScheduleNameEnabled()) {
                 TrainSchedule sch = InstanceManager.getDefault(TrainScheduleManager.class).getActiveSchedule();
                 if (sch != null) {
-                    valid = valid + " (" + sch.getName() + ")";
+                    schName = "(" + sch.getName() + ")";
                 }
             }
             if (Setup.isPrintValidEnabled()) {
-                newLine(fileOut, valid);
+                newLine(fileOut, valid + " " + schName);
+            } else {
+                newLine(fileOut, schName);
             }
             if (!train.getCommentWithColor().equals(Train.NONE)) {
                 newLine(fileOut, train.getCommentWithColor());
@@ -149,10 +154,12 @@ public class TrainManifest extends TrainCommon {
                     }
                 }
 
+                setCarPickupTime(train, rl, carList);
+
                 if (Setup.getManifestFormat().equals(Setup.STANDARD_FORMAT)) {
                     pickupEngines(fileOut, engineList, rl, IS_MANIFEST);
                     // if switcher show loco drop at end of list
-                    if (train.isLocalSwitcher()) {
+                    if (train.isLocalSwitcher() || Setup.isPrintLocoLastEnabled()) {
                         blockCarsByTrack(fileOut, train, carList, rl, printHeader, IS_MANIFEST);
                         dropEngines(fileOut, engineList, rl, IS_MANIFEST);
                     } else {
@@ -235,7 +242,7 @@ public class TrainManifest extends TrainCommon {
                             .getStringDepartTime(), new Object[]{train.getFormatedDepartureTime()});
                 } else if (!rl.getDepartureTime().equals(RouteLocation.NONE)) {
                     s += MessageFormat.format(messageFormatText = TrainManifestText
-                            .getStringDepartTime(), new Object[]{rl.getFormatedDepartureTime()});
+                            .getStringDepartTime(), new Object[]{train.getExpectedDepartureTime(rl)});
                 } else if (Setup.isUseDepartureTimeEnabled() &&
                         !rl.getComment().equals(RouteLocation.NONE)) {
                     s += MessageFormat
