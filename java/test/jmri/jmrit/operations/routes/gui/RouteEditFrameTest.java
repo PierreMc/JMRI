@@ -238,9 +238,6 @@ public class RouteEditFrameTest extends OperationsTestCase {
         // need to show entire table
         f.setSize(new Dimension(1200, Control.panelHeight400));
 
-        // confirm that wait time is displayed
-        Assert.assertFalse(f.showDepartTime.isSelected());
-
         JFrameOperator jfo = new JFrameOperator(f);
         JTableOperator tbl = new JTableOperator(jfo);
 
@@ -267,9 +264,6 @@ public class RouteEditFrameTest extends OperationsTestCase {
 
         // need to show entire table
         f.setSize(new Dimension(1200, Control.panelHeight400));
-
-        // confirm that wait time is displayed
-        Assert.assertFalse(f.showDepartTime.isSelected());
 
         JFrameOperator jfo = new JFrameOperator(f);
         JTableOperator tbl = new JTableOperator(jfo);
@@ -299,14 +293,11 @@ public class RouteEditFrameTest extends OperationsTestCase {
         // need to show entire table
         f.setSize(new Dimension(1200, Control.panelHeight400));
 
-        // confirm that wait time is displayed
-        Assert.assertTrue(f.showTravel.isSelected());
-
         JFrameOperator jfo = new JFrameOperator(f);
         JTableOperator tbl = new JTableOperator(jfo);
-        // findColumn finds the first column with the letters "up"
+        // bug, findColumn finds the first column with the letters "up"
         //        tbl.clickOnCell(0, tbl.findColumn(Bundle.getMessage("Up")));
-        tbl.clickOnCell(0, 14);
+        tbl.clickOnCell(0, 16);
 
         rl = route.getDepartsRouteLocation();
         Assert.assertEquals("Confirm departure name", "Boston", rl.getName());
@@ -336,9 +327,6 @@ public class RouteEditFrameTest extends OperationsTestCase {
         // need to show entire table
         f.setSize(new Dimension(1200, Control.panelHeight400));
 
-        // confirm that wait time is displayed
-        Assert.assertFalse(f.showDepartTime.isSelected());
-
         // confirm default wait value
         Assert.assertEquals("Wait", 0, rl.getWait());
         Assert.assertEquals("Time", 4, Setup.getTravelTime());
@@ -363,16 +351,13 @@ public class RouteEditFrameTest extends OperationsTestCase {
         route.setName("5 Locations");
         RouteLocation rl = route.getDepartsRouteLocation();
         Assert.assertEquals("Confirm departure name", "Acton", rl.getName());
-        rl.setDepartureTime("06", "05");
+        rl.setDepartureTime("0", "06", "05");
 
         RouteEditFrame f = new RouteEditFrame();
         f.initComponents(route);
 
         // need to show entire table
         f.setSize(new Dimension(1200, Control.panelHeight400));
-
-        // confirm that departure time is displayed
-        Assert.assertTrue(f.showDepartTime.isSelected());
 
         JFrameOperator jfo = new JFrameOperator(f);
         JTableOperator tbl = new JTableOperator(jfo);
@@ -381,7 +366,7 @@ public class RouteEditFrameTest extends OperationsTestCase {
 
         tbl.setValueAt(box, 0, tbl.findColumn(Bundle.getMessage("Time")));
         JemmyUtil.enterClickAndLeave(f.saveRouteButton);
-        Assert.assertEquals("New departure time", "20:45", rl.getDepartureTime());
+        Assert.assertEquals("New departure time", "0:20:45", rl.getDepartureTime());
 
         JUnitUtil.dispose(f);
     }
@@ -432,11 +417,11 @@ public class RouteEditFrameTest extends OperationsTestCase {
 
         JFrameOperator jfo = new JFrameOperator(f);
         JTableOperator tbl = new JTableOperator(jfo);
-        // findColumn returns the first column with the letter "x".
-        //        tbl.setValueAt(23, 0, tbl.findColumn(Bundle.getMessage("X")));
-        // not all columns are visible, only travel or time       
-        tbl.setValueAt(23, 0, 11);
-        tbl.setValueAt(57, 0, tbl.findColumn(Bundle.getMessage("Y")));
+        // bug, findColumn returns the first column with the letter "x".
+        //        tbl.setValueAt(23, 0, tbl.findColumn(Bundle.getMessage("X"))); 
+        // TRAINICONX_COLUMN = 13
+        tbl.setValueAt(23, 0, 13);
+        tbl.setValueAt(57, 0, 14);
         JemmyUtil.enterClickAndLeave(f.saveRouteButton);
         Assert.assertEquals("New X Corrdinate", 23, rl.getTrainIconX());
         Assert.assertEquals("New Y Corrdinate", 57, rl.getTrainIconY());

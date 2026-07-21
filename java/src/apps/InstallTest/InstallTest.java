@@ -58,7 +58,7 @@ public class InstallTest extends Apps {
 
     @Override
     protected String line2() {
-        return "http://jmri.org/InstallTest";
+        return "https://jmri.org/InstallTest";
     }
 
     @Override
@@ -123,5 +123,5 @@ public class InstallTest extends Apps {
         splash(false);
     }
 
-    private final static Logger log = LoggerFactory.getLogger(InstallTest.class);
+    private static final Logger log = LoggerFactory.getLogger(InstallTest.class);
 }

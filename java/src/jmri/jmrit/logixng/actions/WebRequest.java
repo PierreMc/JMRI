@@ -155,8 +155,8 @@ public class WebRequest extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.OTHER;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.OTHER;
     }
 
     /** {@inheritDoc} */
@@ -687,7 +687,7 @@ public class WebRequest extends AbstractDigitalAction
     }
 
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebRequest.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WebRequest.class);
 
 
 

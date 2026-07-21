@@ -81,6 +81,16 @@ public class LocoNetInterfaceScaffold extends LnTrafficController {
         return listeners;
     }
 
-    private final static Logger log = LoggerFactory.getLogger(LocoNetInterfaceScaffold.class);
+    /**
+     * Resets the outbound message log.
+     * {@inheritDoc }
+     */
+    @Override
+    public void resetStatistics() {
+        outbound.clear();
+        super.resetStatistics();
+    }
+
+    private static final Logger log = LoggerFactory.getLogger(LocoNetInterfaceScaffold.class);
 
 }

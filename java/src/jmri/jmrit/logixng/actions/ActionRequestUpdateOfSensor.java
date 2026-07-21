@@ -46,8 +46,8 @@ public class ActionRequestUpdateOfSensor extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     /** {@inheritDoc} */
@@ -118,5 +118,5 @@ public class ActionRequestUpdateOfSensor extends AbstractDigitalAction
     public void disposeMe() {
     }
 
-//    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionRequestUpdateOfSensor.class);
+//    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionRequestUpdateOfSensor.class);
 }

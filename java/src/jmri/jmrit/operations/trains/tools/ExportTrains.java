@@ -11,7 +11,8 @@ import org.apache.commons.csv.CSVPrinter;
 import jmri.InstanceManager;
 import jmri.jmrit.XmlFile;
 import jmri.jmrit.operations.setup.OperationsSetupXml;
-import jmri.jmrit.operations.trains.*;
+import jmri.jmrit.operations.trains.Train;
+import jmri.jmrit.operations.trains.TrainManager;
 import jmri.jmrit.operations.trains.trainbuilder.TrainCommon;
 import jmri.util.swing.JmriJOptionPane;
 
@@ -66,6 +67,7 @@ public class ExportTrains extends XmlFile {
 
             // create header
             fileOut.printRecord(Bundle.getMessage("Name"), Bundle.getMessage("Description"), Bundle.getMessage("Time"),
+                    Bundle.getMessage("Done"),
                     Bundle.getMessage("Route"), Bundle.getMessage("Departs"), Bundle.getMessage("Terminates"),
                     Bundle.getMessage("Status"), Bundle.getMessage("Comment"), Bundle.getMessage("LocoTypes"),
                     Bundle.getMessage("CarTypes"), Bundle.getMessage("RoadOption"), Bundle.getMessage("RoadsCar"),
@@ -90,7 +92,8 @@ public class ExportTrains extends XmlFile {
                 if (train.getRoute() != null) {
                     routeName = train.getRoute().getName();
                 }
-                fileOut.printRecord(train.getName(), train.getDescription(), train.getDepartureTime(), routeName,
+                fileOut.printRecord(train.getName(), train.getDescription(), train.getDepartureTime(), 
+                        train.getExpectedDepartureTime(train.getTrainTerminatesRouteLocation(), true), routeName,
                         train.getTrainDepartsName(), train.getTrainTerminatesName(), train.getStatus(),
                         train.getComment(), TrainCommon.formatStringToCommaSeparated(train.getLocoTypeNames()),
                         TrainCommon.formatStringToCommaSeparated(train.getCarTypeNames()), getCarRoadOption(train),
@@ -178,8 +181,6 @@ public class ExportTrains extends XmlFile {
                 }
             }
 
-            fileOut.flush();
-            fileOut.close();
             log.info("Exported {} trains to file {}", count, defaultOperationsFilename());
             JmriJOptionPane.showMessageDialog(null,
                     Bundle.getMessage("ExportedTrainsToFile",

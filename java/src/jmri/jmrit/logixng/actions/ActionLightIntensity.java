@@ -53,8 +53,8 @@ public class ActionLightIntensity extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     /** {@inheritDoc} */
@@ -196,6 +196,6 @@ public class ActionLightIntensity extends AbstractDigitalAction
         getConditionalNG().execute();
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionLightIntensity.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionLightIntensity.class);
 
 }

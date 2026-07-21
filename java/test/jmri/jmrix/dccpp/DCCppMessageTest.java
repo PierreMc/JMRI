@@ -552,6 +552,10 @@ public class DCCppMessageTest extends jmri.jmrix.AbstractMessageTestBase {
         Assert.assertEquals("Monitor string", "Request details for AutomationID 145", msg.toMonitorString());
         msg = DCCppMessage.makeAutomationIDMsg(145);
         Assert.assertEquals("Monitor string", "Request details for AutomationID 145", msg.toMonitorString());
+        msg = DCCppMessage.makeCurrentMaxesMsg();
+        Assert.assertEquals("Monitor string", "Request list of Current Maximums", msg.toMonitorString());
+        msg = DCCppMessage.makeCurrentValuesMsg();
+        Assert.assertEquals("Monitor string", "Request list of Current Values", msg.toMonitorString());
         msg = new DCCppMessage("J C");
         Assert.assertEquals("Monitor string", "Request clock update from CS", msg.toMonitorString());
         msg = DCCppMessage.makeClockRequestTimeMsg();
@@ -560,6 +564,19 @@ public class DCCppMessageTest extends jmri.jmrix.AbstractMessageTestBase {
         Assert.assertEquals("Monitor string", "FastClock Send: 03:54, Rate:12", msg.toMonitorString());
         msg = DCCppMessage.makeClockSetMsg(234, 12);
         Assert.assertEquals("Monitor string", "FastClock Send: 03:54, Rate:12", msg.toMonitorString());
+    }
+
+    @Test
+    public void testMakeStartExrailMsg() {
+        msg = DCCppMessage.makeStartExrailMsg(42);
+        Assert.assertNotNull(msg);
+        Assert.assertEquals("message content", "/ START 42", msg.toString());
+        Assert.assertEquals("monitor string", "Control Cmd: '/ START 42'", msg.toMonitorString());
+
+        msg = DCCppMessage.makeStartExrailMsg(10, 1234);
+        Assert.assertNotNull(msg);
+        Assert.assertEquals("message content", "/ START 1234 10", msg.toString());
+        Assert.assertEquals("monitor string", "Control Cmd: '/ START 1234 10'", msg.toMonitorString());
     }
 
     @Test
@@ -837,6 +854,18 @@ public class DCCppMessageTest extends jmri.jmrix.AbstractMessageTestBase {
         Assert.assertEquals("Monitor string", "Output Cmd: ID: 23, State: LOW", msg.toMonitorString());
     }
 
+    @Test
+    public void testOutputCmdReplyExpected() {
+        Assert.assertTrue("uppercase <Z> expects a reply", DCCppMessage.makeOutputCmdMsg(23, true).replyExpected());
+    }
+
+    @Test
+    public void testOutputCmdLCNoReplyExpected() {
+        // lowercase <z> is fire-and-forget; no reply from CS
+        Assert.assertFalse("lowercase <z> on does not expect a reply", DCCppMessage.makeOutputCmdMsgLC(26, true).replyExpected());
+        Assert.assertFalse("lowercase <z> off does not expect a reply", DCCppMessage.makeOutputCmdMsgLC(26, false).replyExpected());
+    }
+
     @BeforeEach
     @Override
     public void setUp() {
@@ -852,6 +881,6 @@ public class DCCppMessageTest extends jmri.jmrix.AbstractMessageTestBase {
         super.tearDown();
     }
 
-    private final static Logger log = LoggerFactory.getLogger(DCCppMessageTest.class);
+    private static final Logger log = LoggerFactory.getLogger(DCCppMessageTest.class);
 
 }

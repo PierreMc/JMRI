@@ -186,7 +186,7 @@ public class WindowManagement extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
+    public LogixNG_Category getCategory() {
         return CategoryDisplay.DISPLAY;
     }
 
@@ -454,6 +454,6 @@ public class WindowManagement extends AbstractDigitalAction
 
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WindowManagement.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WindowManagement.class);
 
 }

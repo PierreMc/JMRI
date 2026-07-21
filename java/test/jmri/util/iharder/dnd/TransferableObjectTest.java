@@ -2,7 +2,6 @@ package jmri.util.iharder.dnd;
 
 import java.io.File;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -15,7 +14,7 @@ public class TransferableObjectTest {
     @Test
     public void testCTor(@TempDir File folder) throws java.io.IOException  {
         TransferableObject t = new TransferableObject(folder);
-        Assert.assertNotNull("exists",t);
+        Assertions.assertNotNull( t, "exists");
     }
 
     @BeforeEach
@@ -28,6 +27,6 @@ public class TransferableObjectTest {
         jmri.util.JUnitUtil.tearDown();
     }
 
-    // private final static Logger log = LoggerFactory.getLogger(TransferableObjectTest.class.getName());
+    // private static final Logger log = LoggerFactory.getLogger(TransferableObjectTest.class.getName());
 
 }

@@ -220,8 +220,8 @@ public class ActionDispatcher extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     private String getNewData(DirectOperation oper) throws JmriException {
@@ -499,6 +499,6 @@ public class ActionDispatcher extends AbstractDigitalAction
         getConditionalNG().execute();
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionDispatcher.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionDispatcher.class);
 
 }

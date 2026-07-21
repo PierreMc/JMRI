@@ -87,6 +87,8 @@
         <li>Harald Barth, <!-- habazut -->
          who improved the SRCP implementation and the DCC++ implementation.</li>
 
+        <li>Jack Basiago, who worked on the block contents icon</li>
+
         <li>Michal Basta, who contributed the Czech internationalization</li>
 
         <li>Patrick Beard, who allows us to distribute his javax.comm.MRJ package for the
@@ -139,6 +141,9 @@
         <li>Ian Birchenough, who contributed (with Phil Grainger) six ZTC decoder definition files,
         plus the ZTC 4007, and the Lenz Standard decoder.</li>
 
+        <li>Brandon Bittinger, who helped debug a nasty problem with 
+        Reporter and IdTag initialization.</li>
+        
         <li>Rodney Black, <!-- Sturbee -->
         who has worked on refining the JMRI interfaces as part of creating his
         <a href="http://cats4ctc.org/">CATS</a> system.</li>
@@ -266,9 +271,6 @@
 
         <li>Bill Chown, who did a lot of work on the MRC decoder definitions</li>
 
-        <li>Chris Why, <!-- chriswhy00 -->
-         who fixed a tough bug in the speed-profiling code.</li>
-
         <li>Bob Clearfield, who helped fix some broken links</li>
 
         <li>Nigel Cliffe, who updated the CT Elektronik decoder definitions, provided sample
@@ -292,6 +294,9 @@
         <li>Jeff Collell, <!-- auctionsjeff -->
          who added Light support for OpenLCB.</li>
 
+        <li>Frank Collingwood, <!-- fcollingwood -->
+        who provided a definition for the Rokuhan A053 and A059 decoders.
+        
          <li>John Connelly, <!-- connelly38 -->
          who greatly sped up the decoder and roster indexing steps for large rosters.
 
@@ -334,6 +339,11 @@
 
         <li>Andrew Deak<!-- adeak1rr -->
          who added the CPMEGA C/MRI option.</li>
+
+        <li>Mike Dean<!-- mdean77a -->
+         who created the 
+         <a href="https://github.com/mdean77a/JMRI/blob/master/python_code/README.md">pyjmri</a>
+         async Python interface to the JMRI web server.</li>
 
         <li>Fred Decker<!-- FrightRisk -->
          who improved the Walthers Diesel Soundtraxx decoder.</li>
@@ -384,6 +394,9 @@
         <li>Joe Ellis provided the DecoderPro configuration files for the Lenz LE077XF decoder and
         has done a fantastic job on the manual</li>
 
+        <li>Peter Ely and the PMRRM,
+        who helped with a number of LocoNet and LCC feature improvements.</li>
+        
         <li>Wayne Eric, who provided the MRC AD370 decoder definition</li>
 
         <li>Max Ettinger, who made JMRI work with the QSI Quantum Programmer on Windows and wrote
@@ -434,6 +447,10 @@
         <li>Paul Fraker, who wrote the documentation for the Throttles and provided MRC decoder
         definitions</li>
 
+        <li>Chad Francis, <!-- yamanote1138 -->
+        who improved DCC++ connection reliability, improved WebSocket power control,
+        and improved the handling of missing roster mount points.
+        
         <li>Joe Fugate and the other people of <a href="https://model-railroad-hobbyist.com">Model
         Railroad Hobbyist</a> emagazine for putting the <a href=
         "https://model-railroad-hobbyist.com/mrht_decoderpro">JMRI clinics from the NMRA 2008
@@ -459,6 +476,9 @@
         </li>
 
         <li>@gitophile, who found the fix for a broken link.</li>
+
+        <li>Philip Gladstone, <!-- pjsg -->
+        who improved the printing code.
 
         <li>Qun and Sven G&ouml;thel  of
         <a href="https://jausoft.com">G&ouml;thel Software</a> who maintain the JOAL library we use
@@ -542,6 +562,9 @@
         who improved how the throttle handles speed steps and improved the quality of the code and
         documentation.</li>
 
+        <li>Rene Hentschel,
+        who contributed a decoder definition.
+        
         <li>Max Hearnden, <!-- MaxHearnden -->
         who improved how local HTML help is handled.</li>
 
@@ -557,6 +580,9 @@
         </li>
 
         <li>Michael Homscheidt, who worked on the KPF-Zeller speedometer support.</li>
+
+        <li><a href="https://github.com/JMRI/JMRI/pulls/mvanhorn">Matt Van Horn</a>,
+        who fixed the shape level (z-order) of items on a web panel.</li>
 
         <li>Hornby Hobbys, who provided a full set of TTS manuals plus information regarding
         various CVs.</li>
@@ -607,6 +633,10 @@
         <li>The Jython project, who provided a very powerful scripting engine for us <a id="K"></a>
         </li>
 
+        <li>Timothy Jump,   <!-- E3t1jump -->
+        who worked on TMCC development and documentation.
+        </li>
+        
         <li>Georg Kautzsch, who provided a decoder definition for the Uhlenbrock 67800 servo
         decoder.</li>
 
@@ -1173,6 +1203,9 @@
 
         <li>Simon White, who added support for FindBugs and EMMA to our build tools.</li>
 
+        <li>Chris Why, <!-- chriswhy00 -->
+         who fixed a tough bug in the speed-profiling code.</li>
+
         <li>Stephen Williams, who improved the LocoNet slot monitor, made multiple small
         improvements to LocoNet internals, especially including the LocoNet monitor, fixed a nasty
         problem with looping LocoNet throttles, added a command station option to the TCP
@@ -1180,6 +1213,8 @@
 
         <li>Jos Wils updated the ESU decoder definitions, and extended the Comprehensive programmer
         format for really-high-functionality decoders.</li>
+
+        <li>Gerald Wolfson, who contributed the ClearFileHistory.py script.</li>
 
         <li>Jim Wolters, who updated the MRC Sound Brilliance 1812 decoder definition.</li>
 
@@ -1190,6 +1225,9 @@
 
         <li>Mike Yawn, who provided the instructions for building under Eclipse <a id="Z"></a>
         </li>
+
+        <li>Lim Sim Yee, <!-- simei2k -->
+        who fixed a security vulnerability.
 
         <li><a href="https://github.com/JMRI/JMRI/pulls?q=author%3Aicklesteve+">Steve Young</a>,
         <!-- icklesteve -->

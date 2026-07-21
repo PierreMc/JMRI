@@ -5,8 +5,9 @@ import java.awt.GridBagLayout;
 import javax.swing.*;
 
 import jmri.InstanceManager;
+import jmri.jmrit.operations.OperationsXml;
 import jmri.jmrit.operations.locations.LocationManager;
-import jmri.jmrit.operations.setup.OperationsSetupXml;
+import jmri.jmrit.operations.locations.tools.LocationsByQuickServiceFrame;
 import jmri.jmrit.operations.setup.Setup;
 import jmri.jmrit.operations.trains.TrainManager;
 import jmri.util.swing.JmriJOptionPane;
@@ -14,7 +15,7 @@ import jmri.util.swing.JmriJOptionPane;
 /**
  * Frame for user edit of setup options
  *
- * @author Dan Boudreau Copyright (C) 2010, 2011, 2012, 2013, 2015
+ * @author Dan Boudreau Copyright (C) 2010, 2011, 2012, 2013, 2015, 2026
  */
 public class OptionPanel extends OperationsPreferencesPanel {
 
@@ -25,6 +26,7 @@ public class OptionPanel extends OperationsPreferencesPanel {
     // radio buttons
     JRadioButton buildNormal = new JRadioButton(Bundle.getMessage("Normal"));
     JRadioButton buildAggressive = new JRadioButton(Bundle.getMessage("Aggressive"));
+    JRadioButton buildOnTime = new JRadioButton(Bundle.getMessage("OnTime"));
 
     // check boxes
     JCheckBox routerCheckBox = new JCheckBox(Bundle.getMessage("EnableCarRouting"));
@@ -57,6 +59,7 @@ public class OptionPanel extends OperationsPreferencesPanel {
     JCheckBox saveTrainManifestCheckBox = new JCheckBox(Bundle.getMessage("SaveManifests"));
 
     // text field
+    JTextField dwellTimeTextField = new JTextField(10);
     JTextField rfidTextField = new JTextField(10);
     JTextField valueTextField = new JTextField(10);
 
@@ -96,6 +99,7 @@ public class OptionPanel extends OperationsPreferencesPanel {
         enableVsdCheckBox.setSelected(Setup.isVsdPhysicalLocationEnabled());
 
         // load text fields
+        dwellTimeTextField.setText(Integer.toString(Setup.getDwellTime()));
         rfidTextField.setText(Setup.getRfidLabel());
         valueTextField.setText(Setup.getValueLabel());
 
@@ -111,6 +115,7 @@ public class OptionPanel extends OperationsPreferencesPanel {
         }
 
         numberPassesComboBox.setSelectedItem(Setup.getNumberPasses());
+        padComboBox(numberPassesComboBox, 2);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -128,6 +133,7 @@ public class OptionPanel extends OperationsPreferencesPanel {
 
         addItem(pOpt, buildNormal, 1, 0);
         addItem(pOpt, buildAggressive, 2, 0);
+        addItem(pOpt, buildOnTime, 3, 0);
         pBuild.add(pOpt);
 
         JPanel pPasses = new JPanel();
@@ -135,6 +141,12 @@ public class OptionPanel extends OperationsPreferencesPanel {
         pPasses.setBorder(BorderFactory.createTitledBorder(Bundle.getMessage("BorderLayoutNumberPasses")));
         addItem(pPasses, numberPassesComboBox, 0, 0);
         pBuild.add(pPasses);
+
+        JPanel pDwellTime = new JPanel();
+        pDwellTime.setLayout(new GridBagLayout());
+        pDwellTime.setBorder(BorderFactory.createTitledBorder(Bundle.getMessage("BorderLayoutDwellTime")));
+        addItem(pDwellTime, dwellTimeTextField, 0, 0);
+        pBuild.add(pDwellTime);
 
         // Switcher Service
         JPanel pSwitcher = new JPanel();
@@ -216,8 +228,11 @@ public class OptionPanel extends OperationsPreferencesPanel {
         ButtonGroup buildGroup = new ButtonGroup();
         buildGroup.add(buildNormal);
         buildGroup.add(buildAggressive);
+        buildGroup.add(buildOnTime);
+
         addRadioButtonAction(buildNormal);
         addRadioButtonAction(buildAggressive);
+        addRadioButtonAction(buildOnTime);
 
         // check boxes
         addCheckBoxAction(routerCheckBox);
@@ -231,13 +246,15 @@ public class OptionPanel extends OperationsPreferencesPanel {
     private void setBuildOption() {
         buildNormal.setSelected(!Setup.isBuildAggressive());
         buildAggressive.setSelected(Setup.isBuildAggressive());
+        buildOnTime.setSelected(Setup.isBuildOnTime());
     }
 
     private void enableComponents() {
         // disable staging option if normal mode
-        stagingAvailCheckBox.setEnabled(buildAggressive.isSelected());
-        numberPassesComboBox.setEnabled(buildAggressive.isSelected());
-        tryNormalStagingCheckBox.setEnabled(buildAggressive.isSelected());
+        stagingAvailCheckBox.setEnabled(!buildNormal.isSelected());
+        numberPassesComboBox.setEnabled(!buildNormal.isSelected());
+        dwellTimeTextField.setEnabled(buildOnTime.isSelected());
+        tryNormalStagingCheckBox.setEnabled(!buildNormal.isSelected());
     }
 
     @Override
@@ -301,9 +318,16 @@ public class OptionPanel extends OperationsPreferencesPanel {
     @Override
     public void savePreferences() {
         // build option
-        Setup.setBuildAggressive(buildAggressive.isSelected());
+        boolean isBuildOnTime = Setup.isBuildOnTime();
+        Setup.setBuildAggressive(buildAggressive.isSelected() || buildOnTime.isSelected());
         Setup.setNumberPasses((Integer) numberPassesComboBox.getSelectedItem());
-        // Local moves?
+        Setup.setBuildOnTime(buildOnTime.isSelected());
+        try {
+            Setup.setDwellTime(Integer.parseInt(dwellTimeTextField.getText()));
+        } catch (NumberFormatException e) {
+            log.error("Dwell Time {} must be a number", dwellTimeTextField.getText());
+        }
+        // local switcher options
         Setup.setLocalInterchangeMovesEnabled(localInterchangeCheckBox.isSelected());
         Setup.setLocalSpurMovesEnabled(localSpurCheckBox.isSelected());
         Setup.setLocalYardMovesEnabled(localYardCheckBox.isSelected());
@@ -335,7 +359,12 @@ public class OptionPanel extends OperationsPreferencesPanel {
         // VSD
         Setup.setVsdPhysicalLocationEnabled(enableVsdCheckBox.isSelected());
         // write the file
-        InstanceManager.getDefault(OperationsSetupXml.class).writeOperationsFile();
+        OperationsXml.save();
+        // bring up the quick service tool
+        if (!isBuildOnTime && buildOnTime.isSelected()) {
+            LocationsByQuickServiceFrame f = new LocationsByQuickServiceFrame();
+            f.initComponents();
+        }
     }
 
     @Override

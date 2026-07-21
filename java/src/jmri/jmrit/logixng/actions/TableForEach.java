@@ -63,8 +63,8 @@ public class TableForEach extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.FLOW_CONTROL;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.FLOW_CONTROL;
     }
 
     private String getNewRowOrColumnName() throws JmriException {
@@ -403,6 +403,6 @@ public class TableForEach extends AbstractDigitalAction
         getConditionalNG().execute();
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(TableForEach.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(TableForEach.class);
 
 }

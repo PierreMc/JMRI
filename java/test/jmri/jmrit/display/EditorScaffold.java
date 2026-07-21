@@ -91,7 +91,7 @@ public class EditorScaffold extends Editor {
      *
      */
     @Override
-    protected void setNextLocation(Positionable obj){
+    public void setNextLocation(Positionable obj){
     }
 
     /**
@@ -111,5 +111,5 @@ public class EditorScaffold extends Editor {
     }
 
     // initialize logging
-    // private final static Logger log = LoggerFactory.getLogger(EditorScaffold.class);
+    // private static final Logger log = LoggerFactory.getLogger(EditorScaffold.class);
 }

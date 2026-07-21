@@ -85,8 +85,8 @@ public final class ActionThrottleFunction extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     /** {@inheritDoc} */
@@ -246,6 +246,6 @@ public final class ActionThrottleFunction extends AbstractDigitalAction
 
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionThrottleFunction.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionThrottleFunction.class);
 
 }

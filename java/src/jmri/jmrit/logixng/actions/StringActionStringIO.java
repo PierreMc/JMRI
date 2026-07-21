@@ -64,8 +64,8 @@ public class StringActionStringIO extends AbstractStringAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     /** {@inheritDoc} */
@@ -115,6 +115,6 @@ public class StringActionStringIO extends AbstractStringAction
         getConditionalNG().execute();
     }
 
-//    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(StringActionStringIO.class);
+//    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(StringActionStringIO.class);
 
 }

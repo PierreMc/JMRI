@@ -47,7 +47,7 @@ public class JsonManifest extends TrainCommon {
     private final ObjectMapper mapper = new ObjectMapper();
     private final JsonUtil utilities = new JsonUtil(mapper);
 
-    private final static Logger log = LoggerFactory.getLogger(JsonManifest.class);
+    private static final Logger log = LoggerFactory.getLogger(JsonManifest.class);
 
     public JsonManifest(Train train) {
         this.train = train;
@@ -93,7 +93,7 @@ public class JsonManifest extends TrainCommon {
             }
             if (routeLocation == train.getTrainDepartsRouteLocation()) {
                 jsonLocation.put(JSON.DEPARTURE_TIME, train.getDepartureTime());
-            } else if (!routeLocation.getDepartureTime().equals(RouteLocation.NONE)) {
+            } else if (!routeLocation.getDepartureTimeHourMinutes().equals(RouteLocation.NONE)) {
                 jsonLocation.put(JSON.DEPARTURE_TIME, routeLocation.getDepartureTime());
             } else {
                 jsonLocation.put(JSON.EXPECTED_DEPARTURE, train.getExpectedDepartureTime(routeLocation));

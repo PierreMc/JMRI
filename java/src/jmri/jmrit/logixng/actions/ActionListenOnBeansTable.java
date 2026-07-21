@@ -191,8 +191,8 @@ public class ActionListenOnBeansTable extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.OTHER;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.OTHER;
     }
 
     /** {@inheritDoc} */
@@ -393,6 +393,6 @@ public class ActionListenOnBeansTable extends AbstractDigitalAction
 */
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionListenOnBeansTable.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionListenOnBeansTable.class);
 
 }

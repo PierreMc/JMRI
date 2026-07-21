@@ -142,8 +142,8 @@ public class ActionOBlock extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.ITEM;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.ITEM;
     }
 
     private String getNewData(ConditionalNG conditionalNG) throws JmriException {
@@ -356,6 +356,6 @@ public class ActionOBlock extends AbstractDigitalAction
         getConditionalNG().execute();
     }
 
-//    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionOBlock.class);
+//    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionOBlock.class);
 
 }

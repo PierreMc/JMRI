@@ -136,8 +136,8 @@ public class ActionFindTableRowOrColumn extends AbstractDigitalAction
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
-        return Category.OTHER;
+    public LogixNG_Category getCategory() {
+        return LogixNG_Category.OTHER;
     }
 
     private Map<String, Object> getRow(Object value) throws JmriException {
@@ -292,6 +292,6 @@ public class ActionFindTableRowOrColumn extends AbstractDigitalAction
 */
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionFindTableRowOrColumn.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionFindTableRowOrColumn.class);
 
 }

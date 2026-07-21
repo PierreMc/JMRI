@@ -562,8 +562,14 @@ class LayoutEditorComponent extends JComponent {
                 if (editable || !lt.isHidden()) {
                     lt.drawTurnoutControls(g2);
                 }
+            }else if (tr instanceof LayoutTraverserView) {
+                LayoutTraverserView lt = (LayoutTraverserView) tr;
+                if (editable || !lt.isHidden()) {
+                    lt.drawTurnoutControls(g2);
+                }
             }
         });
+
     }
 
     private void drawSelectionRect(Graphics2D g2) {
@@ -721,5 +727,5 @@ class LayoutEditorComponent extends JComponent {
     }
 
     // initialize logging
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LayoutEditorComponent.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LayoutEditorComponent.class);
 }

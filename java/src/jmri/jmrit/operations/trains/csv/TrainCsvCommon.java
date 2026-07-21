@@ -20,7 +20,7 @@ import jmri.util.FileUtil;
 /**
  * Contains the csv operators for manifests and switch lists
  *
- * @author Daniel Boudreau Copyright (C) 2011, 2013, 2015, 2022
+ * @author Daniel Boudreau Copyright (C) 2011, 2013, 2015, 2022, 2026
  */
 public class TrainCsvCommon extends TrainCommon {
 
@@ -134,7 +134,9 @@ public class TrainCsvCommon extends TrainCommon {
     }
 
     protected final void printRouteComment(CSVPrinter fileOut, Train train) throws IOException {
-        fileOut.printRecord("RC", Bundle.getMessage("csvRouteComment"), train.getRoute().getComment()); // NOI18N
+        if (!train.getRoute().getComment().isBlank()) {
+            fileOut.printRecord("RC", Bundle.getMessage("csvRouteComment"), train.getRoute().getComment()); // NOI18N
+        }
     }
 
     protected void printLogoURL(CSVPrinter fileOut, Train train) throws IOException {
@@ -178,7 +180,9 @@ public class TrainCsvCommon extends TrainCommon {
                 car.getLoadType(),
                 car.getReturnWhenLoadedDestinationName(),
                 car.getReturnWhenLoadedDestTrackName(),
-                car.getRoutePath());
+                car.getRoutePath(),
+                car.getDivisionName(),
+                car.getBlocking());
     }
 
     protected void printEngine(CSVPrinter fileOut, Engine engine, String code, String message) throws IOException {
@@ -199,7 +203,8 @@ public class TrainCsvCommon extends TrainCommon {
                 engine.isLead() ? "Lead loco" : "", // NOI18N
                 engine.getComment(),
                 engine.getRfid(),
-                engine.getDccAddress());
+                engine.getDccAddress(),
+                engine.getBlocking());
     }
 
     protected final void checkForEngineOrCabooseChange(CSVPrinter fileOut, Train train, RouteLocation rl)

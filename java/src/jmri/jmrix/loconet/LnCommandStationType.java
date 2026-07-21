@@ -341,6 +341,20 @@ public enum LnCommandStationType {
                     new SlotMapEntry(128,432,SlotType.UNKNOWN)),
             SupportsSlot250.SLOT250_UNAVAILABLE
             ),
+    COMMAND_STATION_STANDALONE_EXT_TERM("Stand-alone LocoNet (using external LocoNet Data Termination!)",  // NOI18N
+            ReadsFromServiceModeTrack.NO_SVC_MODE_READS,
+            ProgDepowersTrack.TRACK_UNCHANGED_BY_PROGRAMMING,
+            "LnThrottleManager", "SlotManager",  // NOI18N
+            IdleSupport.NO_OPC_IDLE_SUPPORT,
+            MultiMeterSupport.NO_MULTIMETER_SUPPORT,
+            LocoResetSupport.NO_LOCO_RESET_SUPPORT,
+            CommandStationClockFracType.CLOCK13BIT,
+            Arrays.asList(new SlotMapEntry(0,0,SlotType.SYSTEM),
+                    new SlotMapEntry(1,120,SlotType.UNKNOWN),
+                    new SlotMapEntry(121,127,SlotType.SYSTEM),
+                    new SlotMapEntry(128,432,SlotType.UNKNOWN)),
+            SupportsSlot250.SLOT250_UNAVAILABLE
+            ),
     COMMAND_STATION_PR4_ALONE("PR4 standalone programmer",  // NOI18N
             ReadsFromServiceModeTrack.CAN_READ_ON_SVC_TRACK,
             ProgDepowersTrack.TRACK_UNCHANGED_BY_PROGRAMMING,
@@ -477,7 +491,7 @@ public enum LnCommandStationType {
         return supportsSlot250 == SupportsSlot250.SLOT250_AVAILABLE;
     }
 
-    static public LnCommandStationType getByName(String name) {
+    public static LnCommandStationType getByName(String name) {
         for (LnCommandStationType p : LnCommandStationType.values()) {
             if (p.name.equals(name)) {
                 return p;
@@ -637,5 +651,5 @@ public enum LnCommandStationType {
         SLOT250_UNAVAILABLE
     }
 
-    private final static Logger log = LoggerFactory.getLogger(LnCommandStationType.class);
+    private static final Logger log = LoggerFactory.getLogger(LnCommandStationType.class);
 }

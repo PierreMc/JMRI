@@ -227,7 +227,7 @@ public class ActionPositionable extends AbstractDigitalAction implements Vetoabl
 
     /** {@inheritDoc} */
     @Override
-    public Category getCategory() {
+    public LogixNG_Category getCategory() {
         return CategoryDisplay.DISPLAY;
     }
 
@@ -467,6 +467,6 @@ public class ActionPositionable extends AbstractDigitalAction implements Vetoabl
 
     }
 
-    private final static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionPositionable.class);
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ActionPositionable.class);
 
 }
